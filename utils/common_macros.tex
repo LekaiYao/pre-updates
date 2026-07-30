@@ -1,0 +1,22 @@
+% Analysis-independent semantic and layout helpers.
+\newcommand{\pos}[1]{\textcolor{positive}{#1}}
+\newcommand{\con}[1]{\textcolor{negative}{#1}}
+\newcommand{\HL}[1]{\textcolor{emphasis}{#1}}
+\newcommand{\muted}[1]{\textcolor{neutral}{#1}}
+\newcommand{\demolabel}{\textcolor{negative}{\textbf{DEMO / MOCK}}}
+
+% Draft checkpoint. Remove the draft label only after explicit physics approval.
+\newcommand{\analysischeckpoint}[4]{%
+  \begin{frame}{#1}
+    \begin{block}{What is established}
+      #2
+    \end{block}
+    \begin{alertblock}{Current limitation}
+      #3
+    \end{alertblock}
+    \vfill
+    \textbf{Next question:} #4
+    \vfill
+    \centering\con{\textbf{DRAFT -- needs physics approval}}
+  \end{frame}%
+}

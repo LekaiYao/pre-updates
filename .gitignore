@@ -1,0 +1,21 @@
+# coding agent 文件不入库
+AGENTS.md
+docs/
+.claude/
+.codex/
+.cursor/
+.aider*
+
+# TeX 编译产物
+build/
+*.aux
+*.log
+*.out
+*.toc
+*.nav
+*.snm
+*.vrb
+*.fls
+*.fdb_latexmk
+*.synctex.gz
+_fastcheck.*

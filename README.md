@@ -24,6 +24,7 @@ utils/theme_setup.tex     通用主题和语义颜色
 utils/common_macros.tex   通用布局与 conclusion helper
 utils/beamer_setup.tex    可选 HEP 粒子和 collider 宏
 fastcheck_slides.sh       快速语法检查
+archive_slides.sh         极简 slides 归档
 latexmkrc                 本地 TeX 搜索路径
 ```
 
@@ -38,6 +39,28 @@ latexmk -pdf -outdir=build slides/main.tex
 ```
 
 构建后使用官方 `pdf` skill 对 `build/main.pdf` 做逐页视觉检查。
+
+## 极简归档
+
+完成一版 slides 并通过视觉检查后运行：
+
+```bash
+bash archive_slides.sh
+```
+
+脚本会在归档前询问是否增加标签。直接回车时使用日期作为 report ID，例如
+`20260730`；输入 `test` 时使用 `20260730-test`。归档目录包含：
+
+```text
+archive/<report-id>/
+├── main.tex
+├── project_setup.tex
+└── main.pdf
+```
+
+脚本会先运行 fastcheck 和完整 `latexmk` 构建，再复制当前源码与编译结果。
+已有的归档目录不会被覆盖。该机制假设仓库中的通用 TeX 配置以及 slides 引用
+的图片路径和内容保持可用，不以完全封闭的环境复现为目标。
 
 ## Skills 分工
 

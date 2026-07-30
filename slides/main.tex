@@ -15,88 +15,104 @@
 
 \begin{frame}[plain]
   \titlepage
-  \vfill
-  \centering\demolabel
 \end{frame}
 
-\begin{frame}{Analysis update: recommended narrative}
-  \begin{columns}[T]
-    \column{0.48\textwidth}
-      \begin{block}{Physics question}
-        \begin{itemize}
-          \item Define the observable and scope
-          \item Identify signal and backgrounds
-          \item State the validation strategy
-        \end{itemize}
-      \end{block}
-    \column{0.48\textwidth}
-      \begin{exampleblock}{Evidence}
-        \begin{itemize}
-          \item Source-backed figures
-          \item Reproducible selections
-          \item Explicit limitations
-        \end{itemize}
-      \end{exampleblock}
-  \end{columns}
-  \vfill
-  \centering\demolabel\ --- replace with verified, analysis-specific content
-\end{frame}
-
-\begin{frame}{Generic analysis workflow}
+\begin{frame}{Why total efficiency matters}
   \centering
   \begin{tikzpicture}[
-    node distance=0.75cm,
+    node distance=0.62cm,
     flowbox/.style={
       draw=positive,
       rounded corners,
       fill=positive!8,
-      minimum width=2.35cm,
-      minimum height=1.1cm,
+      text width=2.25cm,
+      minimum height=1.05cm,
       align=center
     },
     arrow/.style={-{Stealth},thick,positive}
   ]
-    \node[flowbox] (data) {Dataset\\and samples};
-    \node[flowbox,right=of data] (selection) {Selection\\and training};
-    \node[flowbox,right=of selection] (validation) {Validation\\and fits};
-    \node[flowbox,right=of validation] (result) {Result\\and review};
-    \draw[arrow] (data) -- (selection);
-    \draw[arrow] (selection) -- (validation);
-    \draw[arrow] (validation) -- (result);
+    \node[flowbox] (acceptance) {Single-muon\\acceptance};
+    \node[flowbox,right=of acceptance] (single) {Single-$J/\psi$\\reconstruction\\and selection};
+    \node[flowbox,right=of single] (event) {Event-level\\trigger and\\selection};
+    \node[flowbox,right=of event] (total) {Total\\acceptance\\$\times$ efficiency};
+    \draw[arrow] (acceptance) -- (single);
+    \draw[arrow] (single) -- (event);
+    \draw[arrow] (event) -- (total);
   \end{tikzpicture}
+  \vspace{0.7cm}
+  \begin{columns}[T]
+    \column{0.47\textwidth}
+      \begin{block}{Conditional efficiency}
+        One reconstruction or selection step after earlier requirements.
+      \end{block}
+    \column{0.47\textwidth}
+      \begin{exampleblock}{Correction quantity}
+        Complete event-level product used to inspect the correction structure.
+      \end{exampleblock}
+  \end{columns}
+\end{frame}
+
+\begin{frame}{Definition of total acceptance times efficiency}
+  The two reconstructed $J/\psi$ candidates and the event-level requirements
+  enter one correction product:
+  \[
+    \epsilon_{\mathrm{total}} =
+    \prod_{i=1}^{2}
+    \left(
+      A_{\eta} A_{p_{\mathrm{T}}}
+      \epsilon_{\mathrm{RECO}}
+      \epsilon_{\mathrm{ID}}
+      \epsilon_{\mu\mu}
+    \right)_{i}
+    \epsilon_{\mathrm{HLT}}\epsilon_{\mathrm{evt}} .
+  \]
   \vfill
-  \begin{exampleblock}{Template invariant}
-    Every reported quantity remains traceable to the analysis source of truth.
-  \end{exampleblock}
+  \begin{columns}[T]
+    \column{0.47\textwidth}
+      \textbf{Map coordinates}
+      \[
+        p_{\mathrm{T}}(J/\psi_{1}),\quad
+        p_{\mathrm{T}}(J/\psi_{2})
+        \in (10,40)\ \mathrm{GeV}.
+      \]
+    \column{0.47\textwidth}
+      \textbf{Sample labels}
+      \begin{itemize}
+        \item SPS or DPS population
+        \item No single-generator reinterpretation
+      \end{itemize}
+  \end{columns}
+\end{frame}
+
+\begin{frame}{SPS total acceptance times efficiency}
+  \centering
+  \includegraphics[
+    width=0.92\textwidth,
+    height=0.78\textheight,
+    keepaspectratio
+  ]{slides/figures/accepted/H005/recoeff2d_total_SPS_JJto4mu.pdf}
+\end{frame}
+
+\begin{frame}{DPS total acceptance times efficiency}
+  \centering
+  \includegraphics[
+    width=0.92\textwidth,
+    height=0.78\textheight,
+    keepaspectratio
+  ]{slides/figures/accepted/H005/recoeff2d_total_DPS_JJto4mu.pdf}
+
+  \smallskip
+  {\small Empty bins indicate no available simulated population in the map,
+  not zero efficiency.}
 \end{frame}
 
 \analysischeckpoint
   {Interim conclusion}
-  {The example workflow separates analysis evidence from presentation logic.}
-  {No physics claim is encoded in the template; downstream content is still missing.}
-  {Replace this draft with source-backed statements and obtain physics approval.}
-
-\begin{frame}{Start a new analysis branch}
-  \begin{columns}[T]
-    \column{0.56\textwidth}
-      \begin{enumerate}
-        \item Configure project metadata
-        \item Add analysis-specific definitions
-        \item Replace demo frames with sourced material
-        \item Review every drafted conclusion
-      \end{enumerate}
-    \column{0.39\textwidth}
-      \begin{block}{Required QA}
-        \begin{itemize}
-          \item Fast syntax check
-          \item Full PDF build
-          \item Log inspection
-          \item Page-by-page review
-        \end{itemize}
-      \end{block}
-  \end{columns}
-  \vfill
-  \centering\HL{Keep analysis content in its branch; return only generic improvements to main.}
-\end{frame}
+  {The SPS and DPS maps expose the two-dimensional structure of the complete
+   event-level acceptance-times-efficiency correction.}
+  {The statistical-uncertainty maps are not yet accepted for slides, and no
+   integrated efficiency is reported in this batch.}
+  {Confirm whether integrated efficiencies are needed and whether corrected
+   uncertainty maps should be requested.}
 
 \end{document}

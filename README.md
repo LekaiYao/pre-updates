@@ -91,7 +91,8 @@ XGBoost 训练产出和 Analysis Note（AN）保持数据一致。
 - `utils/beamer_setup.tex`：自包含粒子宏；
 - `SLIDES_GUIDE.md`：阶段性结论、CMS 用语和标签分级的人工审核规则；
 - `REPOSITORY_WORKFLOW.md`：通用 `main` 与各分析长期 branch 的维护方案；
-- `docs/bootstrap.md`：当前状态和下一步；
+- `docs/slides_format.md`：历史 slides 版式参考；
+- `docs/archive/2026-07/`：过时 bootstrap、接手 prompt 和 OCR inventory；
 - `AGENTS.md`：项目长期规则和数据联动约束。
 
 ## 编译

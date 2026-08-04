@@ -136,10 +136,10 @@ The accepted input area now uses the six H007 PDFs: `marginals_weighted.pdf`,
 physics source of truth; selection and 14-cell binning are unchanged.
 
 Consumer verification: fastcheck and `latexmk` passed; the deck remains 31
-pages with no reported LaTeX layout warnings. The rebuilt PDF SHA256 is
-`f0f8709ffae1b2ee935dce41d059e7ab802271815bfa09587bf5baeec021eded`.
-This is byte-identical to the frozen report edition, confirming that the
-accepted H007 files were already the versions used by that edition.
+pages with no reported LaTeX layout warnings. The H007-updated build SHA256 is
+`3eccb1285350f8e7c688f2ba06c54a49800bdd52e5d24c8cd68120295172f512`.
+It differs from the frozen pre-H007 report edition, as intended: the archive
+was frozen before the accepted H007 files replaced the working slide inputs.
 
 Frozen report archive:
 

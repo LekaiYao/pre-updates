@@ -1,6 +1,5 @@
-# coding agent 文件不入库
-AGENTS.md
-docs/
+# coding agent 临时配置不入库；项目规则与生命周期文档需要版本管理
+
 .claude/
 .codex/
 .cursor/

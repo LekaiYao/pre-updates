@@ -1,3 +1,5 @@
+> Lifecycle: completed initial implementation plan, archived on 2026-08-02.
+
 # JJ Slides：从 Clone 到第一版分析总结
 
 本文件交给 JJ 侧 Codex CLI 使用。目标是优先生成一套能够与分析人员讨论的

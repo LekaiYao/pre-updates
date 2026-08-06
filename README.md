@@ -88,6 +88,7 @@ XGBoost 训练产出和 Analysis Note（AN）保持数据一致。
 - `slides/main.tex`：当前 Beamer 主文件；
 - `slides/legacy_main.tex`：重构前旧稿；
 - `build/main.pdf`：本地完整编译产物，不入库；
+- `archive_slides.sh`：来自通用 `main` 的极简 slides 归档脚本；
 - `utils/beamer_setup.tex`：自包含粒子宏；
 - `SLIDES_GUIDE.md`：阶段性结论、CMS 用语和标签分级的人工审核规则；
 - `REPOSITORY_WORKFLOW.md`：通用 `main` 与各分析长期 branch 的维护方案；
@@ -101,3 +102,27 @@ XGBoost 训练产出和 Analysis Note（AN）保持数据一致。
 bash fastcheck_slides.sh
 latexmk -pdf -outdir=build slides/main.tex
 ```
+
+构建后使用官方 `pdf` skill 对 `build/main.pdf` 做逐页视觉检查。
+
+## 极简归档
+
+完成一版 slides 并通过视觉检查后运行：
+
+```bash
+bash archive_slides.sh
+```
+
+脚本会在归档前询问是否增加标签。直接回车时使用日期作为 report ID，例如
+`20260730`；输入 `test` 时使用 `20260730-test`。归档目录包含：
+
+```text
+archive/<report-id>/
+├── main.tex
+├── project_setup.tex
+└── main.pdf
+```
+
+脚本会先运行 fastcheck 和完整 `latexmk` 构建，再复制当前源码与编译结果。
+已有的归档目录不会被覆盖。该机制假设仓库中的通用 TeX 配置以及 slides 引用
+的图片路径和内容保持可用，不以完全封闭的环境复现为目标。

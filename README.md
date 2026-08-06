@@ -41,6 +41,24 @@ latexmk -pdf -outdir=build slides/main.tex
 
 构建后使用官方 `pdf` skill 对 `build/main.pdf` 做逐页视觉检查。
 
+## 本地提交 hook
+
+本仓库使用版本化 hook，首次 checkout 后启用：
+
+```bash
+git config core.hooksPath .githooks
+```
+
+`pre-commit` 只检查 `slides/**/*.tex` 本次 staged 新增的可见正文。若出现独立的
+`H{编号}`、`A{编号}`、`C{编号}`，提交会失败；应将对应文本重写为面向听众的
+物理或方法表述。TeX 注释、artifact 路径、输入文件和 label 不属于渲染正文。
+
+完整扫描可手动运行：
+
+```bash
+python3 scripts/check_tex_internal_ids.py --all
+```
+
 ## 单页排版迭代
 
 为目标 frame 设置稳定的 `label` 后运行：

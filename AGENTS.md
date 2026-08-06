@@ -17,3 +17,9 @@
 - open request 必须在共享 `progress.md` 有索引；完成后立即移入本项目 `completed/` 或 `archive/`，answer 随同归档。
 - 已收口的阶段性 implementation plan 和 accepted artifact manifest 归档保存，不继续充当当前状态。
 - 本项目 handoff 只保留接手 slides 所需的当前实现或写作事实；历史证据保留在 archive，不删除。
+
+## Slides 正文内部编号
+
+- `slides/**/*.tex` 的可见正文禁止出现独立的 `H{编号}`、`A{编号}`、`C{编号}` 等内部协作编号。
+- 新增正文若触发 `.githooks/pre-commit`，必须将对应段落重写为读者可理解的物理或方法表述；不得只删除编号而保留失去上下文的句子。
+- 内部编号仅可保留在 TeX 注释、artifact 路径和 provenance 文档中，不得渲染到 slides。

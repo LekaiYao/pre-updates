@@ -25,6 +25,9 @@ if [[ ! -f "$MAIN" ]]; then
   exit 2
 fi
 
+# Content-policy hook: analysis-internal handoff labels must not enter slide body.
+python3 scripts/check_tex_internal_ids.py "$MAIN"
+
 # Generate all temporary files in a unique directory
 CHECK_DIR=$(mktemp -d /tmp/slides_fastcheck.XXXXXX)
 WRAPPER="$CHECK_DIR/wrapper.tex"

@@ -17,6 +17,12 @@
 \usetikzlibrary{arrows.meta,positioning}
 \input{beamer_setup.tex}
 
+% Optional fast single-frame build, e.g.:
+%   bash fastcompile_frame.sh p18
+\ifdefined\onlyframes
+  \expandafter\includeonlyframes\expandafter{\onlyframes}
+\fi
+
 \definecolor{positive}{HTML}{0173B2}
 \definecolor{negative}{HTML}{DE8F05}
 \definecolor{emphasis}{HTML}{027A5A}
@@ -36,687 +42,931 @@
 
 \title[X(3872) Analysis Update]{X(3872) Analysis Update}
 \subtitle{From \texorpdfstring{\psiP}{psi(2S)} reweighting to the current PbPb strategy}
-\author{Lekai Yao}
-\institute{CMS}
-\date{2026.7.29}
+\author{%
+  Henrique Legoinha, \underline{Lekai Yao}, Nuno Leonardo, Zhen Hu\\[0.45em]
+  2026.8.5%
+}
+\institute{}
+\date{%
+  \includegraphics[height=1.653cm]{figures/symbols/CERN.png}\hspace{0.30cm}%
+  \includegraphics[height=1.653cm]{figures/symbols/CMS.png}\hspace{0.30cm}%
+  \includegraphics[height=1.653cm]{figures/symbols/LIP.png}\hspace{0.30cm}%
+  \includegraphics[height=1.653cm]{figures/symbols/LU.png}\hspace{0.30cm}%
+  \includegraphics[height=1.653cm]{figures/symbols/THU.png}%
+}
 
 \begin{document}
 
-\begin{frame}[plain]
+\begin{frame}[plain,label=p1]
   \titlepage
-  \vspace{-0.6em}
-  \begin{center}
-    \small ppRef prototype completed --- PbPb selection and fit diagnostics in progress
-  \end{center}
 \end{frame}
 
-\begin{frame}{Why can MC mismodelling bias the X analysis?}
-  \begin{columns}[T]
-    \begin{column}{0.46\textwidth}
-      \centering
-      \begin{tikzpicture}[
-        x=0.82cm,y=0.82cm,
-        axis/.style={-{Stealth},thick},
-        data/.style={positive,very thick},
-        mc/.style={negative,very thick,dashed}
-      ]
-        \draw[axis] (0,0) -- (5.4,0) node[right] {\small input $x$};
-        \draw[axis] (0,0) -- (0,4.0) node[above] {\small density};
-        \draw[data] plot[smooth] coordinates
-          {(0.2,0.2) (0.9,0.8) (1.6,2.3) (2.3,3.3)
-           (3.0,2.4) (3.8,1.0) (5.0,0.2)};
-        \draw[mc] plot[smooth] coordinates
-          {(0.2,0.1) (0.9,0.3) (1.6,1.0) (2.3,2.0)
-           (3.0,3.3) (3.8,2.5) (5.0,0.4)};
-        \node[data,anchor=west] at (0.3,3.6) {\small DATA signal};
-        \node[mc,anchor=west] at (3.2,3.6) {\small MC signal};
-      \end{tikzpicture}
-      \vspace{0.4em}
-
-      \small The classifier sees the simulated signal distribution,
-      not the unknown true X signal distribution.
-    \end{column}
-    \begin{column}{0.51\textwidth}
-      \begin{tikzpicture}[
-        node distance=0.35cm,
-        box/.style={
-          draw=positive,
-          rounded corners,
-          fill=positive!8,
-          text width=5.5cm,
-          minimum height=0.75cm,
-          align=center,
-          font=\small
-        },
-        warn/.style={
-          draw=negative,
-          rounded corners,
-          fill=negative!10,
-          text width=5.5cm,
-          minimum height=0.75cm,
-          align=center,
-          font=\small
-        },
-        arr/.style={-{Stealth},thick,neutral}
-      ]
-        \node[warn] (mismatch) {Signal MC $\neq$ signal DATA in reconstructed features};
-        \node[box,below=of mismatch] (learn) {XGBoost learns simulation-specific structure};
-        \node[box,below=of learn] (shift) {Decision boundary shifts when applied to DATA};
-        \node[warn,below=of shift] (eff) {Selection efficiency and mass-fit stability become uncertain};
-        \draw[arr] (mismatch) -- (learn);
-        \draw[arr] (learn) -- (shift);
-        \draw[arr] (shift) -- (eff);
-      \end{tikzpicture}
-    \end{column}
-  \end{columns}
-  \vfill
-  \centering\HL{A more powerful classifier does not by itself remove a domain mismatch.}
-\end{frame}
-
-\begin{frame}{Event reweighting as multidimensional density-ratio estimation}
-  \begin{columns}[T]
-    \begin{column}{0.48\textwidth}
-      \begin{block}{Target correction}
-        \[
-          w(\mathbf{x})
-          \simeq
-          \frac{p_{\mathrm{DATA\ signal}}(\mathbf{x})}
-               {p_{\mathrm{MC\ signal}}(\mathbf{x})}.
-        \]
-      \end{block}
-      \[
-        p_{\mathrm{MC}}^{\mathrm{weighted}}(\mathbf{x})
-        \approx p_{\mathrm{DATA\ signal}}(\mathbf{x}).
-      \]
-    \end{column}
-    \begin{column}{0.48\textwidth}
-      \begin{itemize}
-        \item $\mathbf{x}$: correlated reconstruction-level variables
-        \item One continuous weight per simulated event
-        \item BDT reweighter handles the multidimensional ratio
-        \item No event reconstruction is changed
-        \item No new simulated events are created
-      \end{itemize}
-    \end{column}
-  \end{columns}
-  \vspace{0.5em}
+\begin{frame}{Recap: where the previous update stopped}
   \centering
   \begin{tikzpicture}[
-    node distance=0.7cm,
-    box/.style={
-      draw=positive,
-      rounded corners,
-      fill=positive!8,
-      minimum width=3.0cm,
-      minimum height=0.9cm,
-      align=center
-    },
-    arr/.style={-{Stealth},thick,positive}
-  ]
-    \node[box] (mc) {Unweighted MC\\events};
-    \node[box,right=of mc] (weight) {Apply\\$w(\mathbf{x})$};
-    \node[box,right=of weight] (weighted) {Weighted MC\\population};
-    \draw[arr] (mc) -- (weight);
-    \draw[arr] (weight) -- (weighted);
-  \end{tikzpicture}
-  \vfill
-  \centering\small
-  BDT reweighting: A. Rogozhnikov, arXiv:1608.05806.
-\end{frame}
-
-\begin{frame}{The DATA target must represent signal, not inclusive background}
-  \begin{columns}[T]
-    \begin{column}{0.48\textwidth}
-      \centering
-      \begin{tikzpicture}[
-        node distance=0.42cm,
-        box/.style={
-          draw=positive,
-          rounded corners,
-          fill=positive!8,
-          text width=5.0cm,
-          minimum height=0.68cm,
-          align=center,
-          font=\small
-        },
-        arr/.style={-{Stealth},thick,positive}
-      ]
-        \node[box] (cand) {ppRef \psiP DATA candidates};
-        \node[box,below=of cand] (fit) {Mass fit: signal + combinatorial background};
-        \node[box,below=of fit] (splot) {sPlot statistical separation};
-        \node[box,below=of splot] (tree) {Event-level \texttt{signal\_sWeight}};
-        \node[box,below=of tree] (target) {sWeighted DATA signal target};
-        \draw[arr] (cand) -- (fit);
-        \draw[arr] (fit) -- (splot);
-        \draw[arr] (splot) -- (tree);
-        \draw[arr] (tree) -- (target);
-      \end{tikzpicture}
-    \end{column}
-    \begin{column}{0.48\textwidth}
-      \begin{block}{What the target is}
-        \begin{itemize}
-          \item Statistical representation of the signal component
-          \item Negative sWeights retained
-          \item Fit and effective-statistics diagnostics required
-        \end{itemize}
-      \end{block}
-      \begin{alertblock}{What it is not}
-        \begin{itemize}
-          \item Not an event-by-event truth label
-          \item Not equivalent to a pure simulated signal sample
-          \item Not usable without a trustworthy mass fit
-        \end{itemize}
-      \end{alertblock}
-    \end{column}
-  \end{columns}
-\end{frame}
-
-\begin{frame}{What is transferred from \texorpdfstring{\psiP}{psi(2S)} to X?}
-  \begin{columns}[T]
-    \begin{column}{0.48\textwidth}
-      \begin{exampleblock}{Transfer}
-        \begin{itemize}
-          \item DATA/MC correction in shared variables
-          \item Tracking and vertex reconstruction response
-          \item Correction inside validated phase-space support
-          \item Event weights applied to X simulation
-        \end{itemize}
-      \end{exampleblock}
-    \end{column}
-    \begin{column}{0.48\textwidth}
-      \begin{alertblock}{Do not transfer}
-        \begin{itemize}
-          \item Raw \psiP physics distribution
-          \item \psiP mass or dipion dynamics
-          \item A \psiP-trained classifier
-          \item Unconstrained correction outside target support
-        \end{itemize}
-      \end{alertblock}
-    \end{column}
-  \end{columns}
-  \vspace{0.7em}
-  \begin{block}{Transfer assumption to validate}
-    \[
-      \left[\frac{p_{\mathrm{DATA}}}{p_{\mathrm{MC}}}\right]_{\psiP}
-      (\mathbf{x}\mid\mathbf{z})
-      \approx
-      \left[\frac{p_{\mathrm{DATA}}}{p_{\mathrm{MC}}}\right]_{X}
-      (\mathbf{x}\mid\mathbf{z}),
-    \]
-  \end{block}
-  \centering\small
-  $\mathbf{x}$: shared detector/reconstruction variables;\quad
-  $\mathbf{z}$: conditioning kinematics such as $p_{\mathrm{T}}$ and rapidity.
-\end{frame}
-
-\begin{frame}{Analysis path: validate the chain, then move to PbPb}
-  \centering
-  \begin{tikzpicture}[
-    node distance=0.55cm,
     box/.style={
       draw=positive,
       rounded corners,
       fill=positive!8,
       minimum height=0.82cm,
-      text width=2.25cm,
+      text width=2.15cm,
       align=center,
       font=\small
     },
-    arrow/.style={-{Stealth},thick,positive}
+    arr/.style={-{Stealth},thick,positive}
   ]
-    \node[box] (signal) {\psiP signal\\from ppRef DATA};
-    \node[box,right=of signal] (rw) {Learn R5\\DATA/MC correction};
-    \node[box,right=of rw] (apply) {Transfer weights\\to X MC};
-    \node[box,right=of apply] (ml) {Train and apply\\X classifier};
-    \node[box,right=of ml] (fit) {Matched-MC fits\\and cut scans};
-    \draw[arrow] (signal) -- (rw);
-    \draw[arrow] (rw) -- (apply);
-    \draw[arrow] (apply) -- (ml);
-    \draw[arrow] (ml) -- (fit);
+    \node[box] (signal) {ppRef \psiP\\signal target};
+    \node[box,right=0.52cm of signal] (rw) {Learn DATA/MC\\correction};
+    \node[box,right=0.52cm of rw] (apply) {Transfer weights\\to X MC};
+    \node[box,right=0.52cm of apply] (ml) {Train and apply\\X classifier};
+    \node[box,right=0.52cm of ml] (fit) {Matched fits\\and cut scans};
+    \draw[arr] (signal) -- (rw);
+    \draw[arr] (rw) -- (apply);
+    \draw[arr] (apply) -- (ml);
+    \draw[arr] (ml) -- (fit);
   \end{tikzpicture}
 
-  \vspace{1.0em}
-  \begin{columns}[T]
-    \begin{column}{0.48\textwidth}
-      \begin{block}{ppRef question}
-        Can the complete correction $\rightarrow$ ML $\rightarrow$ fit workflow be validated?
-      \end{block}
-    \end{column}
-    \begin{column}{0.48\textwidth}
-      \begin{alertblock}{Interpretation boundary}
-        Observed significance alone does not establish the final training preference.
-      \end{alertblock}
-    \end{column}
-  \end{columns}
-  \vfill
-  \centering\small\HL{The ppRef prototype is now closed; the next bottleneck is PbPb \psiP.}
-\end{frame}
-
-\begin{frame}{Reweighting profiles: variable definitions}
-  \vspace{4pt}
-  \begin{center}
-    \small
-    \begin{tabular}{lp{9.7cm}}
-      \toprule
-      Profile & Reweighting variables \\
-      \midrule
-      R3 &
-      \texttt{Bcos\_dtheta}, \texttt{Btktkpt}, \texttt{Bchi2Prob} \\
-      \addlinespace
-      R4-noCos &
-      \texttt{Btktkpt}, \texttt{Bchi2Prob},
-      \texttt{Btrk1Pt}, \texttt{Btrk2Pt} \\
-      \addlinespace
-      R5 &
-      \texttt{Bcos\_dtheta}, \texttt{Btktkpt}, \texttt{Bchi2Prob},
-      \texttt{Btrk1Pt}, \texttt{Btrk2Pt} \\
-      \addlinespace
-      R8 &
-      \texttt{Bchi2Prob}, \texttt{Btrk1dR}, \texttt{BtrkPtimb},
-      \texttt{Btrk1Pt}, \texttt{Btrk2Pt}, \texttt{BtktkvProb},
-      \texttt{Bcos\_dtheta}, \texttt{Btktkpt} \\
-      \bottomrule
-    \end{tabular}
-  \end{center}
-  \vspace{0.4em}
-  \begin{columns}[T]
-    \begin{column}{0.48\textwidth}
-      \begin{block}{Controlled comparisons}
-        R3: low-dimensional check;\quad
-        R4-noCos: remove \texttt{Bcos\_dtheta}.
-      \end{block}
-    \end{column}
-    \begin{column}{0.48\textwidth}
-      \begin{exampleblock}{Prototype decision}
-        R5 nominal;\quad R8 excluded because of weight tails and loss of effective statistics.
-      \end{exampleblock}
-    \end{column}
-  \end{columns}
-\end{frame}
-
-\begin{frame}{Reweighting profiles: KS-like closure metric}
-  \begin{columns}[T]
-    \begin{column}{0.52\textwidth}
-      \vspace{4pt}
-      \begin{center}
-        \small
-        \begin{tabular}{lrr}
-          \toprule
-          Profile & Mean before & Mean after \\
-          \midrule
-          R3       & 0.0908 & 0.0100 \\
-          R4-noCos & 0.0908 & 0.0409 \\
-          R5       & 0.0908 & \textbf{0.0091} \\
-          R8       & 0.0908 & 0.0123 \\
-          \bottomrule
-        \end{tabular}
-      \end{center}
-      \vspace{0.5em}
-      \begin{alertblock}{Metric interpretation}
-        \small Mean maximum CDF distance over eight validation variables,
-        using signed target weights. Descriptive KS-like distance, not a KS p-value.
-      \end{alertblock}
-    \end{column}
-    \begin{column}{0.45\textwidth}
-      \centering
-      \includegraphics[width=\textwidth,height=0.65\textheight,keepaspectratio]
-      {../XGBoost/output/reweighting/comparison_pp24_psi2s/weight_distributions_R3_R4_R5_R8.pdf}
-    \end{column}
-  \end{columns}
-  \vfill
-  \centering\small
-  R5 gives the best average one-dimensional closure without the R8 weight instability.
-\end{frame}
-
-\begin{frame}{One-dimensional closure: before and after R5}
-  \begin{columns}[T]
-    \begin{column}{0.49\textwidth}
-      \centering
-      \textbf{\texttt{Bcos\_dtheta}}\\[-0.2em]
-      \includegraphics[width=\textwidth,height=0.66\textheight,keepaspectratio]
-      {../XGBoost/output/reweighting/comparison_pp24_psi2s/variable_closure/Bcos_dtheta_before_after_ratio.pdf}
-    \end{column}
-    \begin{column}{0.49\textwidth}
-      \centering
-      \textbf{\texttt{Bchi2Prob}}\\[-0.2em]
-      \includegraphics[width=\textwidth,height=0.66\textheight,keepaspectratio]
-      {../XGBoost/output/reweighting/comparison_pp24_psi2s/variable_closure/Bchi2Prob_before_after_ratio.pdf}
-    \end{column}
-  \end{columns}
-  \vfill
-  \centering\small
-  One-dimensional agreement is necessary, but correlations require an independent multivariate test.
-\end{frame}
-
-\begin{frame}{Closure: little residual DATA/MC separation}
-  \begin{columns}[T]
-    \begin{column}{0.52\textwidth}
-      \centering
-      \includegraphics[width=\textwidth,height=0.60\textheight,keepaspectratio]
-      {../XGBoost/output/reweighting/comparison_pp24_psi2s/domain_auc_stability.pdf}
-    \end{column}
-    \begin{column}{0.45\textwidth}
-      \begin{exampleblock}{Independent holdout test}
-        Domain-classifier AUC $\simeq \HL{0.5225}$, stable over five random splits.
-      \end{exampleblock}
-      \begin{itemize}
-        \item Weight statistics validated
-        \item X MC support/coverage checked
-        \item \texttt{Reweight} written to X MC
-        \item No obvious residual separation
-      \end{itemize}
-    \end{column}
-  \end{columns}
-  \vfill
-  \centering\small\HL{R5 passes the ppRef closure and transfer checks used in this prototype.}
-\end{frame}
-
-\begin{frame}{X classifier: unweighted and R5-weighted 8v2}
-  \begin{columns}[T]
-    \begin{column}{0.49\textwidth}
-      \centering
-      \textbf{Unweighted X MC}\\[-0.1em]
-      \includegraphics[width=\textwidth,height=0.58\textheight,keepaspectratio]
-      {../XGBoost/output/training/X_pp24_v4_fid3_8v2_rw0_xgb_v1/roc.pdf}
-      \scriptsize
-      \texttt{X\_pp24\_v4\_fid3\_8v2\_rw0\_xgb\_v1}
-    \end{column}
-    \begin{column}{0.49\textwidth}
-      \centering
-      \textbf{R5-weighted X MC}\\[-0.1em]
-      \includegraphics[width=\textwidth,height=0.58\textheight,keepaspectratio]
-      {../XGBoost/output/training/X_pp24_v4_fid3_8v2_rwpsi2sr5v1_xgb_v1/roc.pdf}
-      \scriptsize
-      \texttt{X\_pp24\_v4\_fid3\_8v2\_rwpsi2sr5v1\_xgb\_v1}
-    \end{column}
-  \end{columns}
-  \vfill
-  \centering\small
-  Both train/apply/draw chains and scored DATA/MC ROOT files are complete.
-\end{frame}
-
-\begin{frame}{Matched-MC working points}
-  \vspace{4pt}
-  \begin{center}
-    \small
-    \begin{tabular}{llrrrr}
-      \toprule
-      Training & Bkg. eff. & Status & Yield & Signif. & Mass [GeV] \\
-      \midrule
-      rw0 & 10\% & 0/0 & $762\pm63$ & 12.18 & 3.87028 \\
-      rw0 & 3\%  & $-1$/3 & $286\pm80$ & 8.04 & 3.86884 \\
-      rw0 & 1\%  & 0/0 & $112\pm20$ & 5.52 & 3.86703 \\
-      \midrule
-      R5 & 10\% & 0/0 & $775\pm65$ & 12.21 & 3.87174 \\
-      R5 & 3\%  & 0/0 & $216\pm54$ & 5.84 & 3.87229 \\
-      R5 & 1\%  & 0/0 & $78\pm23$ & 3.40 & 3.87208 \\
-      \bottomrule
-    \end{tabular}
-  \end{center}
-  \vspace{0.3em}
-  \begin{columns}[T]
-    \begin{column}{0.48\textwidth}
-      \begin{block}{Interface fixed}
-        Each training uses its own scored DATA and matched MC template.
-      \end{block}
-    \end{column}
-    \begin{column}{0.48\textwidth}
-      \begin{alertblock}{Comparison caveat}
-        rw0 3\% did not converge; it cannot support a quantitative ranking.
-      \end{alertblock}
-    \end{column}
-  \end{columns}
-  \vfill
-  \centering\small
-  No consistent R5 sensitivity gain across the three predefined working points.
-\end{frame}
-
-\begin{frame}{Punzi optimum: useful diagnostic, not a final ranking}
-  \vspace{4pt}
-  \begin{center}
-    \begin{tabular}{lrrrr}
-      \toprule
-      Training & Frozen cut & Efficiency & Fit status & Significance \\
-      \midrule
-      rw0 & 0.875 & 0.2840 & strategy-2: 0/0 & 7.01 \\
-      R5  & 0.613 & 0.6775 & 0/0 & 16.62 \\
-      \bottomrule
-    \end{tabular}
-  \end{center}
   \vspace{0.8em}
   \begin{columns}[T]
     \begin{column}{0.48\textwidth}
-      \begin{block}{What was validated}
+      \begin{exampleblock}{ppRef: end-to-end prototype completed}
         \begin{itemize}
-          \item Frozen before inspecting new fits
-          \item R5 fit converges with a clear X peak
-          \item R5 cut agrees with the later 0.6 scan point
+          \item Signal extraction, reweighting, X MC application
+          \item Weighted/unweighted ML, matched fits, cut scans
+          \item Technical workflow established; physics choice not frozen
         \end{itemize}
-      \end{block}
+      \end{exampleblock}
     \end{column}
     \begin{column}{0.48\textwidth}
-      \begin{alertblock}{Why this is not the answer}
+      \begin{alertblock}{PbPb: no reliable \texorpdfstring{\psiP}{psi(2S)} target}
         \begin{itemize}
-          \item Efficiency definitions differ
-          \item rw0 cut 0.875 is too tight in DATA
-          \item Significance cannot rank the schemes alone
+          \item Cumulative selections and S2/S3 fits checked
+          \item No sufficiently robust peak for a signed-sWeight target
+          \item PbPb-specific reweighting could not start from this route
         \end{itemize}
       \end{alertblock}
     \end{column}
   \end{columns}
+
+  \vfill
+  \centering\HL{This update revisits the ppRef assumptions before choosing a PbPb strategy.}
 \end{frame}
 
-\begin{frame}{Fixed-cut scans expose the relevant trend}
+\begin{frame}{Comments postponed}
   \vspace{4pt}
   \begin{center}
-    \small
-    \begin{tabular}{lrrr}
+    \footnotesize
+    \begin{tabular}{p{3.5cm}p{9.1cm}}
       \toprule
-      Scan & Prediction range & Significance trend & Fitted mass range [GeV] \\
+      Comment & Reason for postponement \\
       \midrule
-      rw0 & 0.2--0.8 & $20.27 \rightarrow 9.49$ & $3.87128 \rightarrow 3.86914$ \\
-      R5  & 0.2--0.8 & $\sim20 \rightarrow 6.63$ & $3.87113$--$3.87204$ \\
+      Use ML AUC to decide whether more inputs are better? &
+      MC-based AUC is not a reliable standalone criterion for variable inclusion. \\
+      \addlinespace
+      Add \texttt{B\_alpha}? &
+      Not a current bottleneck; no new training or validation in this update. \\
+      \addlinespace
+      Add muon variables? &
+      Revisit only after the reweighting and transfer strategy is defined. \\
+      \addlinespace
+      Move \texttt{BQvalue} into the fiducial region? &
+      A broad bias question requiring a dedicated selection and systematic study. \\
       \bottomrule
     \end{tabular}
   \end{center}
-  \vspace{0.6em}
+
+  \vspace{0.35em}
   \begin{columns}[T]
     \begin{column}{0.48\textwidth}
-      \begin{block}{rw0}
-        \begin{itemize}
-          \item Seven default fits converge
-          \item Yield/significance fall with tighter cuts
-          \item Frozen 0.875 is beyond the useful scan
-        \end{itemize}
-      \end{block}
+      \centering
+      \textbf{What AUC can tell us}\\[0.2em]
+      \footnotesize Separation power on the simulated validation sample.
     \end{column}
     \begin{column}{0.48\textwidth}
-      \begin{exampleblock}{R5}
-        \begin{itemize}
-          \item More stable fitted peak position
-          \item Cut 0.8 passes strategy-2 check
-          \item $S(0.613)=16.62$, $S(0.6)=16.91$
-        \end{itemize}
-      \end{exampleblock}
+      \centering
+      \textbf{What it cannot establish}\\[0.2em]
+      \footnotesize DATA modelling, transfer closure, or final analysis robustness.
     \end{column}
   \end{columns}
+
   \vfill
+  \centering\itshape
+  Feature expansion is paused until the correction strategy and validation scope are fixed.
+\end{frame}
+
+\begin{frame}{What does AUC $=0.5$ mean here?}
+  \begin{columns}[T]
+    \begin{column}{0.58\textwidth}
+      \centering
+      \includegraphics[width=\textwidth,height=0.47\textheight,keepaspectratio]
+      {../XGBoost/output/slides_evidence/a5_b1_b3_v1/b3/holdout_domain_classifier_auc.pdf}
+    \end{column}
+    \begin{column}{0.38\textwidth}
+      \small
+      \textbf{This diagnostic}\\[-0.2em]
+      \begin{itemize}
+        \item Classifies \textbf{DATA target vs. MC domain}
+        \item Positive: signed-sWeighted \psiP DATA
+        \item Negative: \psiP MC before/after R5 correction
+      \end{itemize}
+      \vspace{0.2em}
+      \textbf{Different from ML AUC}\\[0.15em]
+      Signal-vs-background AUC should be high; domain AUC should approach 0.5 after correction.
+
+      \vspace{0.35em}
+      \textbf{Five holdout splits after reweighting:}\\[0.2em]
+      range $0.5066$--$0.5285$; mean $0.5217$.
+
+    \end{column}
+  \end{columns}
+\end{frame}
+
+\begin{frame}{From the KS test to a signed-weight KS-like distance}
+  \begin{columns}[T]
+    \begin{column}{0.48\textwidth}
+      \textbf{Standard two-sample KS test}
+        \small\\[-0.3em]
+        \[
+          D_{n,m}=\sup_x\left|F_n(x)-G_m(x)\right|.
+        \]
+        \begin{itemize}
+          \item Unweighted, monotonic empirical CDFs
+          \item A KS p-value follows under standard assumptions
+        \end{itemize}
+    \end{column}
+    \begin{column}{0.48\textwidth}
+      \textbf{Our signed-weight distance}
+        \small\\[-0.3em]
+        \[
+          D=\sup_x\left|F_{\rm MC}(x)-F_{\rm target}^{\rm signed}(x)\right|.
+        \]
+        \begin{itemize}
+          \item Negative sWeights are retained
+          \item Signed CDF may decrease or leave $[0,1]$
+          \item Descriptive effect size, not a KS p-value
+        \end{itemize}
+    \end{column}
+  \end{columns}
+
+  \vspace{0.4em}
+  \small
+  \textbf{Completed bootstrap study:} 500 paired replicas; resample DATA/MC, retain signed
+  event weights, retrain each reweighter, and evaluate an independent holdout.
+
+  \vspace{0.35em}
+  \begin{center}
+    \begin{tabular}{ll}
+      \toprule
+      Covered & Not covered \\
+      \midrule
+      Finite-event fluctuations; retraining & Fit model/range; sWeight construction \\
+      \bottomrule
+    \end{tabular}
+  \end{center}
+
+  \vfill
+  \centering\itshape
+  Later recipe scans use point estimates only; the bootstrap is not repeated by default.
+\end{frame}
+
+\begin{frame}{SHAP importance in the new nominal workflow}
+  \begin{columns}[T]
+    \begin{column}{0.49\textwidth}
+      \centering
+      \vspace{-0.45em}
+      \textbf{R6range2-weighted classifier}\\[0.15em]
+      \includegraphics[width=\textwidth,height=0.46\textheight,keepaspectratio]
+      {../XGBoost/output/slides_evidence/a5_b1_b3_v1/a5/weighted/shap_cumulative.pdf}
+    \end{column}
+    \begin{column}{0.49\textwidth}
+      \centering
+      \vspace{-0.45em}
+      \textbf{Unweighted classifier}\\[0.15em]
+      \includegraphics[width=\textwidth,height=0.46\textheight,keepaspectratio]
+      {../XGBoost/output/slides_evidence/a5_b1_b3_v1/a5/unweighted/shap_cumulative.pdf}
+    \end{column}
+  \end{columns}
+
+  \vspace{0.25em}
+  \small
+  \textbf{R6range2 correction used by this artifact:}
+  \texttt{Bcos\_dtheta}$\in[-1,1]$,
+  \texttt{Btktkpt}$\in[2,10]$,
+  \texttt{Bchi2Prob}$\in[0,1]$,
+  \texttt{Btrk2Pt}$\in[0.5,4.5]$,
+  \texttt{Btrk1Pt}$\in[0.5,4.5]$,
+  \texttt{Btrk1dR}$\in[0,0.5]$.
+
+  \vfill
+  \centering\HL{New nominal chain: ppRef X fit $\to$ reweighting $\to$
+  PbPb weighted-vs-unweighted ML comparison.}
+\end{frame}
+
+\begin{frame}{SHAP importance versus ppRef X closure}
+  \centering
+  \small
+  \setlength{\tabcolsep}{5pt}
+  \begin{tabular}{lrrr}
+    \toprule
+    Variable & SHAP fraction: unweighted $\to$ weighted & KS-like: before $\to$ after & Pattern \\
+    \midrule
+    \texttt{Btrk1dR}      & 19.33\% $\to$ 31.34\% & 0.051 $\to$ 0.039 & importance rises \\
+    \texttt{Btktkpt}      & 33.94\% $\to$ 22.10\% & 0.242 $\to$ 0.037 & both decrease \\
+    \texttt{Bchi2Prob}    & 16.22\% $\to$ 12.47\% & 0.123 $\to$ 0.032 & both decrease \\
+    \texttt{Bcos\_dtheta} &  7.57\% $\to$ 10.63\% & 0.260 $\to$ 0.040 & importance rises \\
+    \texttt{Btrk2Pt}      &  9.29\% $\to$  9.94\% & 0.093 $\to$ 0.017 & nearly stable \\
+    \texttt{Btrk1Pt}      &  9.72\% $\to$  9.06\% & 0.176 $\to$ 0.043 & mild decrease \\
+    \bottomrule
+  \end{tabular}
+
+  \vfill
+  \centering\HL{Corrected variables remain dominant, but no simple monotonic SHAP--closure relation is observed.}
+
+  \vspace{0.1em}
   \centering\small
-  \HL{ppRef validates the chain, but does not uniquely choose the final correction scheme.}
+  SHAP: PbPb classifiers; KS-like: ppRef X R6range2 closure. The comparison is qualitative.
 \end{frame}
 
-\begin{frame}{PbPb \texorpdfstring{\psiP}{psi(2S)}: cumulative S0--S4 definitions}
-  \vspace{4pt}
+\begin{frame}{Why did the previous plot not show the maximum weight?}
+  \begin{columns}[T]
+    \begin{column}{0.49\textwidth}
+      \centering
+      \vspace{-0.45em}
+      \textbf{Previous update}\\[0.15em]
+      \includegraphics[width=\textwidth,height=0.48\textheight,keepaspectratio]
+      {../XGBoost/output/reweighting/comparison_pp24_psi2s/weight_distributions_R3_R4_R5_R8.pdf}
+    \end{column}
+    \begin{column}{0.49\textwidth}
+      \centering
+      \vspace{-0.45em}
+      \textbf{Corrected full-range view}\\[0.15em]
+      \includegraphics[width=\textwidth,height=0.48\textheight,keepaspectratio]
+      {../XGBoost/output/slides_evidence/a5_b1_b3_v1/b1/weight_distributions_full_range.pdf}
+    \end{column}
+  \end{columns}
+
+  \vspace{0.35em}
+  \begin{itemize}
+    \item The previous histogram stopped at the \textbf{99.5\% positive-weight quantile};
+      its legend nevertheless reported the true maximum.
+    \item The corrected view spans the complete finite positive-weight range:
+      the long tail is visible and the R8 maximum $=219.262$ is real.
+  \end{itemize}
+
+\end{frame}
+
+\begin{frame}{How is the ppRef X validation target constructed?}
+  \centering
+  \small\textbf{Comment from the previous update:} compare the X sPlot target with
+  \psiP-reweighted X MC and quantify the agreement with a KS-like distance.
+
+  \vspace{0.2em}
+  \begin{columns}[T]
+    \begin{column}{0.43\textwidth}
+      \centering
+      \includegraphics[width=\textwidth,height=0.39\textheight,keepaspectratio]
+      {../Analysis_CODES/fitER/results/ppRef_X_r5_fiducial_feasibility/diagnostics/mass_fit_components_pull.pdf}
+
+      \footnotesize
+      Technically accepted fit: status $=0$, covQual $=3$;\quad
+      $N_X=3795\pm288$.
+    \end{column}
+    \begin{column}{0.49\textwidth}
+      \footnotesize
+      \textbf{Independent X target}\\[-0.2em]
+      \begin{itemize}
+        \item $7.5<p_T(B)<50$, $|y|<2.4$, \texttt{BQvalue}$<0.15$
+        \item Yield-only sPlot refit; signed weights retained
+        \item $N_{\rm eff}=393.74$ from 194,886 candidates
+      \end{itemize}
+
+      \vspace{0.25em}
+      \textbf{Transfer test}\\[-0.2em]
+      \begin{center}
+        \begin{tikzpicture}[
+          node distance=0.10cm,
+          box/.style={draw=positive,rounded corners,fill=positive!8,
+            text width=2.65cm,minimum height=0.40cm,align=center,font=\tiny},
+          arr/.style={-{Stealth},thick,positive}
+        ]
+          \node[box] (psi) {signed-sWeighted ppRef \psiP DATA + \psiP MC};
+          \node[box,below=of psi] (corr) {learn five-variable correction};
+          \node[box,below=of corr] (xmc) {apply correction to ppRef X MC};
+          \node[box,below=of xmc] (close) {compare with X signed-sPlot target};
+          \draw[arr] (psi)--(corr);
+          \draw[arr] (corr)--(xmc);
+          \draw[arr] (xmc)--(close);
+        \end{tikzpicture}
+      \end{center}
+
+      \tiny
+      Inputs: \texttt{Bcos\_dtheta}, \texttt{Btktkpt}, \texttt{Bchi2Prob},
+      \texttt{Btrk2Pt}, \texttt{Btrk1Pt}; correction selection:
+      $p_T(B)>7.5$, $|y|<2.4$, \texttt{BQvalue}$<0.15$.
+    \end{column}
+  \end{columns}
+
+\end{frame}
+
+\begin{frame}{Most variables move closer to the X signed-sPlot target}
+  \centering
+  \begin{columns}[T]
+    \begin{column}{0.32\textwidth}
+      \centering
+      \includegraphics[width=\textwidth,height=0.34\textheight,keepaspectratio]
+      {../XGBoost/output/reweighting/X_pp24_psi2s_R5_rw_v1/transfer_closure_x_splot_v1/variables/Bchi2Prob_transfer_closure.pdf}
+
+      \includegraphics[width=\textwidth,height=0.34\textheight,keepaspectratio]
+      {../XGBoost/output/reweighting/X_pp24_psi2s_R5_rw_v1/transfer_closure_x_splot_v1/variables/BtrkPtimb_transfer_closure.pdf}
+    \end{column}
+    \begin{column}{0.32\textwidth}
+      \centering
+      \includegraphics[width=\textwidth,height=0.34\textheight,keepaspectratio]
+      {../XGBoost/output/reweighting/X_pp24_psi2s_R5_rw_v1/transfer_closure_x_splot_v1/variables/Btrk1Pt_transfer_closure.pdf}
+
+      \includegraphics[width=\textwidth,height=0.34\textheight,keepaspectratio]
+      {../XGBoost/output/reweighting/X_pp24_psi2s_R5_rw_v1/transfer_closure_x_splot_v1/variables/Btrk2Pt_transfer_closure.pdf}
+    \end{column}
+    \begin{column}{0.32\textwidth}
+      \centering
+      \includegraphics[width=\textwidth,height=0.34\textheight,keepaspectratio]
+      {../XGBoost/output/reweighting/X_pp24_psi2s_R5_rw_v1/transfer_closure_x_splot_v1/variables/Bcos_dtheta_transfer_closure.pdf}
+
+      \includegraphics[width=\textwidth,height=0.34\textheight,keepaspectratio]
+      {../XGBoost/output/reweighting/X_pp24_psi2s_R5_rw_v1/transfer_closure_x_splot_v1/variables/Btktkpt_transfer_closure.pdf}
+    \end{column}
+  \end{columns}
+
+  \vfill
+  \small\HL{Six variables show point-estimate improvement after transferring the \psiP-derived weights to X MC.}
+\end{frame}
+
+\begin{frame}{The remaining variables limit the transfer reliability}
+  \begin{columns}[T]
+    \begin{column}{0.48\textwidth}
+      \centering
+      \includegraphics[width=\textwidth,height=0.48\textheight,keepaspectratio]
+      {../XGBoost/output/reweighting/X_pp24_psi2s_R5_rw_v1/transfer_closure_x_splot_v1/variables/Btrk1dR_transfer_closure.pdf}
+      \small \textbf{\texttt{Btrk1dR}: worsens}\quad $0.1012\to0.1091$
+    \end{column}
+    \begin{column}{0.48\textwidth}
+      \centering
+      \includegraphics[width=\textwidth,height=0.48\textheight,keepaspectratio]
+      {../XGBoost/output/reweighting/X_pp24_psi2s_R5_rw_v1/transfer_closure_x_splot_v1/variables/BtktkvProb_transfer_closure.pdf}
+      \small \textbf{\texttt{BtktkvProb}: small improvement}\quad $0.0472\to0.0393$
+    \end{column}
+  \end{columns}
+
+  \vspace{0.25em}
+  \centering
+  \small
+  \begin{tabular}{lr}
+    \toprule
+    Overall diagnostic & Before $\to$ after \\
+    \midrule
+    Eight-variable mean KS-like distance & $0.1855\to0.1609$ \\
+    Variables improved & $7/8$ \\
+    \bottomrule
+  \end{tabular}
+
+  \vfill
+  \HL{The tested \psiP-derived weights do not provide a reliable description of X across all validation variables.}
+\end{frame}
+
+\begin{frame}{A new X-based nominal candidate}
+  \centering
+  \begin{tikzpicture}[
+    box/.style={draw=positive,rounded corners,fill=positive!8,
+      minimum height=0.76cm,text width=2.02cm,align=center,font=\small},
+    arr/.style={-{Stealth},thick,positive}
+  ]
+    \node[box] (target) {ppRef X fit\\and signed-sPlot};
+    \node[box,right=0.38cm of target] (corr) {Direct-X\\correction};
+    \node[box,right=0.38cm of corr] (transfer) {Transfer to\\PbPb X MC};
+    \node[box,right=0.38cm of transfer] (ml) {Weighted\\classifier};
+    \node[box,right=0.38cm of ml] (fit) {PbPb DATA fit\\and injections};
+    \draw[arr] (target)--(corr);
+    \draw[arr] (corr)--(transfer);
+    \draw[arr] (transfer)--(ml);
+    \draw[arr] (ml)--(fit);
+  \end{tikzpicture}
+
+  \vspace{0.8em}
+  \begin{columns}[T,onlytextwidth]
+    \begin{column}{0.70\textwidth}
+      \textbf{Why change the route?}
+      \begin{itemize}
+        \item \psiP-derived correction did not reliably describe X
+        \item PbPb \psiP did not provide a usable sPlot target
+        \item Use the accepted ppRef X target directly
+      \end{itemize}
+    \end{column}
+  \end{columns}
+
+  \vfill
+  \centering\HL{The correction is learned from the ppRef X signed-sPlot target and consumed only within a controlled common support.}
+\end{frame}
+
+\begin{frame}{Unrestricted X-target reweighting is unstable}
+  \begin{columns}[T]
+    \begin{column}{0.52\textwidth}
+      \footnotesize
+      \textbf{Unrestricted five-variable correction}
+      \begin{itemize}
+        \item \texttt{Bcos\_dtheta}, \texttt{Btktkpt}, \texttt{Bchi2Prob},
+          \texttt{Btrk2Pt}, \texttt{Btrk1Pt}
+        \item Fiducial: $7.5<p_T(B)<50$, $|y|<2.4$,
+          \texttt{BQvalue}$<0.15$; no controlled input-variable ranges
+      \end{itemize}
+      \textbf{Assessment of unrestricted X reweighting}
+      \begin{tabular}{lr}
+        \toprule
+        Maximum event weight & $23910.72$ \\
+        Weighted-MC $N_{\rm eff}$ & $11.79$ \\
+        $\overline{D}$ & $0.1855\to0.3315$ \\
+        $D(\texttt{Btrk1dR})$ & $0.1012\to0.5227$ \\
+        \bottomrule
+      \end{tabular}
+
+      \vspace{0.25em}
+      \textbf{Effective sample size:}
+      $N_{\rm eff}=(\sum_i w_i)^2/\sum_i w_i^2$, the equivalent number of
+      unit-weight events after reweighting.
+    \end{column}
+    \begin{column}{0.44\textwidth}
+      \centering
+      \includegraphics[width=\textwidth,height=0.49\textheight,keepaspectratio]
+      {../XGBoost/output/reweighting/X_pp24_xsplot_R5_rw_v1/transfer_closure_x_splot_v1/variables/Btrk1dR_transfer_closure.pdf}
+
+      \footnotesize Unrestricted correction strongly distorts \texttt{Btrk1dR}.
+    \end{column}
+  \end{columns}
+
+  \vfill
+  \centering\HL{The unrestricted correction cannot be transferred; common phase-space control is required.}
+\end{frame}
+
+\begin{frame}{Correction variable sets}
+  \small
+  \textbf{Common fiducial:} $7.5<p_T(B)<50$, $|y|<2.4$, \texttt{BQvalue}$<0.15$.
+
+  \vspace{0.45em}
+  \centering
+  \setlength{\tabcolsep}{6pt}
+  \begin{tabular}{lp{10.6cm}}
+    \toprule
+    Variable set & Reweighting variables \\
+    \midrule
+    R5 & \texttt{Bcos\_dtheta}, \texttt{Btktkpt}, \texttt{Bchi2Prob},
+      \texttt{Btrk2Pt}, \texttt{Btrk1Pt} \\
+    R6 & R5 + \texttt{Btrk1dR} \\
+    R5v2 & \texttt{Bcos\_dtheta}, \texttt{Btktkpt}, \texttt{Bchi2Prob},
+      \texttt{Btrk1Pt}, \texttt{Btrk1dR} \\
+    R6v2 & R5v2 + \texttt{Btrk2dR} \\
+    \bottomrule
+  \end{tabular}
+
+  \vspace{0.8em}
+  \begin{columns}[T]
+    \begin{column}{0.48\textwidth}
+      \textbf{R5 $\to$ R6}\\[0.2em]
+      Add \texttt{Btrk1dR} after its closure worsens with R5range.
+    \end{column}
+    \begin{column}{0.48\textwidth}
+      \textbf{R5v2 $\to$ R6v2}\\[0.2em]
+      Test track-1-only inputs, then add \texttt{Btrk2dR} explicitly.
+    \end{column}
+  \end{columns}
+
+  \vfill
+  \centering\HL{Variable-set changes and phase-space range changes are tested separately.}
+\end{frame}
+
+\begin{frame}{Controlled ranges and tested variants}
+  \small
+  \begin{columns}[T]
+    \begin{column}{0.48\textwidth}
+      \textbf{Ranges shared whenever the variable is present}
+      \begin{itemize}
+        \item \texttt{Bcos\_dtheta} $\in[-1,1]$
+        \item \texttt{Bchi2Prob} $\in[0,1]$
+        \item \texttt{Btrk1Pt}, \texttt{Btrk2Pt} $\in[0.5,4.5]$
+        \item \texttt{Btrk1dR}, \texttt{Btrk2dR} $\in[0,0.5]$
+      \end{itemize}
+
+      \vspace{0.3em}
+      \textbf{Only \texttt{Btktkpt} changes between range variants}
+      \begin{itemize}
+        \item R5range, R6range: $[1,10]$
+        \item R6range2, R5v2range, R6v2range: $[2,10]$
+        \item R5v2range2, R6v2range2: $[2,8]$
+      \end{itemize}
+    \end{column}
+    \begin{column}{0.48\textwidth}
+      \centering
+      \textbf{Representative outcomes}
+      \setlength{\tabcolsep}{4pt}
+      \begin{tabular}{lrrr}
+        \toprule
+        Configuration & max $w$ & $N_{\rm eff}$ & $\overline{D}$ after \\
+        \midrule
+        R5range & 74.11 & 17106 & 0.0581 \\
+        R6range & 951.65 & 2085 & 0.0376 \\
+        R6range2 & 16.45 & 34641 & 0.0350 \\
+        R5v2range & 15.84 & 32920 & 0.0354 \\
+        R6v2range & 38.11 & 28169 & 0.0724 \\
+        R5v2range2 & 17.53 & 33836 & 0.0374 \\
+        R6v2range2 & 42.33 & 25687 & 0.0738 \\
+        \bottomrule
+      \end{tabular}
+
+      \vspace{0.4em}
+      \textbf{Both track-$dR$ inputs in R6v2range2}\\[0.2em]
+      $D(\texttt{Btrk1dR})=0.03552\to0.08319$\\
+      $D(\texttt{Btrk2dR})=0.04968\to0.07047$
+    \end{column}
+  \end{columns}
+
+\end{frame}
+
+\begin{frame}{The second-track angular distance remains mismodelled}
+  \begin{columns}[T]
+    \begin{column}{0.53\textwidth}
+      \centering
+      \includegraphics[width=\textwidth,height=0.56\textheight,keepaspectratio]
+      {../XGBoost/output/reweighting/X_pp24_xsplot_R6range2_rw_v1/transfer_closure_x_splot_v1/variables/Btrk2dR_transfer_closure.pdf}
+
+      \small R6range2, evaluated within $0<\texttt{Btrk2dR}<0.5$
+    \end{column}
+    \begin{column}{0.43\textwidth}
+      \small
+      \textbf{Independent closure check}
+      \begin{tabular}{lcc}
+        \toprule
+        Configuration & $D$ before & $D$ after \\
+        \midrule
+        R5range & 0.1051 & 0.2014 \\
+        R6range2 & 0.0525 & 0.1651 \\
+        R5v2range & 0.0493 & 0.1746 \\
+        R6v2range & 0.0493 & 0.0840 \\
+        \bottomrule
+      \end{tabular}
+
+      \vspace{0.6em}
+      \begin{itemize}
+        \item $\texttt{Btrk2dR}$ is excluded from the eight-variable mean
+        \item Adding one or both track-$dR$ inputs does not restore closure
+        \item Every tested configuration gives a larger $D(\texttt{Btrk2dR})$
+      \end{itemize}
+    \end{column}
+  \end{columns}
+
+  \vfill
+  \centering\HL{The aggregate improvement does not extend to the independent \texttt{Btrk2dR} check.}
+\end{frame}
+
+\begin{frame}{Momentum closure improves without resolving track-$dR$}
+  \begin{columns}[T]
+    \begin{column}{0.48\textwidth}
+      \centering
+      \textbf{R5range: includes \texttt{Btrk2Pt}}\\[0.2em]
+      \includegraphics[width=\textwidth,height=0.48\textheight,keepaspectratio]
+      {../XGBoost/output/reweighting/X_pp24_xsplot_R5range_rw_v1/transfer_closure_x_splot_v1/variables/Btrk2Pt_transfer_closure.pdf}
+
+      \small $D(\texttt{Btrk2Pt}):\ 0.239176\to0.031423$
+    \end{column}
+    \begin{column}{0.48\textwidth}
+      \centering
+      \textbf{R5v2range: excludes \texttt{Btrk2Pt}}\\[0.2em]
+      \includegraphics[width=\textwidth,height=0.48\textheight,keepaspectratio]
+      {../XGBoost/output/reweighting/X_pp24_xsplot_R5v2range_rw_v1/transfer_closure_x_splot_v1/variables/Btrk2Pt_transfer_closure.pdf}
+
+      \small $D(\texttt{Btrk2Pt}):\ 0.106097\to0.031412$
+    \end{column}
+  \end{columns}
+
+  \vspace{0.25em}
+  \small
+  \textbf{Contrast:} \texttt{Btrk2Pt} improves strongly whether it is a correction input or
+  an independent check, while \texttt{Btrk2dR} worsens in all tested configurations.
+
+  \vfill
+  \centering\HL{R6range2 is a pragmatic stability--closure compromise; no tested variant resolves \texttt{Btrk2dR}.}
+\end{frame}
+
+\begin{frame}[label=p18]{Transfer is restricted to a common phase space}
+  \begin{tikzpicture}[remember picture,overlay]
+    \node[anchor=north west] at ([xshift=0.802cm,yshift=-0.997cm]current page.north west) {%
+      \includegraphics[width=8.64cm,height=7.38cm,keepaspectratio]
+      {../XGBoost/output/reweighting/X_pp24_xsplot_R6range2_rw_v1/ppref_pbpb_mc_comparison_v1/common_fiducial_in_r6range2_support/variables/BtrkPtimb_ppref_vs_pbpb_unweighted.pdf}%
+    };
+  \end{tikzpicture}
+  \vspace{-1.2em}
+  \begin{columns}[T]
+    \begin{column}{0.70\textwidth}
+      \mbox{}
+
+    \end{column}
+    \begin{column}{0.27\textwidth}
+      \hspace{-0.5\textwidth}%
+      \begin{minipage}[t]{1.5\textwidth}
+        \footnotesize
+        \textbf{1. Transfer domain}\\[0.2em]
+        Learn inside ppRef R6range2 support. Apply with tighter PbPb:
+        $10<\texttt{Bpt}<50$, $|\texttt{By}|<1.6$, \texttt{BQvalue}$<0.15$.
+
+        \vspace{0.3em}
+        \textbf{2. MC-domain baseline}\\[0.2em]
+        Compare unweighted ppRef/PbPb MC. Adding full support, including
+        \texttt{Btktkpt}$\in[2,10]$, changes mean $\overline D$ from 0.0943 to 0.0843.
+
+        \vspace{0.3em}
+        \textbf{3. Apply contract}\\[0.2em]
+        Reweight 32,160 in-support events; keep 22,908 outside at unity and
+        exclude them downstream.
+      \end{minipage}
+    \end{column}
+  \end{columns}
+\end{frame}
+
+\begin{frame}{Weighted and unweighted classifiers define the fit inputs}
+  \footnotesize
+  \begin{columns}[T]
+    \begin{column}{0.48\textwidth}
+      \textbf{Shared training definition}
+      \begin{itemize}
+        \item Background: PbPb DATA, \texttt{Bmass}$\in[3.75,3.80]\cup[3.95,4.00]$ GeV
+        \item Candidate-level 75/25 split; common support
+      \end{itemize}
+    \end{column}
+    \begin{column}{0.48\textwidth}
+      \textbf{Only the signal model changes}
+      \begin{itemize}
+        \item Weighted: transferred correction on PbPb X MC
+        \item Unweighted: unit-weight PbPb X MC
+        \item Same fit workflow consumes both scored samples
+      \end{itemize}
+    \end{column}
+  \end{columns}
+
+  \vspace{0.15em}
+  \textbf{Eight shared inputs:}
+  \texttt{Bchi2Prob}, \texttt{Btrk1dR}, \texttt{BtrkPtimb}, \texttt{Btrk1Pt},
+  \texttt{Btrk2Pt}, \texttt{BtktkvProb}, \texttt{Bcos\_dtheta}, \texttt{Btktkpt}.
+
+  \vspace{0.3em}
+  \centering
+  \begin{tabular}{lccc}
+    \toprule
+    Classifier & signal weighting & train AUC & test AUC \\
+    \midrule
+    Weighted signal & transferred event weights & 0.8777 & 0.8391 \\
+    Unit signal & unit event weights & 0.9115 & 0.8958 \\
+    \bottomrule
+  \end{tabular}
+
+  \vspace{0.3em}
+  \textbf{Interpretation boundary:} the classifiers see different signal distributions;
+  a higher MC AUC may absorb DATA--MC mismatch and does not select the physical model.
+
+  \vfill
+  \centering\HL{AUC and SHAP describe model response; the decision requires observed spectra and injection tests.}
+\end{frame}
+
+\begin{frame}[label=p20]{Observed data after the unweighted classifier}
+  \begin{columns}[T,onlytextwidth]
+    \begin{column}{0.62\textwidth}
+      \centering
+      \includegraphics[width=1.10\textwidth,height=0.66\textheight,keepaspectratio]
+      {../Analysis_CODES/fitER/results/PbPb_H012_template_ml_matrix_narrow_range/unweighted_ml_xeff20/background_fit.pdf}
+    \end{column}
+    \begin{column}{0.36\textwidth}
+      \footnotesize
+      \textbf{Selected spectrum}
+      \begin{itemize}
+        \item 20\% weighted-reference X efficiency
+        \item 4087 DATA candidates
+        \item \texttt{Bmass}: 3.80--3.94 GeV
+        \item Smooth second-order background
+      \end{itemize}
+      \textbf{Fit quality}
+      \begin{itemize}
+        \item status $=0$
+        \item covQual $=3$
+        \item $\chi^2/{\rm ndf}=0.771$
+      \end{itemize}
+    \end{column}
+  \end{columns}
+
+  \vfill
+  \centering\HL{No narrow X peak is clearly visible; a smooth background-only model adequately describes this selected spectrum.}
+\end{frame}
+
+\begin{frame}[label=p21]{Observed data after the weighted classifier}
+  \begin{columns}[T,onlytextwidth]
+    \begin{column}{0.62\textwidth}
+      \centering
+      \includegraphics[width=1.10\textwidth,height=0.66\textheight,keepaspectratio]
+      {../Analysis_CODES/fitER/results/PbPb_H012_template_ml_matrix_narrow_range/weighted_ml_xeff20/background_fit.pdf}
+    \end{column}
+    \begin{column}{0.36\textwidth}
+      \footnotesize
+      \textbf{Selected spectrum}
+      \begin{itemize}
+        \item 20\% weighted-reference X efficiency
+        \item 2799 DATA candidates
+        \item \texttt{Bmass}: 3.80--3.94 GeV
+        \item Smooth second-order background
+      \end{itemize}
+      \textbf{Fit quality}
+      \begin{itemize}
+        \item status $=0$
+        \item covQual $=3$
+        \item $\chi^2/{\rm ndf}=0.662$
+      \end{itemize}
+    \end{column}
+  \end{columns}
+
+  \vfill
+  \centering\HL{The weighted classifier also yields no clearly visible narrow X peak in the observed spectrum.}
+\end{frame}
+
+\begin{frame}{The absence of a visible peak is not a transfer test by itself}
+  \small
+  \centering
+  \begin{tabular}{lrrrr}
+    \toprule
+    & \multicolumn{4}{c}{Weighted-reference X efficiency} \\
+    \cmidrule(lr){2-5}
+    Classifier & 20\% & 30\% & 40\% & 50\% \\
+    \midrule
+    Unweighted: DATA candidates & 4087 & 10765 & 23422 & 43273 \\
+    Unweighted: $\chi^2/{\rm ndf}$ & 0.771 & 0.979 & 0.981 & 0.762 \\
+    Weighted: DATA candidates & 2799 & 7742 & 16983 & 31399 \\
+    Weighted: $\chi^2/{\rm ndf}$ & 0.662 & 1.217 & 0.917 & 0.569 \\
+    \bottomrule
+  \end{tabular}
+
+  \vspace{0.65em}
+  \begin{itemize}
+    \item All eight background-only fits converge
+    \item No clearly visible narrow X peak
+    \item Smooth background gives an acceptable description
+  \end{itemize}
+
+  \vfill
+  \centering\HL{A leading explanation for the absent peak is residual mismatch between the reweighted MC and the signal-variable distributions.}
+\end{frame}
+
+\begin{frame}[label=p23]{A matched-signal injection tests the current workflow}
+  \footnotesize
+  \textbf{Validation question}
+  \begin{enumerate}
+    \item Generate pseudo-data with signal-variable distributions matching the current X MC.
+    \item Apply the current classifier selection and \texttt{Bmass} fit workflow.
+    \item Test whether the injected narrow signal peak and yield are recovered.
+  \end{enumerate}
+
+  \vspace{0.2em}
+  \begin{columns}[T]
+    \begin{column}{0.45\textwidth}
+      \textbf{Signal-yield estimate}
+      \[
+        N_X^{\rm after}=N_{\psi}^{\rm raw}\times1.08\times
+        \frac{\epsilon_X^{\rm score}}{\epsilon_{\psi}^{\rm score}}.
+      \]
+      \begin{itemize}
+        \item $N_{\psi}^{\rm raw}$ from eight accepted PbPb DATA fits
+        \item Expected yield evaluated after each score cut
+      \end{itemize}
+    \end{column}
+    \begin{column}{0.51\textwidth}
+      \centering
+      \textbf{Expected signal yields}
+      \setlength{\tabcolsep}{4pt}
+      \begin{tabular}{crr}
+        \toprule
+        X efficiency & weighted & unweighted \\
+        \midrule
+        20\% & $90.0\pm22.2$ & $67.6\pm17.7$ \\
+        30\% & $114.4\pm32.3$ & $137.2\pm27.9$ \\
+        40\% & $193.5\pm73.2$ & $184.5\pm40.8$ \\
+        50\% & $235.8\pm63.2$ & $212.7\pm55.5$ \\
+        \bottomrule
+      \end{tabular}
+    \end{column}
+  \end{columns}
+
+  \vspace{0.35em}
+  \textbf{Fast-test assumptions:}
+  pre-score acceptance--efficiency ratio $=1$; prompt-fraction ratio $=1$;
+  only the \psiP fit statistical uncertainty is propagated.
+\end{frame}
+
+\begin{frame}[label=p24]{Matched-model injections recover the assumed signal}
+  \begin{columns}[T,onlytextwidth]
+    \begin{column}{0.66\textwidth}
+      \centering
+      \raisebox{-0.2\height}{%
+        \includegraphics[width=1.31\textwidth,height=0.696\textheight,keepaspectratio]
+        {../Analysis_CODES/fitER/results/PbPb_H011_x_ratio_injection_fast_toys/toy_sensitivity_summary.pdf}%
+      }
+    \end{column}
+    \begin{column}{0.32\textwidth}
+      \footnotesize
+      \textbf{Fast-test design}
+      \begin{itemize}
+        \item Asimov fits at the central yield and $\pm1\sigma_{\psi}$
+        \item 200 toys with the central signal injection
+        \item 200 background-only toys
+        \item Generation and fit use matching signal models
+      \end{itemize}
+      \textbf{Observed in toys}
+      \begin{itemize}
+        \item Median expected $Z$: 2.66--4.15
+        \item Central Asimov bias: $-0.8\%$ to $-3.3\%$
+        \item Background-only: 12--43\% failure; 71.5--88\% boundary
+      \end{itemize}
+    \end{column}
+  \end{columns}
+
+  \vfill
+  \centering\HL{Matched-signal sensitivity does not validate the ppRef-to-PbPb transfer in data.}
+\end{frame}
+
+\begin{frame}[label=p25]{Template and classifier choices do not yet define an optimum}
+  \begin{columns}[T,onlytextwidth]
+    \begin{column}{0.66\textwidth}
+      \centering
+      \raisebox{-0.2\height}{%
+        \includegraphics[width=1.24\textwidth,height=0.696\textheight,keepaspectratio]
+        {../Analysis_CODES/fitER/results/PbPb_H012_template_ml_matrix_narrow_range/toy_sensitivity_matrix_summary.pdf}%
+      }
+    \end{column}
+    \begin{column}{0.32\textwidth}
+      \footnotesize
+      \textbf{Matching-template matrix}
+      \begin{itemize}
+        \setlength{\itemsep}{0.1em}
+        \item Each template $\times$ classifier: central and $\pm1\sigma_{\psi}$ Asimov fits
+        \item 200 central-injection + 200 background-only toys
+        \item Median $Z$: 2.52--5.01
+      \end{itemize}
+      \textbf{Remaining limitations}
+      \begin{itemize}
+        \setlength{\itemsep}{0.1em}
+        \item Mean failure change: $-0.0275$
+        \item No systematic covQual/boundary gain
+        \item 7 central recovery warnings
+      \end{itemize}
+    \end{column}
+  \end{columns}
+
+  \vfill
+  \centering\HL{Expected sensitivity depends jointly on template, classifier, and injected yield; no final model or working point is established.}
+\end{frame}
+
+\begin{frame}[label=p26]{Summary and Outlook}
+  \small
   \begin{center}
-    \small
-    \begin{tabular}{lp{10.5cm}}
+    \renewcommand{\arraystretch}{1.22}
+    \begin{tabular}{p{3.2cm}p{5.0cm}p{5.0cm}}
       \toprule
-      ID & Selection \\
+      Question & Established & Remaining limitation \\
       \midrule
-      S0 &
-      \texttt{BQvalue < 0.15 \&\& abs(By) < 1.6 \&\& Bpt > 10} \\
-      \addlinespace
-      S1 &
-      S0, but tighten \texttt{abs(By) < 1.2} \\
-      \addlinespace
-      S2 &
-      S1 \texttt{\&\& Btrk2dR < 0.25} \\
-      \addlinespace
-      S3 &
-      S2 \texttt{\&\& BtrkPtimb > 0.15} \\
-      \addlinespace
-      S4 &
-      S3 \texttt{\&\& Btrk1dR < 0.25} \\
+      Extreme weights & Range control restores $N_{\rm eff}$ & \\
+      Variables/ranges & A working configuration & Not optimal \\
+      \texttt{Btrk1dR}/\texttt{Btrk2dR} & & Failure persists across variants \\
+      Region transfer & Explicit extrapolation is excluded & No PbPb DATA closure \\
+      Observed spectra & & No clearly visible narrow X peak \\
+      Injection checks & ML is working & \\
       \bottomrule
     \end{tabular}
   \end{center}
-  \vspace{0.6em}
-  \begin{columns}[T]
-    \begin{column}{0.48\textwidth}
-      \begin{block}{Design}
-        \begin{itemize}
-          \item Same $3.6<m<3.8$ GeV range
-          \item Same 5 MeV binning
-          \item Strictly cumulative selections
-        \end{itemize}
-      \end{block}
-    \end{column}
-    \begin{column}{0.48\textwidth}
-      \begin{alertblock}{ML interaction}
-        \begin{itemize}
-          \item \texttt{Btrk2dR}: not planned for R5 ML
-          \item \texttt{BtrkPtimb}, \texttt{Btrk1dR}: ML candidates
-          \item S3/S4 are diagnostic, not nominal
-        \end{itemize}
-      \end{alertblock}
-    \end{column}
-  \end{columns}
+
+  \vspace{0.25em}
+  \raggedright
+  \textbf{Possible ways forward}
+  \begin{enumerate}
+    \item Test ppRef \psiP correction transfer within common support.
+    \item Compare variables/ranges with common validation gates.
+    \item Explore additional potentially useful input variables.
+  \end{enumerate}
 \end{frame}
 
-\begin{frame}{PbPb \texorpdfstring{\psiP}{psi(2S)} mass spectra: S0 and S1}
-  \begin{columns}[T]
-    \begin{column}{0.49\textwidth}
-      \centering
-      \textbf{S0 --- common fiducial baseline}\\[-0.2em]
-      \includegraphics[width=\textwidth,height=0.69\textheight,keepaspectratio]
-      {../Analysis_CODES/plotER/results/PbPb24/psi2s_selection_mass_scan/PbPb24_psi2S_S0_3p6_3p8.pdf}
-      \small 497,145 entries in $3.6<m<3.8$ GeV
-    \end{column}
-    \begin{column}{0.49\textwidth}
-      \centering
-      \textbf{S1 --- tighter rapidity}\\[-0.2em]
-      \includegraphics[width=\textwidth,height=0.69\textheight,keepaspectratio]
-      {../Analysis_CODES/plotER/results/PbPb24/psi2s_selection_mass_scan/PbPb24_psi2S_S1_3p6_3p8.pdf}
-      \small 373,736 entries in $3.6<m<3.8$ GeV
-    \end{column}
-  \end{columns}
-\end{frame}
-
-\begin{frame}{PbPb \texorpdfstring{\psiP}{psi(2S)} mass spectra: S2 and S3}
-  \begin{columns}[T]
-    \begin{column}{0.49\textwidth}
-      \centering
-      \textbf{S2 --- add \texttt{Btrk2dR < 0.25}}\\[-0.2em]
-      \includegraphics[width=\textwidth,height=0.69\textheight,keepaspectratio]
-      {../Analysis_CODES/plotER/results/PbPb24/psi2s_selection_mass_scan/PbPb24_psi2S_S2_3p6_3p8.pdf}
-      \small 230,447 entries; preferred fit candidate
-    \end{column}
-    \begin{column}{0.49\textwidth}
-      \centering
-      \textbf{S3 --- add \texttt{BtrkPtimb > 0.15}}\\[-0.2em]
-      \includegraphics[width=\textwidth,height=0.69\textheight,keepaspectratio]
-      {../Analysis_CODES/plotER/results/PbPb24/psi2s_selection_mass_scan/PbPb24_psi2S_S3_3p6_3p8.pdf}
-      \small 83,754 entries; tighter fallback
-    \end{column}
-  \end{columns}
-\end{frame}
-
-\begin{frame}{PbPb \texorpdfstring{\psiP}{psi(2S)} mass spectrum: S4}
-  \begin{columns}[T]
-    \begin{column}{0.64\textwidth}
-      \centering
-      \includegraphics[width=\textwidth,height=0.72\textheight,keepaspectratio]
-      {../Analysis_CODES/plotER/results/PbPb24/psi2s_selection_mass_scan/PbPb24_psi2S_S4_3p6_3p8.pdf}
-    \end{column}
-    \begin{column}{0.33\textwidth}
-      \begin{block}{S4: strict diagnostic point}
-        \begin{itemize}
-          \item Add \texttt{Btrk1dR < 0.25}
-          \item 52,479 entries in the main window
-          \item Cuts two ML-candidate variables
-        \end{itemize}
-      \end{block}
-      \begin{alertblock}{Decision}
-        S2 and S3, not S4, were retained for the consistent preliminary fits.
-      \end{alertblock}
-    \end{column}
-  \end{columns}
-\end{frame}
-
-\begin{frame}{Current checkpoint: preliminary PbPb S2/S3 fits}
-  \begin{columns}[T]
-    \begin{column}{0.49\textwidth}
-      \centering
-      \textbf{S2 --- preferred candidate}\\[-0.2em]
-      \includegraphics[width=\textwidth,height=0.42\textheight,keepaspectratio]
-      {../Analysis_CODES/fitER/results/PbPb_H004_fit2_S2/data_fit_clean.pdf}
-      \small
-      \[
-        N_{\psiP}=651\pm192,\quad
-        \frac{S}{\sqrt{S+B}}=4.39
-      \]
-    \end{column}
-    \begin{column}{0.49\textwidth}
-      \centering
-      \textbf{S3 --- tighter fallback}\\[-0.2em]
-      \includegraphics[width=\textwidth,height=0.42\textheight,keepaspectratio]
-      {../Analysis_CODES/fitER/results/PbPb_H004_fit2_S3/data_fit_clean.pdf}
-      \small
-      \[
-        N_{\psiP}=301\pm113,\quad
-        \frac{S}{\sqrt{S+B}}=3.41
-      \]
-    \end{column}
-  \end{columns}
-  \vspace{0.2em}
-  \begin{alertblock}{Fit diagnostics in progress}
-    \small Both fits have status/covQual $=0/3$; the DATA width scale reaches 1.15.
-    Results are preliminary; sWeight and $N_{\mathrm{eff}}$ checks are pending.
-  \end{alertblock}
-\end{frame}
-
-\begin{frame}{Status and immediate next steps}
-  \begin{columns}[T]
-    \begin{column}{0.48\textwidth}
-      \begin{exampleblock}{Completed: ppRef prototype}
-        \begin{itemize}
-          \item \psiP signal target and R5 correction
-          \item Closure and transfer to X MC
-          \item rw0/R5 train, apply, matched fits
-          \item Prediction scans and physical review
-        \end{itemize}
-      \end{exampleblock}
-    \end{column}
-    \begin{column}{0.48\textwidth}
-      \begin{block}{Next: PbPb-specific chain}
-        \begin{enumerate}
-          \item Accept S2 or S3 fit configuration
-          \item Produce and validate sWeights
-          \item Train PbPb-specific correction
-          \item Retrain X ML and scan Prediction
-        \end{enumerate}
-      \end{block}
-    \end{column}
-  \end{columns}
+\begin{frame}[label=p27]{\strut}
+  \centering
   \vfill
-  \begin{center}
-    \Large\HL{The ppRef chain is validated.}\\[0.4em]
-    \normalsize
-    The immediate decision is whether the preliminary PbPb \psiP fit is robust enough
-    to provide the next reweighting target.
-  \end{center}
+  \makebox[\textwidth][c]{%
+    \begin{beamercolorbox}[wd=0.68\textwidth,sep=1.2em,center,rounded=true,shadow=true]{block body}
+      {\LARGE\bfseries Thanks for listening!}\par
+      \vspace{1.0em}
+      {\large Reporter: Lekai Yao}\par
+      \vspace{0.45em}
+      {\large 2026.8.5}
+    \end{beamercolorbox}%
+  }
+  \vfill
 \end{frame}
-
-\input{slides/backup.tex}
 
 \end{document}

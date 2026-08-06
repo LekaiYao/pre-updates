@@ -11,15 +11,21 @@
 \input{beamer_setup.tex}
 \input{project_setup.tex}
 
+% Optional fast single-frame build, for example:
+%   bash fastcompile_frame.sh demo-title
+\ifdefined\onlyframes
+  \expandafter\includeonlyframes\expandafter{\onlyframes}
+\fi
+
 \begin{document}
 
-\begin{frame}[plain]
+\begin{frame}[plain,label=demo-title]
   \titlepage
   \vfill
   \centering\demolabel
 \end{frame}
 
-\begin{frame}{Analysis update: recommended narrative}
+\begin{frame}[label=demo-narrative]{Analysis update: recommended narrative}
   \begin{columns}[T]
     \column{0.48\textwidth}
       \begin{block}{Physics question}

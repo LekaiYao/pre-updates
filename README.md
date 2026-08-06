@@ -24,6 +24,7 @@ utils/theme_setup.tex     通用主题和语义颜色
 utils/common_macros.tex   通用布局与 conclusion helper
 utils/beamer_setup.tex    可选 HEP 粒子和 collider 宏
 fastcheck_slides.sh       快速语法检查
+fastcompile_frame.sh      单页排版快速编译与 PNG 渲染
 archive_slides.sh         极简 slides 归档
 latexmkrc                 本地 TeX 搜索路径
 ```
@@ -39,6 +40,25 @@ latexmk -pdf -outdir=build slides/main.tex
 ```
 
 构建后使用官方 `pdf` skill 对 `build/main.pdf` 做逐页视觉检查。
+
+## 单页排版迭代
+
+为目标 frame 设置稳定的 `label` 后运行：
+
+```bash
+bash fastcompile_frame.sh demo-title
+```
+
+脚本只编译该 frame，执行两次 `pdflatex` 以解析 overlay 坐标，并生成：
+
+```text
+tmp/demo-title/frame-demo-title.pdf
+tmp/demo-title/frame-demo-title.png
+```
+
+人工逐页调整期间只运行单页编译；页面确认后再执行一次完整构建。`tmp/` 不入库，
+一轮 slides 正式收尾后清理。脚本不包含分析项目的外部路径，额外 TeX 搜索路径由
+项目环境或 `TEXINPUTS` 提供。
 
 ## 极简归档
 
@@ -78,3 +98,6 @@ skills 不判断分析数字是否可信。数据溯源、AN 用语和内部标�
 4. 用已核实内容替换 demo frames；
 5. 每个叙事单元后起草并人工审核 `Interim conclusion`；
 6. 运行 fastcheck、完整编译和逐页 PDF 检查。
+
+更新既有分析 deck 时，还应遵守 `SLIDES_GUIDE.md` 的两层计划、从零更新、
+artifact 复用和人工批准版式规则。

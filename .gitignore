@@ -8,6 +8,7 @@ docs/
 
 # TeX 编译产物
 build/
+tmp/
 *.aux
 *.log
 *.out

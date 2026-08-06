@@ -56,6 +56,68 @@
 - 交付前检查内部编号、request/task ID、原始路径和未解释的配置标签。具体
   denylist 由每个分析项目维护，不写死在通用模板中。
 
+## 4. Update 计划与内容复用
+
+- 修改既有 deck 前先建立两层实施计划，并在本轮更新完成前持续维护：
+  1. 主要框架：叙事顺序、各单元目的和大致页数；
+  2. 每约五页的细分：逐页目的、证据来源、图表、过渡和人工结论门禁。
+- 两层计划均写入项目指定的计划文档；session 默认只输出主要框架，详细细分留在
+  文档中供核对。本轮更新正式完成后按项目文档生命周期归档计划。
+- 在没有明确增量更新要求时，新一轮 update 默认从零搭建：保留已批准的封面格式，
+  删除旧版主体和 backup 叙事，再选择性复用经过核实的图、宏和布局组件。
+- 确认 slides 内容或向代码项目提出需求前，先清点既有 figures、results、manifests
+  和 accepted handoffs。已有产物足以支撑表述时直接复用，不重复生成。
+- 新增 plot、analysis result、validation、training、fit、optimization、interface 或
+  code-side run 必须先经人工判断；slide plan 或缺少展示材料本身不构成运行授权。
+
+## 5. 单页排版迭代
+
+- 人工逐页评审时，为目标 frame 设置稳定 `label`，使用 `fastcompile_frame.sh <label>`
+  只编译该页，并检查 `tmp/<label>/` 中的 PDF 和 PNG。
+- 布局修改严格限制在用户指定范围；若只要求移动或缩放图片，不主动重排相邻文字。
+- overlay 或 `remember picture` 页面至少编译两次后再判断坐标；同时检查标题栏、页脚、
+  图注和结论是否重叠，不能只依赖 LaTeX warning。
+- 页面获得人工确认后再运行完整 fastcheck 和 `latexmk`。本轮更新正式收尾后清理 `tmp/`。
+
+## 6. 人工批准的封面与结束页
+
+- 已获人工批准的封面或结束页视为项目局部模板；后续 update 保留其标题层级、作者排序、
+  reporter 标记、logo 尺寸与间距以及结束页信息框结构，不回退为通用默认布局。
+- 通用 `main` 只保存格式和匿名占位符，不保存具体项目的人名、机构、日期或 logo 路径。
+- 多作者封面可采用以下匿名格式；姓名之间使用逗号加一个空格，只给 reporter 加下划线：
+
+```tex
+\author{%
+  COLLABORATOR 1, \underline{REPORTER NAME}, COLLABORATOR 3\\[0.45em]
+  YYYY.M.D%
+}
+\institute{}
+\date{%
+  \includegraphics[height=LOGO-HEIGHT]{LOGO-1}\hspace{LOGO-GAP}%
+  \includegraphics[height=LOGO-HEIGHT]{LOGO-2}%
+}
+```
+
+- 结束页保留正常模板的顶栏和页脚，用全页宽度的 `makebox` 居中信息框；reporter 与日期
+  使用相同字号：
+
+```tex
+\begin{frame}[label=closing]{\strut}
+  \centering
+  \vfill
+  \makebox[\textwidth][c]{%
+    \begin{beamercolorbox}[wd=0.68\textwidth,sep=1.2em,center,rounded=true,shadow=true]{block body}
+      {\LARGE\bfseries Thanks for listening!}\par
+      \vspace{1.0em}
+      {\large Reporter: REPORTER NAME}\par
+      \vspace{0.45em}
+      {\large YYYY.M.D}
+    \end{beamercolorbox}%
+  }
+  \vfill
+\end{frame}
+```
+
 ## 每版 Slides 的内容审核清单
 
 - [ ] 每个主要叙事单元后都有 conclusion，或明确说明为何不需要。
@@ -64,3 +126,7 @@
 - [ ] CMS 术语与 AN 或已审核 wording guide 一致。
 - [ ] 主体 slides 中没有内部协作标签。
 - [ ] 所有保留的分析局部标签在首次出现时都有读者可理解的定义。
+- [ ] 两层 update 计划已维护，并在本轮完成后归档。
+- [ ] 新增分析运行均有明确人工授权；可复用 artifacts 未被重复生成。
+- [ ] 单页排版迭代已在确认后完成一次完整构建，并清理临时输出。
+- [ ] 已批准的封面和结束页格式得到保留，通用模板中没有具体人员信息。

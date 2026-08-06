@@ -4,8 +4,14 @@
 \input{theme_setup.tex}\input{common_macros.tex}\input{beamer_setup.tex}\input{project_setup.tex}
 \newcommand{\hfig}{slides/figures/accepted/H006}
 \newcommand{\atlasref}{\textcolor{neutral}{\scriptsize ATLAS Collaboration, Eur. Phys. J. C 77 (2017) 76, arXiv:1612.02950}}
+
+% Optional fast single-frame build, for example:
+%   bash fastcompile_frame.sh FRAME_LABEL
+\ifdefined\onlyframes
+  \expandafter\includeonlyframes\expandafter{\onlyframes}
+\fi
 \begin{document}
-\begin{frame}[plain]\titlepage\end{frame}
+\begin{frame}[plain,label=title]\titlepage\end{frame}
 
 \begin{frame}{Can data replace an imperfect MC template?}
 \begin{columns}[T]\column{.47\textwidth}\begin{block}{MC-template limitation}\begin{itemize}\item SPS modeling is not fully reliable\item Template choices propagate to the fraction\item A complementary data constraint is desirable\end{itemize}\end{block}

@@ -2,8 +2,9 @@
 
 状态：页面计划和主要 physics wording 已于 2026-08-07 获用户批准。Codes package
 H012 metadata-only 修正已于 2026-08-07 通过 consumer 复核，H011 artifacts 已转为
-`accepted`。正式 slides 制作可以进入下一阶段；本次验收尚未归档旧 deck、复制新
-artifacts 或修改 `slides/main.tex`。
+`accepted`。30 页正式首版已按本计划完成：旧 deck 已冻结、新 inputs 已复制、正文与
+backup 已从零创建并通过完整 build/visual QA。计划保持 active，等待用户 review 后再
+决定页面调整与最终归档。
 
 规划假设：JJ analysis-group internal update，约 25--30 分钟；主文约 23 页，
 backup 约 7 页。报告时长和受众需由用户确认，页数随后可等比例压缩或扩展。
@@ -128,7 +129,7 @@ backup 约 7 页。报告时长和受众需由用户确认，页数随后可等�
 2. H012 provenance 修正与 consumer 复核已完成；H011 已 accepted。
 3. 用户已确认 central、bootstrap `stat`、暂定 `syst` 和最终 nominal comparison
    口径，并已批准 category/CR 独立 group envelopes 的 quadrature combination。
-4. 构建并归档当前 `main.tex`、`project_setup.tex` 和 PDF；冻结 archive 不覆盖。
-5. 只复用 title/thanks 格式、主题和宏，其余正文与 backup 从零创建。
-6. 以单页/小批次编译迭代；完成后运行 fastcheck、latexmk、warning audit、内部编号
-   checker 和逐页 PDF visual QA。
+4. 已构建并归档旧 `main.tex`、`project_setup.tex` 和 PDF；冻结 archive 未覆盖。
+5. 已只复用 title/thanks 格式、主题和宏，其余正文与 backup 从零创建。
+6. 已按小批次编译，并完成 fastcheck、latexmk、warning audit、内部编号 checker 和
+   逐页 PDF visual QA；下一 gate 为用户 review。

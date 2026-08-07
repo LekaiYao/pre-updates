@@ -52,5 +52,8 @@
   及其指向的 verified artifacts。
 - 23 个 PDF 均完成 identity 验证，但 manifest 中标为
   `historical_nominal_comparison_forbidden` 的 PDF 仍禁止展示或引用其 stale 数值。
-- 正式复制到 `slides/figures/accepted/` 和页面选择在 slides 制作阶段完成；本次验收
-  不修改 `slides/main.tex`、`slides/project_setup.tex` 或冻结 archive。
+- 2026-08-07 正式首版制作已将 16 个新图复制到
+  `slides/figures/accepted/H011/`，并将 13 个 machine-readable/provenance 文件复制到
+  `slides/data/accepted/H011/`；local figure hashes 与 accepted manifest 全部匹配。
+- Stale nominal-comparison PDF 未复制、未引用。首版构建与逐页 QA 见
+  `docs/qa/JJ_DATA_DRIVEN_FIRST_DRAFT_2026-08-07.md`。

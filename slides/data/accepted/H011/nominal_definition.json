@@ -1,0 +1,90 @@
+{
+  "artifact_status": "ready",
+  "physics_status": "user_approved_for_current_slides_pending_consumer_acceptance",
+  "role": "data_driven_internal_central_scheme_not_CMS_nominal",
+  "repository": {
+    "branch": "sync/chensh-20260730",
+    "head": "24823a5",
+    "test_code_tracking": "ignored_untracked_use_source_manifest_sha256"
+  },
+  "source_events": {
+    "raw_files": 119,
+    "raw_entries": 6132,
+    "selected_events": 2492,
+    "selection": "HLT_pass_and_trigger_match_and_samePV_and_each_Jpsi_10_le_pt_le_40_GeV_and_mJJ_ge_7p5_GeV",
+    "candidate_choice": "reverse_candidate_scan_then_first_passing_candidate",
+    "slots": "one_Jpsi1_and_one_Jpsi2_from_each_selected_event"
+  },
+  "single_jpsi_splot": {
+    "input_weight": "none",
+    "observables": ["slot_specific_mass", "slot_specific_ctau"],
+    "fit_ranges": {"mass_GeV": [2.95, 3.25], "ctau": [-0.03, 0.16]},
+    "components": ["prompt", "nonprompt", "combinatorial"],
+    "base_model": "Data/ULntuple16/CMSSW_10_6_20/src/NtupleAnalyzer/Model_4D_tot.root",
+    "category_variable": "abs_y",
+    "category_split": 1.2,
+    "category_rule": "low_if_abs_y_lt_1p2_high_otherwise",
+    "calibration": "independent_factorized_low_high_per_slot_mass_and_prompt_ctau_resolution_scales",
+    "splot_fit": "freeze_resolution_scales_then_yield_only_extended_fit",
+    "fit_acceptance": "status_eq_0_and_covQual_ge_2_and_EDM_lt_0p01",
+    "negative_sweights": "retained"
+  },
+  "event_mixing": {
+    "orientation": "Jpsi1_from_source_A_times_Jpsi2_from_source_B",
+    "mode": "all_cross_event_pairs",
+    "pool1_candidates": 2473,
+    "pool2_candidates": 2474,
+    "cartesian_pairs": 6118202,
+    "same_source_rejected": 2456,
+    "mJJ_lt_7p5_GeV_rejected": 53997,
+    "correction_rejected": 0,
+    "accepted_pairs": 6061749,
+    "pair_weight": "prompt_sweight_Jpsi1_times_prompt_sweight_Jpsi2_times_nominal_pair_correction",
+    "pair_correction_inputs": ["acceptance.txt", "efficiency_0_0.6.txt"],
+    "negative_pair_weights": "retained",
+    "random_sampling": "not_used_in_central"
+  },
+  "data_pp_fit": {
+    "input": "tests/atlas_data_driven_sps/results/unified_input/WeightData_mJJ7p5.root",
+    "model": "Model_4D_tot.root_pdf_all",
+    "observables": ["Jpsi_mass1", "Jpsi_mass2", "Jpsi_ctau1", "Jpsi_ctau2"],
+    "weight": "evt_weight",
+    "binning": {
+      "coordinates": ["abs_delta_y", "abs_delta_phi"],
+      "delta_y_edges": [0.0, 0.6, 1.2, 1.8, 2.4, 4.0],
+      "delta_phi_edges": [0.0, 1.5707963267948966, 2.356194490192345, 3.141592653589793],
+      "adaptive_rule": "merge_delta_phi_1p5708_to_pi_for_delta_y_1p8_to_2p4",
+      "cells": 14
+    },
+    "fit_acceptance": "status_eq_0_and_covQual_ge_2_and_EDM_lt_0p01",
+    "minimum_fit_entries": 10
+  },
+  "decomposition": {
+    "control_region": "abs_delta_y_ge_1p8_and_abs_delta_phi_le_pi_over_2",
+    "sps_leakage_fraction": 0.0,
+    "alpha": "sum_PP_in_CR_divided_by_sum_mixed_DPS_in_CR",
+    "DPS_cell": "alpha_times_mixed_cell",
+    "SPS_cell": "PP_cell_minus_DPS_cell",
+    "primary_estimator": "sum_DPS_cells_divided_by_sum_PP_cells",
+    "primary_f_DPS": 0.169980427756,
+    "primary_f_SPS": 0.830019572244,
+    "negative_SPS_cells": 1
+  },
+  "projections": {
+    "role": "differential_decomposition_and_consistency_check_not_independent_integrated_measurements",
+    "f_DPS": {
+      "delta_y": 0.168703597266,
+      "delta_phi": 0.1692473785,
+      "evt_mass": 0.168262477792,
+      "evt_y": 0.168744655864
+    },
+    "component_fits_accepted": "78_of_78"
+  },
+  "recommendation_basis": [
+    "candidate_level_prompt_purification_without_event_weight_splitting",
+    "separate_slot_models",
+    "data_visible_rapidity_dependent_resolution_in_both_slots",
+    "deterministic_all_pairs",
+    "fit_and_algebraic_closure"
+  ]
+}

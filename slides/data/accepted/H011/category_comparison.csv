@@ -1,0 +1,4 @@
+scheme,category_variable,category_split,direct_f_dps,shift_from_global,projected_f_dps_delta_y,projected_f_dps_delta_phi,projected_f_dps_evt_mass,projected_f_dps_evt_y,component_fits_accepted
+global,none,none,0.176302521907,0,0.17506471082,0.175592319261,0.174626914523,0.175096698931,78_of_78
+pt15,pt,15,0.177243951348,0.000941429441,0.17601146356,0.176543425276,0.175571202288,0.176033607474,78_of_78
+absy1p2,absy,1.2,0.169980427756,-0.006322094151,0.168703597266,0.1692473785,0.168262477792,0.168744655864,78_of_78

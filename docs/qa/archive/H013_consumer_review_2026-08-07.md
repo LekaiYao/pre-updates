@@ -2,8 +2,8 @@
 
 日期：2026-08-07  
 Producer artifact：`../JPsiJPsi/docs/answers/H013_preupdates_data_driven_sigma_eff/`  
-Consumer verdict：**technical review passed; awaiting user physics gate**  
-Artifact status：`ready`，尚未转为 `accepted`
+Consumer verdict：**accepted after user physics gate**  
+Artifact status：`accepted`（2026-08-07）
 
 ## 已通过的核对
 
@@ -42,16 +42,14 @@ pair-total estimator，因此现有 artifacts 无法确定 `Cov(f_DPS,P)`。Prod
 这些数值仍继承 500/529 attempts、29 failures 和 successful-only conditional-selection
 caveat。`rho=0` 只能是 independent-input reference，不是 correlation-resolved result。
 
-## 未满足的 acceptance gate
+## Acceptance gate resolution
 
-未发现需要 codes 修正的实现或 provenance defect，但根据 H013 request 与项目规则，以下
-事项必须由用户确认后才能将 artifact 转为 `accepted`：
+未发现需要 codes 修正的实现或 provenance defect。用户随后确认：
 
 1. 接受中心值 `sigma_DPS=6.3232719125232 pb`、`sigma_eff=2.514527745559081 mb`；
-2. 是否批准当前 provisional partial systematic 及显示口径；
-3. statistical treatment 选择：保持 `stat pending` 并要求后续 joint bootstrap，或明确
-   采用某个 provisional correlation convention；
-4. 是否接受推荐舍入 `6.32 pb` 和 `2.51 mb`，并始终保留 data-driven internal、
+2. 接受当前 provisional partial systematic 及显示口径；
+3. statistical treatment 保持 `stat pending`，不采用 `rho=0` reference 作为正式结果；
+4. 接受推荐舍入 `6.32 pb` 和 `2.51 mb`，并始终保留 data-driven internal、
    partial/incomplete systematic 和 non-nominal wording。
 
-在上述 gate 完成前，H013 保持 open、producer artifact 保持 `ready`，不得写入 slides。
+据此 H013 consumer 状态转为 `accepted`，消费边界以 accepted artifact manifest 为准。

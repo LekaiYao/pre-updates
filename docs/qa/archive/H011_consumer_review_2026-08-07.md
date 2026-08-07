@@ -1,6 +1,6 @@
 # H011 consumer review
 
-状态：`accepted`（2026-08-07）。H012 metadata-only correction 已通过 consumer
+状态：`accepted`（2026-08-07，已归档）。H012 metadata-only correction 已通过 consumer
 实际文件、hash、CR summary、PDF byte identity 和 Git context 复核；原 provenance
 阻塞已解除。Accepted consumption boundary 见
 `docs/artifacts/archive/H011_data_driven_optimization_update.md`。

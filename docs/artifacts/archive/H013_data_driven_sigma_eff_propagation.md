@@ -12,7 +12,7 @@
 - User physics gate：accepted current-round central values and provisional partial systematic;
   statistical covariance remains unresolved and must be displayed as pending, never replaced by the
   `rho=0` reference.
-- Consumer review：`docs/qa/H013_consumer_review_2026-08-07.md`
+- Consumer review：`docs/qa/archive/H013_consumer_review_2026-08-07.md`
 
 ## Accepted result and wording boundary
 

@@ -13,7 +13,7 @@
 - Producer answer workspace：JPsiJPsi/docs/answers/H011_preupdates_data_driven_optimization_update/
 - 关联基线：上一轮已验收的 ATLAS-style data-driven SPS/DPS cross-check
 - Human gate：central/stat/syst/nominal-comparison 口径及 provisional syst quadrature 已由用户确认；剩余 gate 为 H012 provenance 修正与 consumer 复核
-- Consumer review：docs/qa/H011_consumer_review_2026-08-07.md
+- Consumer review：docs/qa/archive/H011_consumer_review_2026-08-07.md
 
 ## 背景与职责边界
 

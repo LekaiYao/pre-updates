@@ -12,7 +12,7 @@
 - Requester 文件：`pre-updates/docs/requests/active/H012_JPsiJPsi_H011_provenance_metadata_correction.md`
 - Producer answer workspace：`JPsiJPsi/docs/answers/H012_preupdates_H011_provenance_metadata_correction/`
 - 关联交付：`JPsiJPsi/docs/answers/H011_preupdates_data_driven_optimization_update/`
-- Consumer review：`pre-updates/docs/qa/H011_consumer_review_2026-08-07.md`
+- Consumer review：`pre-updates/docs/qa/archive/H011_consumer_review_2026-08-07.md`
 
 ## 背景与授权边界
 

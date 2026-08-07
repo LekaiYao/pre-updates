@@ -56,4 +56,4 @@
   `slides/figures/accepted/H011/`，并将 13 个 machine-readable/provenance 文件复制到
   `slides/data/accepted/H011/`；local figure hashes 与 accepted manifest 全部匹配。
 - Stale nominal-comparison PDF 未复制、未引用。首版构建与逐页 QA 见
-  `docs/qa/JJ_DATA_DRIVEN_FIRST_DRAFT_2026-08-07.md`。
+  `docs/qa/archive/JJ_DATA_DRIVEN_FIRST_DRAFT_2026-08-07.md`。

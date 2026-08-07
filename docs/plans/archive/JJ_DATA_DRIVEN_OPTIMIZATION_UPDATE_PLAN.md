@@ -1,10 +1,8 @@
-# JJ data-driven optimization update：active slide plan
+# JJ data-driven optimization update：archived slide plan
 
-状态：页面计划和主要 physics wording 已于 2026-08-07 获用户批准。Codes package
-H012 metadata-only 修正已于 2026-08-07 通过 consumer 复核，H011 artifacts 已转为
-`accepted`。30 页正式首版已按本计划完成：旧 deck 已冻结、新 inputs 已复制、正文与
-backup 已从零创建并通过完整 build/visual QA。计划保持 active，等待用户 review 后再
-决定页面调整与最终归档。
+状态：已于 2026-08-07 收口归档。该计划产生的是用于快速展示此前未汇报进展的
+30 页 internal update，不是精修终稿；未来 update 重新建立计划，可选择性复用本轮
+accepted results/artifacts，但不默认继承本轮页面结构或 wording。
 
 规划假设：JJ analysis-group internal update，约 25--30 分钟；主文约 23 页，
 backup 约 7 页。报告时长和受众需由用户确认，页数随后可等比例压缩或扩展。
@@ -160,4 +158,5 @@ nominal comparison。用户已批准本 amendment；P21 单页编译/视觉检�
 latexmk 和全页 visual QA 均已执行。
 
 Implementation status：completed。P21 single-frame 与 full-deck build/visual QA 均通过；
-最终 30 页 PDF 与 hashes 记录于 `docs/qa/JJ_DATA_DRIVEN_FIRST_DRAFT_2026-08-07.md`。
+最终 30 页 PDF 与 hashes 记录于
+`docs/qa/archive/JJ_DATA_DRIVEN_FIRST_DRAFT_2026-08-07.md`。

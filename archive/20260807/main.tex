@@ -1,0 +1,749 @@
+\documentclass[11pt,aspectratio=169]{beamer}
+\usepackage{amsmath,array,booktabs,graphicx,tikz}
+\usetikzlibrary{arrows.meta,positioning,calc}
+\input{theme_setup.tex}\input{common_macros.tex}\input{beamer_setup.tex}\input{project_setup.tex}
+
+\newcommand{\oldfig}{slides/figures/accepted/H006}
+\newcommand{\newfig}{slides/figures/accepted/H011/central}
+\newcommand{\benchfig}{slides/figures/accepted/H011/benchmark}
+\newcommand{\atlasref}{\textcolor{neutral}{\scriptsize ATLAS Collaboration, Eur. Phys. J. C 77 (2017) 76, arXiv:1612.02950}}
+
+% Optional fast single-frame build, for example:
+%   bash fastcompile_frame.sh p06
+\ifdefined\onlyframes
+  \expandafter\includeonlyframes\expandafter{\onlyframes}
+\fi
+
+\begin{document}
+
+% Reuse the approved project title-page geometry; body starts from zero.
+\begin{frame}[plain,label=title]
+  \titlepage
+\end{frame}
+
+\begin{frame}[label=p02]{Can Data provide an independent SPS/DPS separation?}
+\begin{columns}[T]
+\column{0.47\textwidth}
+\begin{block}{Why revisit the method?}
+\begin{itemize}
+  \item CMS nominal uses MC templates
+  \item SPS modeling remains generator-dependent
+  \item Data offer an independent decomposition
+\end{itemize}
+\end{block}
+\column{0.47\textwidth}
+\begin{exampleblock}{This update}
+\begin{itemize}
+  \item Purify prompt single-\Jpsi sources
+  \item Remove random-pair sampling
+  \item Propagate full-chain Data statistics
+\end{itemize}
+\end{exampleblock}
+\end{columns}
+\vfill
+\centering
+\HL{\textbf{Question: how stable is the data-driven fraction after these upgrades?}}
+\vfill
+\atlasref
+\end{frame}
+
+\begin{frame}[label=p03]{Recap: the data-driven decomposition}
+\centering
+\begin{tikzpicture}[
+  box/.style={draw=positive,rounded corners,fill=positive!8,text width=2.55cm,
+              minimum height=1.15cm,align=center,font=\small},
+  arr/.style={-{Stealth},thick,positive},node distance=0.55cm]
+  \node[box] (sel) {Selected Data\\pair candidates};
+  \node[box,right=of sel] (mix) {Cross-event\\mixing};
+  \node[box,right=of mix] (norm) {Control-region\\normalization};
+  \node[box,right=of norm] (sub) {Cell-by-cell\\SPS subtraction};
+  \draw[arr] (sel)--(mix);
+  \draw[arr] (mix)--(norm);
+  \draw[arr] (norm)--(sub);
+\end{tikzpicture}
+\vspace{0.45cm}
+\begin{columns}[T]
+\column{0.47\textwidth}
+\textbf{DPS factorization assumption}
+\[
+P_{\rm DPS}(J/\psi_1,J/\psi_2)\simeq P(J/\psi_1)P(J/\psi_2).
+\]
+\column{0.47\textwidth}
+\textbf{Data-driven subtraction}
+\[
+N_{\rm SPS}^{i}=N_{\rm PP}^{i}-\alpha N_{\rm mix}^{i}.
+\]
+\end{columns}
+\vfill
+\centering\textbf{The method constrains shapes and the integrated fraction in the same 14 cells.}
+\end{frame}
+
+\begin{frame}[label=p04]{Recap: what had already been validated?}
+\begin{columns}[T]
+\column{0.62\textwidth}
+\centering
+\includegraphics[width=\textwidth,height=0.61\textheight,keepaspectratio]{\oldfig/marginals_weighted.pdf}
+\column{0.34\textwidth}
+\small
+\textbf{Previous accepted checks}
+\begin{itemize}
+  \item Reselected mixed-pair kinematics
+  \item Stable inclusive single-\Jpsi marginals
+  \item Common adaptive 14-cell grid
+  \item PP fit and algebraic closure
+\end{itemize}
+\begin{alertblock}{Open at that stage}
+The source pool was not prompt-purified before mixing.
+\end{alertblock}
+\end{columns}
+\end{frame}
+
+\begin{frame}[label=p05]{Recap: validated cross-check, unresolved assumptions}
+\vspace{4pt}
+\begin{center}
+\begin{tabular}{p{0.29\textwidth}p{0.28\textwidth}p{0.30\textwidth}}
+\toprule
+Element & Established & Remaining question \\
+\midrule
+PP extraction & Stable 4D fits & Model dependence \\
+Mixed DPS & Cross-event construction & Prompt-source purity \\
+Normalization & Reproducible CR scaling & DPS dominance of CR \\
+Uncertainty & Statistical machinery & End-to-end covariance \\
+\bottomrule
+\end{tabular}
+\end{center}
+\vfill
+\begin{columns}[T]
+\column{0.47\textwidth}
+\begin{exampleblock}{Role}
+Independent data-driven cross-check of the SPS/DPS decomposition.
+\end{exampleblock}
+\column{0.47\textwidth}
+\begin{alertblock}{Boundary}
+Not a replacement for the CMS MC-template nominal.
+\end{alertblock}
+\end{columns}
+\end{frame}
+
+\begin{frame}[label=p06]{Upgrade 1: prompt-purify each single-\Jpsi slot}
+\begin{columns}[T]
+\column{0.56\textwidth}
+\centering
+\begin{tikzpicture}[
+  box/.style={draw=positive,rounded corners,fill=positive!8,text width=2.6cm,
+              minimum height=0.95cm,align=center,font=\small},
+  arr/.style={-{Stealth},thick,positive},node distance=0.55cm]
+  \node[box] (cand) {Selected pair\\candidates};
+  \node[box,below=of cand] (fit) {Separate mass--$c\tau$\\fit for each slot};
+  \node[box,below=of fit] (sw) {Prompt sWeights\\negative values retained};
+  \draw[arr] (cand)--(fit);
+  \draw[arr] (fit)--(sw);
+\end{tikzpicture}
+\column{0.40\textwidth}
+\small
+\textbf{Data input}
+\begin{itemize}
+  \item 119 raw files
+  \item 2492 selected events
+  \item 2473 / 2474 fitted candidates
+\end{itemize}
+\textbf{Fit content}
+\begin{itemize}
+  \item Prompt, nonprompt, combinatorial
+  \item Slot-specific mass and lifetime response
+  \item Yield-only sPlot after calibration
+\end{itemize}
+\end{columns}
+\vfill
+\centering\HL{\textbf{Prompt purification now occurs before the DPS template is built.}}
+\end{frame}
+
+\begin{frame}[label=p07]{Upgrade 2: preserve the two reconstructed slots}
+\centering
+\begin{tikzpicture}[
+  event/.style={draw=neutral,rounded corners,fill=panelbg,minimum width=3.4cm,
+                minimum height=1.15cm},
+  psi/.style={circle,draw=positive,fill=positive!10,minimum size=0.78cm,font=\small},
+  pair/.style={draw=emphasis,rounded corners,fill=emphasis!8,text width=2.8cm,
+               minimum height=1.05cm,align=center,font=\small},
+  arr/.style={-{Stealth},thick,positive}]
+  \node[event] (ea) at (0,1.25) {};
+  \node[above=0.12cm of ea,font=\small\bfseries] {Source event A};
+  \node[psi] (a1) at (-0.65,1.25) {$J/\psi_1$};
+  \node[psi] (a2) at (0.70,1.25) {$J/\psi_2$};
+  \node[event] (eb) at (0,-1.15) {};
+  \node[above=0.12cm of eb,font=\small\bfseries] {Source event B};
+  \node[psi] (b1) at (-0.65,-1.15) {$J/\psi_1$};
+  \node[psi] (b2) at (0.70,-1.15) {$J/\psi_2$};
+  \node[pair] (mix) at (4.5,0.05) {Mixed DPS candidate\\$J/\psi_1(A)\times J/\psi_2(B)$};
+  \draw[arr] (a1.east) to[bend left=12] (mix.west);
+  \draw[arr] (b2.east) to[bend right=12] (mix.west);
+\end{tikzpicture}
+\vspace{0.35cm}
+\begin{columns}[T]
+\column{0.47\textwidth}
+\textbf{Retained}
+\begin{itemize}
+  \item Slot-specific sWeights
+  \item Signed pair weights
+  \item Nominal pair correction
+\end{itemize}
+\column{0.47\textwidth}
+\textbf{Rejected}
+\begin{itemize}
+  \item Same-source combinations
+  \item $m(J/\psi J/\psi)<7.5$ GeV
+  \item Pairs failing correction inputs
+\end{itemize}
+\end{columns}
+\end{frame}
+
+\begin{frame}[label=p08]{Upgrade 3: deterministic all-pairs mixing}
+\vspace{4pt}
+\begin{center}
+\begin{tabular}{lr}
+\toprule
+Pair accounting & Count \\
+\midrule
+Cartesian $J/\psi_1\times J/\psi_2$ combinations & 6,118,202 \\
+Same-source rejected & 2,456 \\
+$m(J/\psi J/\psi)<7.5$ GeV rejected & 53,997 \\
+Correction rejected & 0 \\
+\textbf{Accepted mixed pairs} & \textbf{6,061,749} \\
+\bottomrule
+\end{tabular}
+\end{center}
+\vfill
+\begin{columns}[T]
+\column{0.47\textwidth}
+\begin{exampleblock}{Removed}
+Random-pair seed and finite sampling variance.
+\end{exampleblock}
+\column{0.47\textwidth}
+\begin{block}{Retained}
+Every accepted cross-event pair with its signed weight.
+\end{block}
+\end{columns}
+\vfill
+\centering\HL{\textbf{All subsequent category, CR and bootstrap studies use the same deterministic construction.}}
+\end{frame}
+
+\begin{frame}[label=p09]{Upgrade 4: calibrate the visible kinematic dependence}
+\vspace{4pt}
+\begin{center}
+\begin{tabular}{lccc}
+\toprule
+Single-\Jpsi treatment & Split & Direct $f_{\rm DPS}$ & Role \\
+\midrule
+Global & none & 0.176303 & variation \\
+$p_{\mathrm{T}}$ categories & 15 GeV & 0.177244 & variation \\
+$|y|$ categories & 1.2 & \textbf{0.169980} & \textbf{central} \\
+\bottomrule
+\end{tabular}
+\end{center}
+\begin{columns}[T]
+\column{0.47\textwidth}
+\textbf{For each slot and category}
+\begin{itemize}
+  \item Calibrate mass resolution
+  \item Calibrate prompt-$c\tau$ resolution
+  \item Freeze scales; refit yields
+\end{itemize}
+\column{0.47\textwidth}
+\begin{exampleblock}{Fit validation}
+Eight calibrations and eight yield fits pass; both category schemes complete all component fits.
+\end{exampleblock}
+\end{columns}
+\vfill
+\centering\textbf{The $|y|=1.2$ split captures a consistent forward response change in both slots.}
+\end{frame}
+
+\begin{frame}[label=p10]{Current data-driven central definition}
+\small
+\begin{columns}[T]
+\column{0.48\textwidth}
+\begin{block}{Inputs and estimator}
+\begin{itemize}
+  \item Current CMS pair selection
+  \item $|y|=1.2$ slot-specific prompt sPlots
+  \item Cross-slot deterministic all-pairs
+  \item Adaptive 14-cell PP fit
+\end{itemize}
+\end{block}
+\column{0.48\textwidth}
+\textbf{Control region}
+\[
+|\Delta y|\geq1.8,\qquad |\Delta\phi|\leq\pi/2.
+\]
+\textbf{Integrated estimator}
+\[
+f_{\rm DPS}=\frac{\sum_i N_{\rm DPS}^{i}}{\sum_i N_{\rm PP}^{i}}
+=\HL{\mathbf{0.169980}}.
+\]
+\end{columns}
+\vfill
+\centering
+\con{\textbf{Internal data-driven central; the CMS MC-template result remains the analysis nominal.}}
+\end{frame}
+
+\begin{frame}[label=p11]{Central input: prompt--prompt Data yields}
+\begin{columns}[T]
+\column{0.63\textwidth}
+\centering
+\includegraphics[width=\textwidth,height=0.70\textheight,keepaspectratio]{\newfig/pp_yield_map.pdf}
+\column{0.33\textwidth}
+\small
+\textbf{Four-dimensional fits}
+\begin{itemize}
+  \item 14 adaptive cells
+  \item Mass and lifetime of both \Jpsi candidates
+  \item Prompt--prompt yield per cell
+  \item All cell fits accepted
+\end{itemize}
+\begin{block}{Role}
+Fitted Data input to the decomposition, not an independent fraction measurement.
+\end{block}
+\end{columns}
+\end{frame}
+
+\begin{frame}[label=p12]{Central component: normalized data-derived DPS}
+\begin{columns}[T]
+\column{0.61\textwidth}
+\centering
+\includegraphics[width=\textwidth,height=0.65\textheight,keepaspectratio]{\newfig/dps_normalized_map.pdf}
+\column{0.35\textwidth}
+\small
+\textbf{Control-region scale}\par\smallskip
+$\alpha=N_{\rm PP}^{\rm CR}/N_{\rm mix}^{\rm CR}$\par\smallskip
+$N_{\rm DPS}^{i}=\alpha N_{\rm mix}^{i}$
+\begin{itemize}
+  \item Signed mixed-pair weights retained
+  \item Normalization covariance included
+  \item Same 14-cell geometry as Data
+\end{itemize}
+\begin{alertblock}{Interpretation}
+CR equality is imposed by normalization; it is not a DPS-purity proof.
+\end{alertblock}
+\end{columns}
+\end{frame}
+
+\begin{frame}[label=p13]{Central component: data-driven SPS by subtraction}
+\begin{columns}[T]
+\column{0.61\textwidth}
+\centering
+\includegraphics[width=\textwidth,height=0.61\textheight,keepaspectratio]{\newfig/sps_data_driven_map.pdf}
+\column{0.35\textwidth}
+\small
+\textbf{Cell estimator}
+\[
+N_{\rm SPS}^{i}=N_{\rm PP}^{i}-N_{\rm DPS}^{i}.
+\]
+\begin{itemize}
+  \item Exact algebraic closure
+  \item One signed negative SPS cell
+  \item Compatible with zero; no clipping
+\end{itemize}
+\begin{exampleblock}{Integrated result}
+$f_{\rm SPS}=0.830020$, hence $f_{\rm DPS}=0.169980$.
+\end{exampleblock}
+\end{columns}
+\end{frame}
+
+\begin{frame}[label=p14]{Component projections: rapidity separation}
+\begin{columns}[T]
+\column{0.49\textwidth}
+\centering
+\textbf{Unit-area shapes}\par\smallskip
+\includegraphics[width=\textwidth,height=0.56\textheight,keepaspectratio]{\newfig/delta_y_component_shapes_normalized.pdf}
+\column{0.49\textwidth}
+\centering
+\textbf{PP-corrected yields}\par\smallskip
+\includegraphics[width=\textwidth,height=0.56\textheight,keepaspectratio]{\newfig/delta_y_component_yields.pdf}
+\end{columns}
+\vfill
+\centering
+$f_{\rm DPS}^{|\Delta y|}=0.168704$ \quad -- \quad \textbf{projection consistency, not an independent measurement}
+\end{frame}
+
+\begin{frame}[label=p15]{Component projections: azimuthal separation}
+\begin{columns}[T]
+\column{0.49\textwidth}
+\centering
+\textbf{Unit-area shapes}\par\smallskip
+\includegraphics[width=\textwidth,height=0.56\textheight,keepaspectratio]{\newfig/delta_phi_component_shapes_normalized.pdf}
+\column{0.49\textwidth}
+\centering
+\textbf{PP-corrected yields}\par\smallskip
+\includegraphics[width=\textwidth,height=0.56\textheight,keepaspectratio]{\newfig/delta_phi_component_yields.pdf}
+\end{columns}
+\vfill
+\centering
+$f_{\rm DPS}^{|\Delta\phi|}=0.169247$ \quad -- \quad \textbf{same two-dimensional decomposition and correlations}
+\end{frame}
+
+\begin{frame}[label=p16]{Component projections: pair mass and rapidity}
+\begin{columns}[T]
+\column{0.49\textwidth}
+\centering
+\textbf{$m(J/\psi J/\psi)$ shapes}\par\smallskip
+\includegraphics[width=\textwidth,height=0.57\textheight,keepaspectratio]{\newfig/evt_mass_component_shapes_normalized.pdf}
+\column{0.49\textwidth}
+\centering
+\textbf{$|y(J/\psi J/\psi)|$ shapes}\par\smallskip
+\includegraphics[width=\textwidth,height=0.57\textheight,keepaspectratio]{\newfig/evt_y_component_shapes_normalized.pdf}
+\end{columns}
+\vfill
+\centering
+$f_{\rm DPS}^{m}=0.168262$, \quad $f_{\rm DPS}^{|y|}=0.168745$ \quad -- \quad all 78 component fits accepted
+\end{frame}
+
+\begin{frame}[label=p17]{Category dependence: the largest positive variation}
+\vspace{4pt}
+\begin{center}
+\begin{tabular}{lrrr}
+\toprule
+Scheme & $f_{\rm DPS}$ & Shift from central & Fit status \\
+\midrule
+$|y|=1.2$ categories & \textbf{0.169980} & --- & all pass \\
+Global response & 0.176303 & $+0.006322$ & all pass \\
+$p_{\mathrm{T}}=15$ GeV categories & 0.177244 & $+0.007264$ & all pass \\
+\bottomrule
+\end{tabular}
+\end{center}
+\begin{columns}[T]
+\column{0.48\textwidth}
+\begin{block}{Source tested}
+Single-\Jpsi kinematic response and sPlot category choice.
+\end{block}
+\column{0.48\textwidth}
+\begin{exampleblock}{Category envelope}
+\[
+\Delta f_{\rm DPS}^{\rm cat}={}^{+0.007264}_{-0.000000}.
+\]
+\end{exampleblock}
+\end{columns}
+\vfill
+\centering\textbf{The variation changes the single-\Jpsi calibration, not the pair selection or 14-cell estimator.}
+\end{frame}
+
+\begin{frame}[label=p18]{Control-region boundary sensitivity}
+\vspace{4pt}
+\begin{center}
+\begin{tabular}{lrrr}
+\toprule
+Control-region variation & $f_{\rm DPS}$ & Signed shift & Fits \\
+\midrule
+$|\Delta\phi|\leq70^\circ$ & 0.171299 & $+0.001319$ & 78/78 \\
+$|\Delta\phi|\leq110^\circ$ & 0.167433 & $-0.002548$ & 78/78 \\
+$|\Delta y|\geq2.4$ & 0.159390 & $-0.010591$ & 78/78 \\
+\bottomrule
+\end{tabular}
+\end{center}
+\begin{columns}[T]
+\column{0.48\textwidth}
+\begin{exampleblock}{CR envelope}
+\[
+\Delta f_{\rm DPS}^{\rm CR}={}^{+0.001319}_{-0.010591}.
+\]
+\end{exampleblock}
+\column{0.48\textwidth}
+\begin{alertblock}{Scope}
+Boundary stability only; neither a CR-purity measurement nor an event-mixing uncertainty.
+\end{alertblock}
+\end{columns}
+\end{frame}
+
+\begin{frame}[label=p19]{Full-chain bootstrap statistical uncertainty}
+\begin{columns}[T]
+\column{0.52\textwidth}
+\centering
+\begin{tikzpicture}[
+  box/.style={draw=positive,rounded corners,fill=positive!8,text width=2.45cm,
+              minimum height=0.80cm,align=center,font=\small},
+  arr/.style={-{Stealth},thick,positive},node distance=0.34cm]
+  \node[box] (res) {Resample 2492\\source events};
+  \node[box,below=of res] (sp) {Redo both category\\sPlots};
+  \node[box,below=of sp] (mix) {Rebuild all-pairs\\DPS template};
+  \node[box,below=of mix] (pp) {Refit 14 PP cells\\and normalize CR};
+  \draw[arr] (res)--(sp);
+  \draw[arr] (sp)--(mix);
+  \draw[arr] (mix)--(pp);
+\end{tikzpicture}
+\column{0.44\textwidth}
+\small
+\vspace{4pt}
+\begin{center}
+\begin{tabular}{lr}
+\toprule
+Summary & Value \\
+\midrule
+Successful replicas & 500 \\
+Attempts & 529 \\
+Mean & 0.164043 \\
+Median & 0.159379 \\
+Sample SD & \textbf{0.056796} \\
+16\% / 84\% & 0.107694 / 0.223979 \\
+\bottomrule
+\end{tabular}
+\end{center}
+\end{columns}
+\vfill
+\centering
+\HL{\textbf{Successful-sample SD is labeled `stat'.}}
+\par\smallskip
+\small\con{\textbf{29 failures:}} 14/7 slot calibrations; 8 sparse-cell fits.
+\end{frame}
+
+\begin{frame}[label=p20]{Provisional systematic: keep the sources visible}
+\vspace{4pt}
+\begin{center}
+\begin{tabular}{lrrl}
+\toprule
+Source group & Up & Down & Interpretation \\
+\midrule
+Category choice & $+0.007264$ & $-0.000000$ & single-\Jpsi response \\
+CR boundaries & $+0.001319$ & $-0.010591$ & normalization stability \\
+\midrule
+\textbf{Quadrature} & \textbf{$+0.007382$} & \textbf{$-0.010591$} & \textbf{provisional syst} \\
+\bottomrule
+\end{tabular}
+\end{center}
+\[
+\delta_{\rm up}=\sqrt{0.007264^2+0.001319^2},\qquad
+\delta_{\rm down}=\sqrt{0^2+0.010591^2}.
+\]
+\begin{columns}[T]
+\column{0.48\textwidth}
+\begin{exampleblock}{Current result}
+\centering
+$f_{\rm DPS}=0.169980\pm0.056796$ (stat.)\\[0.25em]
+${}^{+0.007382}_{-0.010591}$ (syst.)
+\end{exampleblock}
+\column{0.48\textwidth}
+\begin{alertblock}{Still missing}
+Alternative PDFs, correction uncertainties, binning, CR purity and factorization bias.
+\end{alertblock}
+\end{columns}
+\end{frame}
+
+\begin{frame}[label=p21]{Results: data-driven cross-check and CMS nominal}
+\vspace{6pt}
+\begin{columns}[T]
+\column{0.48\textwidth}
+\begin{exampleblock}{Data-driven cross-check}
+\centering
+{\small Prompt-purified cross-slot mixing}\\[0.7em]
+{\small
+\[
+\begin{gathered}
+f_{\rm DPS}=0.170\pm0.057\,(\mathrm{stat.})
+  {}^{+0.007}_{-0.011}\,(\mathrm{prov.\ syst.})\\[0.7em]
+\sigma_{\rm eff}=2.51
+  {}^{+0.26}_{-0.20}\,(\mathrm{partial\ syst.})\ \mathrm{mb}
+\end{gathered}
+\]
+}
+\textit{Statistical uncertainty pending covariance.}
+\end{exampleblock}
+\column{0.48\textwidth}
+\begin{block}{CMS MC-template nominal}
+\centering
+{\small Simultaneous SPS/DPS template fit}\\[0.7em]
+{\small
+\[
+\begin{gathered}
+f_{\rm DPS}=0.34\pm0.10\,(\mathrm{stat.})
+  {}^{+0.02}_{-0.17}\,(\mathrm{syst.})\\[0.7em]
+\sigma_{\rm eff}=1.26\pm0.37\,(\mathrm{stat.})
+  {}^{+0.64}_{-0.11}\,(\mathrm{syst.})\ \mathrm{mb}
+\end{gathered}
+\]
+}
+\textit{Current analysis nominal.}
+\end{block}
+\end{columns}
+\vfill
+\centering
+\con{Different methods and systematic coverage: compare the quoted results, not individual uncertainty components.}
+\end{frame}
+
+\begin{frame}[label=p22]{Takeaways and current status}
+\vspace{4pt}
+\begin{center}
+\begin{tabular}{>{\raggedright\arraybackslash}p{0.26\textwidth}>{\raggedright\arraybackslash}p{0.29\textwidth}>{\raggedright\arraybackslash}p{0.31\textwidth}}
+\toprule
+Status & Established now & Remaining limitation \\
+\midrule
+Source candidates & Prompt-purified per slot & Fixed-shape model dependence \\
+Mixed template & Deterministic all-pairs & SPS/DPS marginal factorization \\
+Statistics & 500 full-chain successes & 29 conditional failures \\
+Systematics & Category + CR groups & Incomplete source coverage \\
+\bottomrule
+\end{tabular}
+\end{center}
+\vfill
+\begin{enumerate}
+  \item \textbf{Method upgrade:} prompt purification, slot separation and deterministic mixing.
+  \item \textbf{Current cross-check:} $f_{\rm DPS}=0.169980\pm0.056796\,\text{(stat.)}
+        {}^{+0.007382}_{-0.010591}\,\text{(syst.)}$.
+  \item \textbf{Next priority:} complete model, correction, binning and CR-purity coverage.
+\end{enumerate}
+\vfill
+\centering\HL{\textbf{The data-driven chain is now end-to-end, but its systematic program is not yet complete.}}
+\end{frame}
+
+% Reuse the approved centered closing-box geometry.
+\begin{frame}[label=thanks]{\strut}
+\centering
+\vfill
+\makebox[\textwidth][c]{%
+  \begin{beamercolorbox}[
+    wd=0.68\textwidth,
+    sep=1.2em,
+    center,
+    rounded=true,
+    shadow=true
+  ]{block body}
+    {\LARGE\bfseries Thanks for listening!}\par
+    \vspace{1.0em}
+    {\large Reporter: Lekai Yao}\par
+    \vspace{0.45em}
+    {\large 7 August 2026}
+  \end{beamercolorbox}%
+}
+\vfill
+\end{frame}
+
+\appendix
+
+\begin{frame}[label=p24]{Backup: central component weights}
+\begin{columns}[T]
+\column{0.49\textwidth}
+\centering
+\textbf{SPS weights}\par\smallskip
+\includegraphics[width=\textwidth,height=0.59\textheight,keepaspectratio]{\newfig/sps_weight_map.pdf}
+\column{0.49\textwidth}
+\centering
+\textbf{DPS weights}\par\smallskip
+\includegraphics[width=\textwidth,height=0.59\textheight,keepaspectratio]{\newfig/dps_weight_map.pdf}
+\end{columns}
+\vfill
+\centering
+$w_{\rm SPS}^{i}+w_{\rm DPS}^{i}=1$ \quad -- \quad \con{central values only; full ratio covariance is not encoded}
+\end{frame}
+
+\begin{frame}[label=p25]{Backup: signed-cell diagnostic}
+\begin{columns}[T]
+\column{0.63\textwidth}
+\centering
+\includegraphics[width=\textwidth,height=0.69\textheight,keepaspectratio]{\newfig/sps_significance_map.pdf}
+\column{0.33\textwidth}
+\small
+\textbf{Diagnostic only}
+\begin{itemize}
+  \item Cell-wise signed SPS yield
+  \item One negative cell retained
+  \item Compatible with zero
+  \item Correlations prevent a global-significance reading
+\end{itemize}
+\begin{alertblock}{Not shown}
+No truncation and no conversion to a probability map.
+\end{alertblock}
+\end{columns}
+\end{frame}
+
+\begin{frame}[label=p26]{Backup: pair-kinematic PP-corrected yields}
+\begin{columns}[T]
+\column{0.49\textwidth}
+\centering
+\textbf{$m(J/\psi J/\psi)$ yields}\par\smallskip
+\includegraphics[width=\textwidth,height=0.58\textheight,keepaspectratio]{\newfig/evt_mass_component_yields.pdf}
+\column{0.49\textwidth}
+\centering
+\textbf{$|y(J/\psi J/\psi)|$ yields}\par\smallskip
+\includegraphics[width=\textwidth,height=0.58\textheight,keepaspectratio]{\newfig/evt_y_component_yields.pdf}
+\end{columns}
+\vfill
+\centering\textbf{Projection fits preserve the central decomposition within correlated uncertainties.}
+\end{frame}
+
+\begin{frame}[label=p27]{Backup: generator-based DPS benchmark}
+\begin{columns}[T]
+\column{0.49\textwidth}
+\centering
+\textbf{DPS-MC normalized map}\par\smallskip
+\includegraphics[width=\textwidth,height=0.56\textheight,keepaspectratio]{\benchfig/dps_mc_normalized_map.pdf}
+\column{0.49\textwidth}
+\centering
+\textbf{$|\Delta y|$ component shapes}\par\smallskip
+\includegraphics[width=\textwidth,height=0.56\textheight,keepaspectratio]{\benchfig/dps_mc_delta_y_shapes.pdf}
+\end{columns}
+\vfill
+\centering
+Benchmark direct $f_{\rm DPS}=0.153752$ \quad -- \quad
+\con{generator-dependent alternative, not a data-driven uncertainty}
+\end{frame}
+
+\begin{frame}[label=p28]{Backup: earlier validation evidence}
+\begin{columns}[T]
+\column{0.49\textwidth}
+\centering
+\textbf{Previous mixed-candidate marginals}\par\smallskip
+\includegraphics[width=\textwidth,height=0.53\textheight,keepaspectratio]{\oldfig/marginals_weighted.pdf}
+\column{0.49\textwidth}
+\centering
+\textbf{Previous CR boundary scan}\par\smallskip
+\includegraphics[width=\textwidth,height=0.53\textheight,keepaspectratio]{\oldfig/h008_control_region_validation.pdf}
+\end{columns}
+\vfill
+\centering\con{\textbf{Method-evolution context only; previous numerical definitions are superseded.}}
+\end{frame}
+
+\begin{frame}[label=p29]{Backup: earlier uncertainty machinery}
+\begin{columns}[T]
+\column{0.66\textwidth}
+\centering
+\includegraphics[page=2,width=\textwidth,height=0.65\textheight,keepaspectratio]{\oldfig/h009_validation_summary.pdf}
+\column{0.30\textwidth}
+\small
+\textbf{Still useful}
+\begin{itemize}
+  \item Tested-variation bookkeeping
+  \item Included/missing-source separation
+  \item Closure terminology
+\end{itemize}
+\begin{alertblock}{Superseded}
+The numerical fraction and statistical propagation shown here are not the current result.
+\end{alertblock}
+\end{columns}
+\end{frame}
+
+\begin{frame}[label=p30]{Backup: bootstrap definition and failure policy}
+\vspace{4pt}
+\begin{center}
+\begin{tabular}{p{0.21\textwidth}p{0.30\textwidth}p{0.34\textwidth}}
+\toprule
+Stage & Recomputed per attempt & Success requirement \\
+\midrule
+Resampling & 2492 source-event draws & multiplicity closure \\
+Single-\Jpsi fits & two slots, two $|y|$ categories & valid calibration and sPlot \\
+Mixed template & all accepted cross-event pairs & deterministic construction \\
+PP decomposition & 14 cell fits + CR scale & every fit accepted \\
+\bottomrule
+\end{tabular}
+\end{center}
+\begin{columns}[T]
+\column{0.48\textwidth}
+\begin{exampleblock}{Reported sample}
+500 successful replicas from 529 attempts; sample SD $=0.056796$.
+\end{exampleblock}
+\column{0.48\textwidth}
+\begin{alertblock}{Conditional-selection caveat}
+Failures are fit- and sparsity-related; successful-only sampling may bias coverage.
+\end{alertblock}
+\end{columns}
+\vfill
+\centering\textbf{The current `stat' label must always travel with the 500/529 disclosure.}
+\end{frame}
+
+\end{document}

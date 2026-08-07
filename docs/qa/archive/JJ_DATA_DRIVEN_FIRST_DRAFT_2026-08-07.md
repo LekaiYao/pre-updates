@@ -1,14 +1,15 @@
 # JJ data-driven formal slides：first-draft QA
 
-状态：正式首版及 H013 P21 result-comparison revision 已完成，等待用户其余内容与页面
-节奏 review。H013 central/partial-systematic artifact 已通过 consumer 与用户 gate；本轮
-未新增 fit、bootstrap production 或 plot。
+状态：2026-08-07 quick progress update 已收口归档。本 deck 用于快速展示此前未汇报的
+当前进展，不代表经过精修的最终 slides；未来 update 将重新规划，可能选择性复用本轮
+accepted 内容。本轮未新增 fit、bootstrap production 或 plot。
 
 ## Deck identity
 
 - Source：`slides/main.tex`
 - Metadata：`slides/project_setup.tex`
 - Build：`build/main.pdf`（ignored，可重建）
+- Frozen archive：`archive/20260807/JJ_update_260807.pdf`
 - Pages：30（23 页 main，包括 title/thanks；7 页 backup）
 - Aspect ratio：16:9
 - PDF SHA256：`ac0444017d332c30129c40061ea10c2b04b008db5df24d803096f2eaa75c577c`

@@ -3,6 +3,10 @@
 状态：`needs-fix`。H011 package 可作为经过核对的 `ready` 审阅材料，但在 producer
 修正 provenance 且用户完成 physics gate 前，不得转为 `accepted` 或写入 slides。
 
+2026-08-07：用户已批准基于本 package inventory 制定的两层页面计划；该批准不等于
+接受 H011 physics content，也不解除 `accepted`-artifact gate。Consumer 修复意见已
+写入 producer 的同一 answer workspace，未新建 request。
+
 ## 已核对通过
 
 - Codes 仓库为 `sync/chensh-20260730@24823a5`，普通 Git 视图 clean；测试代码和

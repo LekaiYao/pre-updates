@@ -1,8 +1,8 @@
 # JJ data-driven optimization update：active slide plan
 
-状态：`proposed`。Codes package 已完成 consumer 数值/文件核对，但当前为
-`needs-fix`，且 physics gate 未完成。用户批准本页面计划、H011 转为 `accepted`
-之前，不归档旧 deck、不复制新 artifacts、不修改 `slides/main.tex`。
+状态：页面计划已于 2026-08-07 获用户批准。Codes package 已完成 consumer
+数值/文件核对，但当前为 `needs-fix`，且 physics gate 未完成。H011 转为
+`accepted` 之前，不归档旧 deck、不复制新 artifacts、不修改 `slides/main.tex`。
 
 规划假设：JJ analysis-group internal update，约 25--30 分钟；主文约 23 页，
 backup 约 7 页。报告时长和受众需由用户确认，页数随后可等比例压缩或扩展。
@@ -120,7 +120,8 @@ backup 约 7 页。报告时长和受众需由用户确认，页数随后可等�
 
 ## Gate 与执行顺序
 
-1. 用户确认报告时长、受众和本两层页面计划。
+1. 页面结构已获用户批准；当前沿用 25--30 分钟 JJ internal update 的规划假设，
+   若报告时长或受众变化再等比例调整。
 2. Producer 修正 H011 generator/metadata provenance，consumer 复核。
 3. 用户确认 data-driven central、bootstrap statistical treatment、partial systematic
    wording 和可报告数值，H011 转为 `accepted`。

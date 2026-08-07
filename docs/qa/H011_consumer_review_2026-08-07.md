@@ -7,6 +7,22 @@
 接受 H011 physics content，也不解除 `accepted`-artifact gate。Consumer 修复意见已
 写入 producer 的同一 answer workspace，未新建 request。
 
+## 用户 physics decisions（2026-08-07）
+
+- 接受 `abs(y)=1.2` category cross-slot all-pairs 作为 data-driven internal central
+  scheme，central `f_DPS=0.169980427756`。
+- 500 个成功 full-chain bootstrap replicas 的 sample SD `0.056796474528` 在本轮
+  slides 中称为 `stat`；同时保留 500/529 attempts 和 29 个失败的事实说明。
+- Category 与 control-region groups 合并称为暂定 `syst`，并分别解释每个来源。
+  当前计划采用独立 group envelope 的 quadrature：
+  `+sqrt(0.007263523592^2+0.001318512530^2)=+0.007382225292`，
+  `-sqrt(0^2+0.010590504745^2)=-0.010590504745`。该数学组合规则尚需用户明确确认。
+- Slides 主体聚焦 data-driven 方法；只在结尾将当前结果与 AN 的 CMS MC-template
+  nominal 比较。CMS nominal 身份不变。
+
+这些决定完成 physics wording gate，但不自动修复 producer metadata。H011 在
+provenance 修正或用户明确接受 known-defect waiver 前仍保持 `needs-fix`。
+
 ## 已核对通过
 
 - Codes 仓库为 `sync/chensh-20260730@24823a5`，普通 Git 视图 clean；测试代码和

@@ -1,8 +1,9 @@
 # JJ data-driven optimization update：active slide plan
 
-状态：页面计划已于 2026-08-07 获用户批准。Codes package 已完成 consumer
-数值/文件核对，但当前为 `needs-fix`，且 physics gate 未完成。H011 转为
-`accepted` 之前，不归档旧 deck、不复制新 artifacts、不修改 `slides/main.tex`。
+状态：页面计划和主要 physics wording 已于 2026-08-07 获用户批准。Codes package
+已完成 consumer 数值/文件核对，但 provenance 当前为 `needs-fix`。H011 转为
+`accepted` 或用户明确批准 known-defect waiver 之前，不归档旧 deck、不复制新
+artifacts、不修改 `slides/main.tex`。
 
 规划假设：JJ analysis-group internal update，约 25--30 分钟；主文约 23 页，
 backup 约 7 页。报告时长和受众需由用户确认，页数随后可等比例压缩或扩展。
@@ -20,9 +21,10 @@ backup 约 7 页。报告时长和受众需由用户确认，页数随后可等�
 4. **当前 central decomposition 与投影（6 页）**：逐张展示 PP、mixed-DPS、
    data-driven SPS central maps，并展示全部六张 codes 标为 important-support 的
    component figures。页面结论明确 central status 和 signed subtraction caveat。
-5. **统计与 tested variations（4 页）**：category comparison、CR boundary sensitivity、
-   bootstrap distribution summary 和 uncertainty coverage matrix；只使用已有 CSV/metadata
-   制作原生表格，不补造 distribution plot，不把 partial coverage 称为 total systematic。
+5. **统计与暂定 systematic（4 页）**：category comparison、CR boundary sensitivity、
+   bootstrap distribution summary 和 uncertainty coverage matrix；500-success bootstrap
+   SD 称为 `stat`，category/CR group envelopes 组合为暂定 `syst` 并拆分解释。只使用
+   已有 CSV/metadata 制作原生表格，不补造 distribution plot。
 6. **Status、takeaways 与 next steps（2 页）**：区分 validated、provisional、missing，
    重申不替代 CMS MC-template nominal，并列出进入 freeze 所需决策。
 7. **Thanks（1 页）**：复用已批准的 thanks 格式。
@@ -80,9 +82,10 @@ backup 约 7 页。报告时长和受众需由用户确认，页数随后可等�
 - **P18 Control-region sensitivity**：从 accepted `primary_fractions.csv` 制作原生表格，
   显示三项 boundary variations 和 separate tested envelope；不称 purity test。
 - **P19 Full-chain bootstrap**：用 summary table 展示 successes/attempts、mean、SD、
-  quantiles 和失败分类；没有 approved distribution figure 时不伪造图形。
-- **P20 Coverage matrix**：included / partial / missing uncertainty sources；明确 category
-  与 CR 未定义 correlation/combination，bootstrap SD 未冻结。
+  quantiles 和失败分类；sample SD 按用户决定称为 `stat`。没有 approved distribution
+  figure 时不伪造图形。
+- **P20 Provisional systematic**：分别展示 category 与 CR envelopes，再给出暂定组合；
+  当前按独立 groups quadrature 计算为 `+0.007382/-0.010591`，并列出仍缺失的来源。
 
 ### P21--P25：结论、thanks 与第一组 backup
 
@@ -122,9 +125,10 @@ backup 约 7 页。报告时长和受众需由用户确认，页数随后可等�
 
 1. 页面结构已获用户批准；当前沿用 25--30 分钟 JJ internal update 的规划假设，
    若报告时长或受众变化再等比例调整。
-2. Producer 修正 H011 generator/metadata provenance，consumer 复核。
-3. 用户确认 data-driven central、bootstrap statistical treatment、partial systematic
-   wording 和可报告数值，H011 转为 `accepted`。
+2. Producer 修正 H011 generator/metadata provenance，consumer 复核；或用户在已知
+   风险后明确批准 known-defect waiver。
+3. 用户已确认 central、bootstrap `stat`、暂定 `syst` 和最终 nominal comparison
+   口径；quadrature combination 规则仍需明确确认。
 4. 构建并归档当前 `main.tex`、`project_setup.tex` 和 PDF；冻结 archive 不覆盖。
 5. 只复用 title/thanks 格式、主题和宏，其余正文与 backup 从零创建。
 6. 以单页/小批次编译迭代；完成后运行 fastcheck、latexmk、warning audit、内部编号

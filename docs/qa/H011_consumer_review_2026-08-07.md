@@ -16,12 +16,13 @@
 - Category 与 control-region groups 合并称为暂定 `syst`，并分别解释每个来源。
   当前计划采用独立 group envelope 的 quadrature：
   `+sqrt(0.007263523592^2+0.001318512530^2)=+0.007382225292`，
-  `-sqrt(0^2+0.010590504745^2)=-0.010590504745`。该数学组合规则尚需用户明确确认。
+  `-sqrt(0^2+0.010590504745^2)=-0.010590504745`。用户已于 2026-08-07 明确批准该组合规则。
 - Slides 主体聚焦 data-driven 方法；只在结尾将当前结果与 AN 的 CMS MC-template
   nominal 比较。CMS nominal 身份不变。
 
-这些决定完成 physics wording gate，但不自动修复 producer metadata。H011 在
-provenance 修正或用户明确接受 known-defect waiver 前仍保持 `needs-fix`。
+这些决定完成 physics wording gate，但不自动修复 producer metadata。用户未采用
+known-defect waiver；已新建 H012 要求 producer 修正 provenance，完成并复核前 H011
+仍保持 `needs-fix`，不得正式制作 slides。
 
 ## 已核对通过
 
@@ -40,7 +41,8 @@ provenance 修正或用户明确接受 known-defect waiver 前仍保持 `needs-f
   complete、500 successes、29 failures；bootstrap mean、sample SD、median、
   16%/84% quantiles、min/max 均与 package 一致。
 - 失败阶段独立归类为 Jpsi1 category calibration 14、Jpsi2 category calibration 7、
-  PP sparse-cell fit 8；成功样本 SD 仍只能称 provisional bootstrap statistical spread。
+  PP sparse-cell fit 8；按用户决定，成功样本 SD 在本轮 slides 中称为 `stat`，并同时
+  披露 500/529 attempts、失败分类和潜在条件选择 caveat。
 - 关键实现抽查与 package 一致：`abs(y)=1.2` category、slot-specific sPlot、
   cross-slot all-pairs、same-source rejection、14-cell PP fit、CR normalization 和
   full source-event bootstrap policy。
@@ -56,8 +58,8 @@ provenance 修正或用户明确接受 known-defect waiver 前仍保持 `needs-f
    误读。
 4. 上述字段来自 `build_2d_templates_adaptive.cpp` 的硬编码，不是单个输出文件的
    偶然笔误；producer 应同时修正 generator 与 central/CR metadata。
-5. `abs(y)=1.2` central scheme、bootstrap failure treatment、category/CR 分组及组合
-   规则、systematics/final-number wording 尚未完成用户 physics gate。
+5. Physics wording gate 已完成；剩余阻塞仅为 H012 要求的 provenance 修正及 consumer
+   对实际文件和 hash 的复核。
 
 ## 接收条件
 

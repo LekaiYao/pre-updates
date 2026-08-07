@@ -10,7 +10,7 @@
 - Requester 文件：pre-updates/docs/requests/active/H011_JPsiJPsi_data_driven_optimization_update_package.md
 - Producer answer workspace：JPsiJPsi/docs/answers/H011_preupdates_data_driven_optimization_update/
 - 关联基线：上一轮已验收的 ATLAS-style data-driven SPS/DPS cross-check
-- Human gate：selection、fit、data-driven nominal、systematics 和最终数值仍须用户确认
+- Human gate：central/stat/syst/nominal-comparison 口径及 provisional syst quadrature 已由用户确认；剩余 gate 为 H012 provenance 修正与 consumer 复核
 - Consumer review：docs/qa/H011_consumer_review_2026-08-07.md
 
 ## 背景与职责边界
@@ -134,5 +134,5 @@ pre-updates 将在 codes 交付后：
 - 核对 data-driven nominal 的完整定义和 provisional/frozen 状态；
 - 核对统计与部分系统误差的 included/missing 范围；
 - 检查所有重要图片均进入候选 inventory；
-- 将 nominal、systematics 和最终数值提交用户确认；
-- 仅在 artifact 转为 accepted 后制定真正的两层 slides 页面计划并消费内容。
+- 用户已确认 nominal、systematics 和最终数值口径；
+- 仅在 artifact 转为 accepted 后消费内容；两层 slides 页面计划已由用户批准。

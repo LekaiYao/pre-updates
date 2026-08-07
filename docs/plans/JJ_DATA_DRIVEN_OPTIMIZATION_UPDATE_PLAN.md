@@ -1,9 +1,10 @@
 # JJ data-driven optimization update：active slide plan
 
 状态：页面计划和主要 physics wording 已于 2026-08-07 获用户批准。Codes package
-已完成 consumer 数值/文件核对，但 provenance 当前为 `needs-fix`。H011 转为
-`accepted` 或用户明确批准 known-defect waiver 之前，不归档旧 deck、不复制新
-artifacts、不修改 `slides/main.tex`。
+已完成 consumer 数值/文件核对，但 provenance 当前为 `needs-fix`。用户决定不采用
+known-defect waiver，已发出 H012 metadata-only 修正 request；H012 完成并由 consumer
+复核、相关 artifacts 转为 `accepted` 之前，不归档旧 deck、不复制新 artifacts、
+不修改 `slides/main.tex`。
 
 规划假设：JJ analysis-group internal update，约 25--30 分钟；主文约 23 页，
 backup 约 7 页。报告时长和受众需由用户确认，页数随后可等比例压缩或扩展。
@@ -125,10 +126,10 @@ backup 约 7 页。报告时长和受众需由用户确认，页数随后可等�
 
 1. 页面结构已获用户批准；当前沿用 25--30 分钟 JJ internal update 的规划假设，
    若报告时长或受众变化再等比例调整。
-2. Producer 修正 H011 generator/metadata provenance，consumer 复核；或用户在已知
-   风险后明确批准 known-defect waiver。
+2. Producer 按 H012 修正 H011 generator/metadata provenance，consumer 复核；正式
+   slides 等待该 request 完成，不采用 known-defect waiver。
 3. 用户已确认 central、bootstrap `stat`、暂定 `syst` 和最终 nominal comparison
-   口径；quadrature combination 规则仍需明确确认。
+   口径，并已批准 category/CR 独立 group envelopes 的 quadrature combination。
 4. 构建并归档当前 `main.tex`、`project_setup.tex` 和 PDF；冻结 archive 不覆盖。
 5. 只复用 title/thanks 格式、主题和宏，其余正文与 backup 从零创建。
 6. 以单页/小批次编译迭代；完成后运行 fastcheck、latexmk、warning audit、内部编号

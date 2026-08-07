@@ -1,0 +1,15 @@
+{
+  "CMS_MC_template_nominal": {
+    "input_sigma_DPS_pb": 12.6,
+    "reference_sigma_eff_mb": 1.26191,
+    "sigma_eff_mb": 1.2619081481550811
+  },
+  "old_H006_E4": {
+    "reference_sigma_DPS_pb": 7.16000261168,
+    "reference_sigma_eff_mb": 2.22067554009,
+    "reference_sigma_eff_stat_mb": 0.22021401332,
+    "sigma_DPS_pb": 7.160002611679201,
+    "sigma_eff_mb": 2.220675540092444,
+    "sigma_eff_stat_mb": 0.22021401332037402
+  }
+}

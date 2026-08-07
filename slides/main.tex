@@ -526,32 +526,45 @@ Alternative PDFs, correction uncertainties, binning, CR purity and factorization
 \end{columns}
 \end{frame}
 
-\begin{frame}[label=p21]{Final comparison: data-driven cross-check and CMS nominal}
-\vspace{4pt}
-\begin{center}
-\begin{tabular}{>{\raggedright\arraybackslash}p{0.27\textwidth}>{\raggedright\arraybackslash}p{0.29\textwidth}>{\raggedright\arraybackslash}p{0.31\textwidth}}
-\toprule
- & Data-driven cross-check & CMS MC-template nominal \\
-\midrule
-Method & Prompt-purified cross-slot mixing & SPS/DPS MC templates \\
-Central $f_{\rm DPS}$ & \textbf{0.169980} & \textbf{0.34} \\
-Statistical & $\pm0.056796$ & $\pm0.10$ \\
-Systematic & ${}^{+0.007382}_{-0.010591}$ provisional & ${}^{+0.02}_{-0.17}$ \\
-Status & Internal central for this method & Analysis nominal \\
-\bottomrule
-\end{tabular}
-\end{center}
-\vfill
+\begin{frame}[label=p21]{Results: data-driven cross-check and CMS nominal}
+\vspace{6pt}
 \begin{columns}[T]
 \column{0.48\textwidth}
-\begin{exampleblock}{Safe comparison}
-Compare the central fractions directly; do not combine the unlike systematic definitions.
+\begin{exampleblock}{Data-driven cross-check}
+\centering
+{\small Prompt-purified cross-slot mixing}\\[0.7em]
+{\small
+\[
+\begin{gathered}
+f_{\rm DPS}=0.170\pm0.057\,(\mathrm{stat.})
+  {}^{+0.007}_{-0.011}\,(\mathrm{prov.\ syst.})\\[0.7em]
+\sigma_{\rm eff}=2.51
+  {}^{+0.26}_{-0.20}\,(\mathrm{partial\ syst.})\ \mathrm{mb}
+\end{gathered}
+\]
+}
+\textit{Statistical uncertainty pending covariance.}
 \end{exampleblock}
 \column{0.48\textwidth}
-\begin{alertblock}{Do not over-interpret}
-Different template construction and incomplete data-driven systematic coverage.
-\end{alertblock}
+\begin{block}{CMS MC-template nominal}
+\centering
+{\small Simultaneous SPS/DPS template fit}\\[0.7em]
+{\small
+\[
+\begin{gathered}
+f_{\rm DPS}=0.34\pm0.10\,(\mathrm{stat.})
+  {}^{+0.02}_{-0.17}\,(\mathrm{syst.})\\[0.7em]
+\sigma_{\rm eff}=1.26\pm0.37\,(\mathrm{stat.})
+  {}^{+0.64}_{-0.11}\,(\mathrm{syst.})\ \mathrm{mb}
+\end{gathered}
+\]
+}
+\textit{Current analysis nominal.}
+\end{block}
 \end{columns}
+\vfill
+\centering
+\con{Different methods and systematic coverage: compare the quoted results, not individual uncertainty components.}
 \end{frame}
 
 \begin{frame}[label=p22]{Takeaways and current status}

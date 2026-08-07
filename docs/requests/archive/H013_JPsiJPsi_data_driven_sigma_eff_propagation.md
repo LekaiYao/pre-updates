@@ -1,3 +1,5 @@
+> Lifecycle: accepted and archived on 2026-08-07 after consumer technical review and user physics gate. Live cross-project status is tracked only in shared `../../../../docs/progress.md`.
+
 # H013 request：由当前 data-driven f_DPS 计算 DPS 与有效截面
 
 ## Request metadata
@@ -5,12 +7,13 @@
 - Request ID：H013
 - Requester / consumer：pre-updates
 - Producer / fact owner：JPsiJPsi
-- 状态：requested
+- 状态：accepted and archived
 - 日期：2026-08-07
-- Requester 文件：`pre-updates/docs/requests/active/H013_JPsiJPsi_data_driven_sigma_eff_propagation.md`
+- Requester archive：`pre-updates/docs/requests/archive/H013_JPsiJPsi_data_driven_sigma_eff_propagation.md`
 - Producer answer workspace：`JPsiJPsi/docs/answers/H013_preupdates_data_driven_sigma_eff/`
 - 输入基线：accepted H011 data-driven central/stat/provisional-syst package，以及当前 AN 中的截面输入
-- Human gate：所有最终数值、相关性假设和 uncertainty label 在 consumer 验收后仍须用户确认
+- Human gate：completed 2026-08-07；central 与 provisional partial systematic accepted，
+  statistical covariance 保持 unresolved/pending
 
 ## 目标与职责边界
 

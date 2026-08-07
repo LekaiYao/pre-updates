@@ -1,7 +1,8 @@
 # JJ data-driven formal slides：first-draft QA
 
-状态：正式首版已完成，等待用户内容与页面节奏 review。Physics wording 和输入 artifact
-均已通过既有 gate；本轮未新增分析结果、fit、bootstrap 或 plot。
+状态：正式首版及 H013 P21 result-comparison revision 已完成，等待用户其余内容与页面
+节奏 review。H013 central/partial-systematic artifact 已通过 consumer 与用户 gate；本轮
+未新增 fit、bootstrap production 或 plot。
 
 ## Deck identity
 
@@ -10,8 +11,8 @@
 - Build：`build/main.pdf`（ignored，可重建）
 - Pages：30（23 页 main，包括 title/thanks；7 页 backup）
 - Aspect ratio：16:9
-- PDF SHA256：`6e94ce17a663f61b83be2adbebbdff7f9d5c793b990f65a7e57ebd1b871e7643`
-- TeX SHA256：`87930da2060df5dcf990c81819706a05f83892fe56a58185a4cafeb2d7770ef2`
+- PDF SHA256：`ac0444017d332c30129c40061ea10c2b04b008db5df24d803096f2eaa75c577c`
+- TeX SHA256：`8fbe6f9ccd9a55117c50bd337369d7b274e4977720e25cc8ae06ff21223edd24`
 - Metadata SHA256：`310420d27d8785248df945058649bad86732b07c6277e39a01817b6f3d8a4491`
 
 ## Lifecycle and inputs
@@ -24,6 +25,8 @@
   figure manifest 匹配。
 - H011/H012 的 13 个 machine-readable/provenance 文件已复制到
   `slides/data/accepted/H011/`；stale nominal-comparison PDF 未复制、未引用。
+- H013 10 个 producer files 已 byte-identically 复制到 `slides/data/accepted/H013/`；
+  accepted manifest 为 `docs/artifacts/archive/H013_data_driven_sigma_eff_propagation.md`。
 - Historical recap/backup 仅使用已 accepted 的 `slides/figures/accepted/H006/` 输入。
 
 ## Content coverage
@@ -35,6 +38,9 @@
   benchmark、historical validation、previous uncertainty machinery、bootstrap policy。
 - 当前结果始终称 data-driven internal central/cross-check；只在最后与 CMS MC-template
   nominal 比较。Category 与 CR 来源分别展示后再做用户批准的 quadrature。
+- P21 不再逐行对比 Central/Statistical/Systematic。两列直接展示完整 `f_DPS` 与
+  `sigma_eff` 中心值和误差；data-driven `sigma_eff=2.51 +0.26/-0.20 (partial syst.) mb`
+  明示 statistical uncertainty pending covariance，CMS nominal 使用 corrected `1.26 mb`。
 - Bootstrap 页和结论页均保留 500/529、29 failures 和 conditional-selection caveat。
 - TeX 可见正文不含独立内部协作编号。
 
@@ -47,5 +53,7 @@
 - `bash fastcompile_frame.sh title`、`thanks`、`p21`：均生成单页 PDF/PNG，passed。
 - Poppler 将 30 页全部渲染为 PNG；三组 contact-sheet review 和关键 P21 focused review
   未发现裁切、图文重叠、框内溢出、不可读 glyph 或错误旋转。
+- H013 revision 后重新运行 P21 single-frame build、full-deck build、P21 focused render 和
+  30-page contact sheet；未发现新增视觉问题。
 - Beamer quality-loop self-score：95/100；满足正式首版交付阈值。保留用户对页面节奏、
   标题措辞和主文/backup 分配的 review，不将其视为物理 gate。

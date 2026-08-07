@@ -133,3 +133,31 @@ backup 约 7 页。报告时长和受众需由用户确认，页数随后可等�
 5. 已只复用 title/thanks 格式、主题和宏，其余正文与 backup 从零创建。
 6. 已按小批次编译，并完成 fastcheck、latexmk、warning audit、内部编号 checker 和
    逐页 PDF visual QA；下一 gate 为用户 review。
+
+## H013 P21 局部 amendment（2026-08-07）
+
+### 第一层：主要框架
+
+- 保持 30 页结构、P1--P20 方法与误差叙事以及 P22--P30 不变。
+- P21 从逐行拆分 `Central/Statistical/Systematic/Status` 改为紧凑的 center-plus-error
+  result comparison，避免逐条对比不等价的误差来源。
+- P21 同时展示 `f_DPS` 与核心物理结果 `sigma_eff`。Data-driven `sigma_eff` 只显示
+  accepted provisional partial systematic，并明确 `stat pending covariance`；CMS 列保持
+  analysis nominal 身份，禁止 stale `1.59 mb`。
+
+### 第二层：P17--P21 五页上下文
+
+- **P17**：category positive variation，定义 partial systematic 的第一组来源；内容不变。
+- **P18**：control-region boundary envelope，定义第二组来源与 purity caveat；内容不变。
+- **P19**：500/529 full-chain bootstrap，保留 conditional-selection caveat；内容不变。
+- **P20**：category/CR provisional combination 与 missing sources；内容不变。
+- **P21**：两列 result cards。每列直接写完整 `f_DPS` 中心值和 stat/syst，以及
+  `sigma_eff` 中心值和误差；data-driven `sigma_eff` 的 stat 明示 pending，partial syst
+  使用 H013 accepted result。页底只保留一句 scope note，不再逐行比较误差类别。
+
+Evidence：accepted H011 manifest、accepted H013 manifest、H013 `results.csv` 和当前 AN
+nominal comparison。用户已批准本 amendment；P21 单页编译/视觉检查、完整 fastcheck、
+latexmk 和全页 visual QA 均已执行。
+
+Implementation status：completed。P21 single-frame 与 full-deck build/visual QA 均通过；
+最终 30 页 PDF 与 hashes 记录于 `docs/qa/JJ_DATA_DRIVEN_FIRST_DRAFT_2026-08-07.md`。

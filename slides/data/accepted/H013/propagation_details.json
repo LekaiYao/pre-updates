@@ -1,0 +1,23 @@
+{
+  "atlas_single_lumi_nb": 0.120119,
+  "pair_nonbr_syst_pb_for_sigma_eff": 2.483104342229702,
+  "sigma_dps_partial_syst_source_effects_pb": {
+    "category_down": 0.0,
+    "category_up": 0.27020307762240003,
+    "control_region_down": 0.393966776514,
+    "control_region_up": 0.049048666116000006,
+    "pair_total_syst": 0.42495106939
+  },
+  "sigma_eff_partial_syst_source_effects_mb": {
+    "down_from_atlas_lumi_down": 0.056507247001805094,
+    "down_from_category_up": 0.10304628995066212,
+    "down_from_control_region_up": 0.019354680968935778,
+    "down_from_pair_nonbr_up": 0.1573423971523895,
+    "down_from_single_bin_down": 0.0423987712372087,
+    "up_from_atlas_lumi_up": 0.0571494070974663,
+    "up_from_control_region_down": 0.1670752925763055,
+    "up_from_pair_nonbr_down": 0.17985003109738962,
+    "up_from_single_bin_up": 0.042759270945412986
+  },
+  "visible_sigma_dps_pb": 0.022468811529235334
+}

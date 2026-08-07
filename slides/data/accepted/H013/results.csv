@@ -1,0 +1,9 @@
+quantity,scenario,rho_f_pair_stat,central,unit,stat_up,stat_down,partial_syst_up,partial_syst_down,recommended_display,status
+sigma_DPS,recommended_partial_syst_stat_unresolved,unresolved,6.3232719125232,pb,,,0.5059633249357911,0.5794766883771391,6.32 +0.51/-0.58 (partial syst) pb; stat pending covariance,recommended_central_and_partial_systematic_only
+sigma_eff,recommended_partial_syst_stat_unresolved,unresolved,2.514527745559081,mb,,,0.2556454518636411,0.20184275130857104,2.51 +0.26/-0.20 (partial syst) mb; stat pending covariance,recommended_central_and_partial_systematic_only
+sigma_DPS,rho_minus1_sensitivity,-1.0,6.3232719125232,pb,2.010840595788,2.010840595788,0.5059633249357911,0.5794766883771391,reference_or_sensitivity_only,provisional_partial_systematic_stat_correlation_unresolved
+sigma_eff,rho_minus1_sensitivity,-1.0,2.514527745559081,mb,0.7996497755681453,0.7996497755681453,0.2556454518636411,0.20184275130857104,reference_or_sensitivity_only,provisional_partial_systematic_stat_correlation_unresolved
+sigma_DPS,rho0_independent_reference,0.0,6.3232719125232,pb,2.115288955250542,2.115288955250542,0.5059633249357911,0.5794766883771391,reference_or_sensitivity_only,provisional_partial_systematic_stat_correlation_unresolved
+sigma_eff,rho0_independent_reference,0.0,2.514527745559081,mb,0.8411842741356691,0.8411842741356691,0.2556454518636411,0.20184275130857104,reference_or_sensitivity_only,provisional_partial_systematic_stat_correlation_unresolved
+sigma_DPS,rho_plus1_sensitivity,1.0,6.3232719125232,pb,2.2148171090952,2.2148171090952,0.5059633249357911,0.5794766883771391,reference_or_sensitivity_only,provisional_partial_systematic_stat_correlation_unresolved
+sigma_eff,rho_plus1_sensitivity,1.0,2.514527745559081,mb,0.8807622849214877,0.8807622849214877,0.2556454518636411,0.20184275130857104,reference_or_sensitivity_only,provisional_partial_systematic_stat_correlation_unresolved

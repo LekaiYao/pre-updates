@@ -1,3 +1,5 @@
+> Lifecycle: completed and archived on 2026-08-07. The metadata-only correction passed consumer validation and enabled H011 acceptance; live cross-project status is tracked only in shared `../../../../docs/progress.md`.
+
 # H012 request：修正 H011 provenance metadata
 
 ## Request metadata

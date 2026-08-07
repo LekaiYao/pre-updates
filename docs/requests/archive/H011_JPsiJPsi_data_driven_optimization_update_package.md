@@ -1,3 +1,5 @@
+> Lifecycle: completed and archived on 2026-08-07. H011 was accepted after H012 provenance correction and consumer hash validation; live cross-project status is tracked only in shared `../../../../docs/progress.md`.
+
 # H011 request：data-driven 优化进展、当前方案与部分误差的 presentation package
 
 ## Request metadata

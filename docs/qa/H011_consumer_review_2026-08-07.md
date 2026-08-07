@@ -1,11 +1,13 @@
 # H011 consumer review
 
-状态：`needs-fix`。H011 package 可作为经过核对的 `ready` 审阅材料，但在 producer
-修正 provenance 且用户完成 physics gate 前，不得转为 `accepted` 或写入 slides。
+状态：`accepted`（2026-08-07）。H012 metadata-only correction 已通过 consumer
+实际文件、hash、CR summary、PDF byte identity 和 Git context 复核；原 provenance
+阻塞已解除。Accepted consumption boundary 见
+`docs/artifacts/archive/H011_data_driven_optimization_update.md`。
 
-2026-08-07：用户已批准基于本 package inventory 制定的两层页面计划；该批准不等于
-接受 H011 physics content，也不解除 `accepted`-artifact gate。Consumer 修复意见已
-写入 producer 的同一 answer workspace，未新建 request。
+2026-08-07：用户已批准基于本 package inventory 制定的两层页面计划。最初的
+consumer 修复意见写入 producer 的同一 answer workspace；随后按用户要求另建 H012，
+其完成与复核已解除 `accepted`-artifact gate。
 
 ## 用户 physics decisions（2026-08-07）
 
@@ -21,15 +23,15 @@
   nominal 比较。CMS nominal 身份不变。
 
 这些决定完成 physics wording gate，但不自动修复 producer metadata。用户未采用
-known-defect waiver；已新建 H012 要求 producer 修正 provenance，完成并复核前 H011
-仍保持 `needs-fix`，不得正式制作 slides。
+known-defect waiver；H012 已修正 provenance 并通过本次 consumer 复核，H011 因此
+转为 `accepted`。
 
 ## 已核对通过
 
 - Codes 仓库为 `sync/chensh-20260730@24823a5`，普通 Git 视图 clean；测试代码和
   artifacts 按 producer 规则由 Git 忽略，文件身份使用 manifest SHA256。
-- `figure_manifest.csv` 的 23 项 PDF 全部存在，页数和 SHA256 匹配；
-  `source_manifest.csv` 的 16 项 source 全部存在且 SHA256 匹配。
+- `figure_manifest.csv` 的 23 项 PDF 全部存在，页数和 SHA256 匹配；H012 更新后的
+  `source_manifest.csv` 共 20 项 source/artifact，全部存在且 SHA256 匹配。
 - 23 项 PDF 共 25 页已用 Poppler 渲染检查；新 central maps 和 component figures
   未发现裁切、重叠、损坏或不可读 glyph。
 - 从 14-cell `cells.csv` 独立复算：`f_DPS=0.169980427756`，SPS+DPS 与 PP
@@ -71,7 +73,20 @@ known-defect waiver；已新建 H012 要求 producer 修正 provenance，完成�
 
 ## Slides 消费边界
 
-- H011 当前只可用于计划和验收，不得复制 PDF、转录新数值或写入 TeX 正文。
+- H011 已 accepted，可按 accepted manifest 消费；正式复制 PDF 和写入 TeX 留待
+  slides 制作阶段，本次验收未修改 slides。
 - 已 accepted 的历史 data-driven artifacts 可用于 recap，但必须保留“validated
   cross-check，不替代 CMS MC-template nominal”的边界。
 - Stale nominal-comparison PDF 继续禁止使用。
+
+## H012 final consumer verification
+
+- 5/5 corrected generator/metadata after hashes 与实际文件一致；4 个 metadata 的
+  input paths、central/CR 边界和 bootstrap provenance 与实际 summaries 一致。
+- 陈旧 provenance 字符串在 current generator、4 个 metadata 和 H011 answer
+  workspace 中均不存在。
+- H011 source manifest 20/20 实际 hash 匹配；PDF 23/23 before=after、actual hash
+  匹配且与 figure manifest 一致。
+- Codes ordinary Git context 为 clean `sync/chensh-20260730@24823a5`；被忽略文件由
+  manifest SHA256 定位。没有 evidence 表明发生 analysis/fit/bootstrap/plot 重跑或
+  物理输出改变。

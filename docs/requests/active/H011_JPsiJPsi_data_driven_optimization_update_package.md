@@ -5,12 +5,13 @@
 - Request ID：H011
 - Requester / consumer：pre-updates
 - Producer / fact owner：JPsiJPsi
-- 状态：requested
+- 状态：needs-fix（consumer review 2026-08-07）
 - 日期：2026-08-07
 - Requester 文件：pre-updates/docs/requests/active/H011_JPsiJPsi_data_driven_optimization_update_package.md
 - Producer answer workspace：JPsiJPsi/docs/answers/H011_preupdates_data_driven_optimization_update/
 - 关联基线：上一轮已验收的 ATLAS-style data-driven SPS/DPS cross-check
 - Human gate：selection、fit、data-driven nominal、systematics 和最终数值仍须用户确认
+- Consumer review：docs/qa/H011_consumer_review_2026-08-07.md
 
 ## 背景与职责边界
 

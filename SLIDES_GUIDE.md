@@ -4,6 +4,14 @@
 并列：模板保证“如何展示”，本文件约束“可以怎样表述”。任何分析结论仍由
 分析人员负责，Codex 只负责起草和一致性检查。
 
+## 0. X(3872) 分析术语延续
+
+- 制作或审核 X(3872) update 前必须读取 `docs/slides_terminology.md`。
+- 代码原生变量名、reweighting/weight transfer、sPlot、BDT/XGBoost，以及
+  `pre-cut`、`selection`、`fiducial region` 的写法以该文件为准。
+- 每轮 update 出现新对象或人工批准新措辞时，先更新术语文档，再在 slides 中使用；
+  不允许只在单次 deck 内引入另一套同义词。
+
 ## 1. 阶段性结论与人工门禁
 
 - 每个完整叙事单元后加入一个简短的 `Interim conclusion`。通常每 4--6 页
@@ -62,5 +70,6 @@
 - [ ] 所有 Codex 起草的 conclusion 已由分析人员标记为 `approved`。
 - [ ] 每条结论均能追溯到已展示证据，没有超出当前分析成熟度。
 - [ ] CMS 术语与 AN 或已审核 wording guide 一致。
+- [ ] X(3872) 专用术语与 `docs/slides_terminology.md` 一致。
 - [ ] 主体 slides 中没有内部协作标签。
 - [ ] 所有保留的分析局部标签在首次出现时都有读者可理解的定义。

@@ -1,6 +1,9 @@
 #!/usr/bin/env bash
 set -euo pipefail
 
+repo_root="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
+cd "${repo_root}"
+
 frame_label=${1:-}
 if [[ -z "${frame_label}" ]]; then
   echo "Usage: bash fastcompile_frame.sh <frame-label>" >&2

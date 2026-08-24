@@ -83,7 +83,9 @@
 
 - 已获人工批准的封面或结束页视为项目局部模板；后续 update 保留其标题层级、作者排序、
   reporter 标记、logo 尺寸与间距以及结束页信息框结构，不回退为通用默认布局。
-- 通用 `main` 只保存格式和匿名占位符，不保存具体项目的人名、机构、日期或 logo 路径。
+- 通用 `main` 只保存格式、匿名占位符和 `figures/logos/` 通用资产库，不预选具体项目的
+  人名、机构、日期或 logo 组合。每个分析在 `slides/project_setup.tex` 中填写
+  `\analysisparticipants`、`\analysisreporter`、`\analysisdate` 和 `\analysislogos`。
 - 多作者封面可采用以下匿名格式；姓名之间使用逗号加一个空格，只给 reporter 加下划线：
 
 ```tex
@@ -93,30 +95,25 @@
 }
 \institute{}
 \date{%
-  \includegraphics[height=LOGO-HEIGHT]{LOGO-1}\hspace{LOGO-GAP}%
-  \includegraphics[height=LOGO-HEIGHT]{LOGO-2}%
+  \analysislogos
 }
 ```
+
+- logo 只按参与者 affiliation 选取，不因资产库中存在而全部展示。五个 logo 的 16:9
+  起始几何为等高 `1.653cm`、间距 `0.30cm`；数量或长宽比变化后必须单页编译并检查
+  总宽度、视觉重心和清晰度。封面只保留 `\titlepage`，不附加进度标签或第二副标题。
+- logo 官方文件名与机构映射以 `figures/logos/README.md` 为准；不要恢复含义错误的
+  `LU.png` 或 `TAU.png`。
 
 - 结束页保留正常模板的顶栏和页脚，用全页宽度的 `makebox` 居中信息框；reporter 与日期
   使用相同字号：
 
 ```tex
-\begin{frame}[label=closing]{\strut}
-  \centering
-  \vfill
-  \makebox[\textwidth][c]{%
-    \begin{beamercolorbox}[wd=0.68\textwidth,sep=1.2em,center,rounded=true,shadow=true]{block body}
-      {\LARGE\bfseries Thanks for listening!}\par
-      \vspace{1.0em}
-      {\large Reporter: REPORTER NAME}\par
-      \vspace{0.45em}
-      {\large YYYY.M.D}
-    \end{beamercolorbox}%
-  }
-  \vfill
-\end{frame}
+\analysisclosing{closing}
 ```
+
+`\analysisclosing` 固定保留正常模板顶栏、页脚、`0.68\textwidth` 居中信息框以及
+reporter/date 同字号关系；内容自动读取 `slides/project_setup.tex`，不在结束页重复维护。
 
 ## 每版 Slides 的内容审核清单
 

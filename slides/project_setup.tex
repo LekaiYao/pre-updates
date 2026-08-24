@@ -1,6 +1,27 @@
-% Safe demo metadata. Replace these values in each analysis branch.
+% Analysis-local metadata entry. Replace every placeholder in each analysis branch.
+\newcommand{\analysisreporter}{REPORTER NAME}
+\newcommand{\analysisdate}{YYYY.M.D}
+\newcommand{\analysisparticipants}{%
+  PARTICIPANT 1, \underline{\analysisreporter}, PARTICIPANT 2%
+}
+
+% Select only the affiliations represented in the analysis team.
+% Available assets and official filenames are documented in figures/logos/README.md.
+% For five logos in a 16:9 deck, start from height=1.653cm and 0.30cm gaps.
+\newcommand{\analysislogos}{%
+  \fbox{\parbox[c][1.35cm][c]{5.4cm}{\centering SELECT LOGOS FOR THIS ANALYSIS}}%
+}
+% Example replacement:
+% \renewcommand{\analysislogos}{%
+%   \includegraphics[height=1.653cm]{figures/logos/CERN.png}\hspace{0.30cm}%
+%   \includegraphics[height=1.653cm]{figures/logos/CMS.png}%
+% }
+
 \title[Analysis Update]{Analysis Update}
 \subtitle{Reusable Beamer framework --- demo content only}
-\author{Presenter Name}
-\institute{Institute Name}
-\date{\today}
+\author{%
+  \analysisparticipants\\[0.45em]
+  \analysisdate%
+}
+\institute{}
+\date{\analysislogos}

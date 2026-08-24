@@ -20,6 +20,7 @@ analysis/jj   JJ-specific slides、数字、图片路径和术语
 ```text
 slides/main.tex           可独立编译的最小示例
 slides/project_setup.tex  branch-local metadata 入口
+figures/logos/            通用机构 logo 资产与命名索引
 utils/theme_setup.tex     通用主题和语义颜色
 utils/common_macros.tex   通用布局与 conclusion helper
 utils/beamer_setup.tex    可选 HEP 粒子和 collider 宏
@@ -31,6 +32,8 @@ latexmkrc                 本地 TeX 搜索路径
 
 `main` 中的文字和状态均为 demo，不是物理结果。新分析从 `main` 创建 branch
 后，必须替换 metadata 和 demo 内容，并指定该分析的权威数据与术语来源。
+封面参与者、reporter、日期及实际显示的 logo 均在 `slides/project_setup.tex`
+按分析填写；`main` 只提供匿名占位符、通用几何和 logo 资产库，不预设参与机构。
 
 ## 构建
 
@@ -94,10 +97,11 @@ skills 不判断分析数字是否可信。数据溯源、AN 用语和内部标�
 
 1. 从 `main` 创建 `analysis/<name>`；
 2. 修改 `slides/project_setup.tex`；
-3. 加入分析局部宏和权威来源说明；
-4. 用已核实内容替换 demo frames；
-5. 每个叙事单元后起草并人工审核 `Interim conclusion`；
-6. 运行 fastcheck、完整编译和逐页 PDF 检查。
+3. 从 `figures/logos/` 选择与参与者 affiliation 对应的 logo；
+4. 加入分析局部宏和权威来源说明；
+5. 用已核实内容替换 demo frames；
+6. 每个叙事单元后起草并人工审核 `Interim conclusion`；
+7. 运行 fastcheck、完整编译和逐页 PDF 检查。
 
 更新既有分析 deck 时，还应遵守 `SLIDES_GUIDE.md` 的两层计划、从零更新、
 artifact 复用和人工批准版式规则。

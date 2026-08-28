@@ -9,7 +9,6 @@ docs/
 # TeX 编译产物
 build/
 tmp/
-figures/symbols/
 *.aux
 *.log
 *.out

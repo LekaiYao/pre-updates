@@ -105,6 +105,31 @@ latexmk -pdf -outdir=build slides/main.tex
 
 构建后使用官方 `pdf` skill 对 `build/main.pdf` 做逐页视觉检查。
 
+### 按叙事部分快速编译
+
+制作过程中每 1--5 页按叙事含义组成一个部分，并为该部分使用一个固定的快速编译目录：
+
+```bash
+bash fastcompile_frame.sh p2_background_dataset_selection p2,p3,p4
+```
+
+尚未纳入 `slides/main.tex` 的 draft 部分使用第三个参数临时注入 source：
+
+```bash
+bash fastcompile_frame.sh p5_reweighting_motivation p5,p6,p7,p8,p9 \
+  slides/sections/p5_p9_reweighting_motivation.tex
+```
+
+该模式只影响快速预览；人工批准前不会把 draft source 永久 `\input` 到主稿。
+
+- 部分名称必须以起始页 `p{n}` 开头，例如 `p2_...`；
+- 每个部分对应 `tmp/<part-name>/`，不得为其中每一页创建独立目录；
+- 同一部分后续调整继续使用原目录，覆盖 `preview.pdf`、`preview.log` 和
+  `preview-*.png`，不得按修改轮次创建新目录；
+- 每个部分必须独立快速编译并完成视觉检查，经人工审核通过后才能进入下一部分
+  或作为已接受内容纳入主稿；
+- `tmp/` 已被 Git 忽略，正式归档不使用其中的预览 PDF。
+
 ## 极简归档
 
 完成一版 slides 并通过视觉检查后运行：
@@ -113,8 +138,9 @@ latexmk -pdf -outdir=build slides/main.tex
 bash archive_slides.sh
 ```
 
-脚本会在归档前询问是否增加标签。直接回车时使用日期作为 report ID，例如
-`20260730`；输入 `test` 时使用 `20260730-test`。归档目录包含：
+脚本会依次确认报告系列、实际汇报日期和可选标签。汇报日期使用 `YYYYMMDD`，
+不得用执行归档的日期替代实际报告日期。无标签的正式归档使用日期作为 report ID，
+例如 `20260813`；输入 `test` 时使用 `20260813-test`。归档目录包含：
 
 ```text
 archive/<report-id>/
@@ -124,5 +150,9 @@ archive/<report-id>/
 ```
 
 脚本会先运行 fastcheck 和完整 `latexmk` 构建，再复制当前源码与编译结果。
-已有的归档目录不会被覆盖。该机制假设仓库中的通用 TeX 配置以及 slides 引用
-的图片路径和内容保持可用，不以完全封闭的环境复现为目标。
+对于无标签的正式归档，还会将同一份最终 PDF 发布为
+`pbpb_updates/<series>_update_YYMMDD.pdf`；例如报告系列 `X`、汇报日期
+`20260813` 对应 `pbpb_updates/X_update_260813.pdf`。带标签的测试或补充归档
+不会发布到 `pbpb_updates/`。已有的归档目录和历史更新 PDF 均不会被覆盖。
+该机制假设仓库中的通用 TeX 配置以及 slides 引用的图片路径和内容保持可用，
+不以完全封闭的环境复现为目标。

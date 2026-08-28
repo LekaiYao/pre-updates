@@ -1,0 +1,40 @@
+\newcommand{\PsiClosureBackupFrame}[3]{%
+\begin{frame}[label=#1]{$\psi(2S)$ validation: \texttt{\detokenize{#2}}}
+  \begin{columns}[T,onlytextwidth]
+    \begin{column}{0.49\textwidth}
+      \centering
+      5 bins\par
+      \includegraphics[height=0.68\textheight,width=0.98\linewidth,keepaspectratio]{../Analysis_CODES/plotER/Validation/results/pbpb23_pbpb24_psi2s_combined_closure/psi2s_pb23_pb24_before_after_expanded22_v1/combined_5bin/#2.pdf}
+    \end{column}
+    \begin{column}{0.49\textwidth}
+      \centering
+      10 bins\par
+      \includegraphics[height=0.68\textheight,width=0.98\linewidth,keepaspectratio]{../Analysis_CODES/plotER/Validation/results/pbpb23_pbpb24_psi2s_combined_closure/psi2s_pb23_pb24_before_after_expanded22_v1/combined_10bin/#2.pdf}
+    \end{column}
+  \end{columns}
+  \vspace{-0.35em}
+  \small #3
+\end{frame}}
+
+\PsiClosureBackupFrame{bcl01}{Bcos_dtheta}{Reweighted-MC distance (L1/CDF): 5 bins $0.220/0.212$; 10 bins $0.242/0.212$.}
+\PsiClosureBackupFrame{bcl02}{Btktkpt}{Reweighted-MC distance (L1/CDF): 5 bins $0.106/0.053$; 10 bins $0.238/0.140$.}
+\PsiClosureBackupFrame{bcl03}{Bchi2Prob}{Reweighted-MC distance (L1/CDF): 5 bins $0.127/0.107$; 10 bins $0.213/0.177$.}
+\PsiClosureBackupFrame{bcl04}{Btrk2Pt}{Reweighted-MC distance (L1/CDF): 5 bins $0.061/0.044$; 10 bins $0.100/0.074$.}
+\PsiClosureBackupFrame{bcl05}{Btrk1Pt}{Reweighted-MC distance (L1/CDF): 5 bins $0.080/0.048$; 10 bins $0.150/0.104$.}
+\PsiClosureBackupFrame{bcl06}{Btrk1dR}{Reweighted-MC distance (L1/CDF): 5 bins $0.004/0.004$; 10 bins $0.040/0.035$.}
+\PsiClosureBackupFrame{bcl07}{Btrk2dR}{Reweighted-MC distance (L1/CDF): 5 bins $0.316/0.316$; 10 bins $0.355/0.355$.}
+\PsiClosureBackupFrame{bcl08}{BtrkPtimb}{Reweighted-MC distance (L1/CDF): 5 bins $0.084/0.084$; 10 bins $0.130/0.097$.}
+\PsiClosureBackupFrame{bcl09}{BtktkvProb}{Reweighted-MC distance (L1/CDF): 5 bins $0.083/0.074$; 10 bins $0.134/0.074$.}
+\PsiClosureBackupFrame{bcl10}{Bpt}{Reweighted-MC distance (L1/CDF): 5 bins $0.119/0.119$; 10 bins $0.195/0.179$.}
+\PsiClosureBackupFrame{bcl11}{By}{Reweighted-MC distance (L1/CDF): 5 bins $0.138/0.101$; 10 bins $0.259/0.220$.}
+\PsiClosureBackupFrame{bcl12}{BQvalue}{Reweighted-MC distance (L1/CDF): 5 bins $0.166/0.145$; 10 bins $0.193/0.145$.}
+\PsiClosureBackupFrame{bcl13}{BujvProb}{Reweighted-MC distance (L1/CDF): 5 bins $0.074/0.067$; 10 bins $0.222/0.067$.}
+\PsiClosureBackupFrame{bcl14}{Balpha}{Reweighted-MC distance (L1/CDF): 5 bins $0.270/0.270$; 10 bins $0.330/0.330$.}
+\PsiClosureBackupFrame{bcl15}{Btrk2Eta}{Reweighted-MC distance (L1/CDF): 5 bins $0.098/0.098$; 10 bins $0.282/0.218$.}
+\PsiClosureBackupFrame{bcl16}{Btrk1Eta}{Reweighted-MC distance (L1/CDF): 5 bins $0.134/0.134$; 10 bins $0.256/0.194$.}
+\PsiClosureBackupFrame{bcl17}{Btrk1Phi}{Reweighted-MC distance (L1/CDF): 5 bins $0.132/0.103$; 10 bins $0.179/0.103$.}
+\PsiClosureBackupFrame{bcl18}{Btrk2Phi}{Reweighted-MC distance (L1/CDF): 5 bins $0.125/0.105$; 10 bins $0.160/0.105$.}
+\PsiClosureBackupFrame{bcl19}{Bmu1y}{Reweighted-MC distance (L1/CDF): 5 bins $0.078/0.078$; 10 bins $0.191/0.167$.}
+\PsiClosureBackupFrame{bcl20}{Bmu2y}{Reweighted-MC distance (L1/CDF): 5 bins $0.128/0.128$; 10 bins $0.267/0.216$.}
+\PsiClosureBackupFrame{bcl21}{Bmu1pt}{Reweighted-MC distance (L1/CDF): 5 bins $0.123/0.089$; 10 bins $0.220/0.150$.}
+\PsiClosureBackupFrame{bcl22}{Bmu2pt}{Reweighted-MC distance (L1/CDF): 5 bins $0.152/0.152$; 10 bins $0.165/0.152$.}

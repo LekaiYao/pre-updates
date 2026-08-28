@@ -1,0 +1,50 @@
+\begin{frame}[label=p10]{X ML recipes tested (1/2)}
+  \small
+  \begin{center}
+    \renewcommand{\arraystretch}{1.14}
+    \setlength{\tabcolsep}{3pt}
+    \begin{tabular}{p{0.72\textwidth}cc}
+      \toprule
+      ML variables & best usable xeff & $\sqrt{q_0}$ \\
+      \midrule
+      Baseline (\texttt{Btrk1dR}, \texttt{Btktkpt}, \texttt{Btrk1Pt},
+      \texttt{Bchi2Prob}, \texttt{Bcos\_dtheta}, \texttt{Btrk2Pt})
+      & 25\% & 3.446 \\
+      Baseline without \texttt{Btktkpt} (whole chain) & 15\% & 3.512 \\
+      Baseline without \texttt{Btktkpt} (ML-only) & 10\% & 3.582 \\
+      Baseline $+$ \texttt{Bmu1y} & 25\% & 3.770 \\
+      Baseline $+$ \texttt{Bmu2pt} & 25\% & 2.849 \\
+      Baseline $+$ \texttt{Bmu1y} $+$ \texttt{Bmu2pt} & 30\% & 3.195 \\
+      Baseline $+$ \texttt{Bmu2y} & 25\% & 3.922 \\
+      Baseline $+$ \texttt{Bmu1y} $+$ \texttt{Bmu2y} & 15\% & 3.853 \\
+      \bottomrule
+    \end{tabular}
+  \end{center}
+\end{frame}
+
+\begin{frame}[label=p11]{X ML recipes tested (2/2)}
+  \small
+  \begin{center}
+    \renewcommand{\arraystretch}{1.14}
+    \setlength{\tabcolsep}{3pt}
+    \begin{tabular}{p{0.72\textwidth}cc}
+      \toprule
+      ML variables & best usable xeff & $\sqrt{q_0}$ \\
+      \midrule
+      Baseline $+$ \texttt{Bmu1y} $+$ \texttt{Bmu1pt} & 20\% & 4.723 \\
+      Baseline $+$ \texttt{Bmu2y} $+$ \texttt{Bmu2pt} & 25\% & 3.506 \\
+      Baseline $+$ \texttt{Bmu1y} $+$ \texttt{Bmu2y} $+$ \texttt{Bmu1pt} & 20\% & 4.407 \\
+      Baseline $+$ \texttt{Bmu1y} $+$ \texttt{Bmu2y} $+$ \texttt{Bmu1pt} $+$ \texttt{Bmu2pt} & 25\% & 4.616 \\
+      \bottomrule
+    \end{tabular}
+  \end{center}
+
+  \vspace{0.25em}
+  \begin{itemize}
+    \setlength{\itemsep}{0.10em}
+    \item $q_0=\max\!\left[0,\,2\left(\mathrm{NLL}_{\mathrm{null}}-\mathrm{NLL}_{\mathrm{alt}}\right)\right]$ from the simultaneous PbPb23+PbPb24 fit.
+    \item Null fit: both signal yields fixed to zero; mean and width scales fixed at the alternative best fit; backgrounds reprofiled.
+    \item The table reports $\sqrt{q_0}$ as a fit-only approximation at the best usable point in each seven-point scan.
+    \item No toys, $p_0$ calibration or scan-trials correction is included; these values are not calibrated significances.
+  \end{itemize}
+\end{frame}

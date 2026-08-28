@@ -1,0 +1,72 @@
+\documentclass[11pt,aspectratio=169]{beamer}
+
+\usetheme{Madrid}
+\usecolortheme{default}
+\setbeamertemplate{navigation symbols}{}
+\setbeamertemplate{footline}[frame number]
+
+\usepackage{booktabs}
+\usepackage{graphicx}
+\usepackage{tikz}
+\usetikzlibrary{arrows.meta,positioning}
+\input{beamer_setup.tex}
+
+% Optional fast part build; each p{n}-prefixed part overwrites
+% tmp/<part-name>/preview.*.
+\ifdefined\onlyframes
+  \expandafter\includeonlyframes\expandafter{\onlyframes}
+\fi
+
+\definecolor{positive}{HTML}{0173B2}
+\definecolor{negative}{HTML}{DE8F05}
+\definecolor{emphasis}{HTML}{027A5A}
+\definecolor{neutral}{HTML}{666666}
+\definecolor{selPurple}{HTML}{7030A0}
+\definecolor{selGreen}{HTML}{00A651}
+\setbeamercolor{structure}{fg=positive}
+\setbeamercolor{block title}{fg=white,bg=positive}
+\setbeamercolor{block body}{fg=black,bg=positive!8}
+\setbeamercolor{block title alerted}{fg=white,bg=negative}
+\setbeamercolor{block body alerted}{fg=black,bg=negative!10}
+\setbeamercolor{block title example}{fg=white,bg=emphasis}
+\setbeamercolor{block body example}{fg=black,bg=emphasis!8}
+\newcommand{\pos}[1]{\textcolor{positive}{#1}}
+\newcommand{\con}[1]{\textcolor{negative}{#1}}
+\newcommand{\HL}[1]{\textcolor{emphasis}{#1}}
+\newcommand{\muted}[1]{\textcolor{neutral}{#1}}
+
+\title[X(3872) Analysis Update]{X(3872) Analysis Update}
+\author{%
+  Henrique Legoinha, \underline{Lekai Yao}, Nuno Leonardo, Zhen Hu\\[0.45em]
+  2026.8.27%
+}
+\institute{}
+\date{%
+  \includegraphics[height=1.653cm]{figures/logos/CERN.png}\hspace{0.30cm}%
+  \includegraphics[height=1.653cm]{figures/logos/CMS.png}\hspace{0.30cm}%
+  \includegraphics[height=1.653cm]{figures/logos/LIP.png}\hspace{0.30cm}%
+  \includegraphics[height=1.653cm]{figures/logos/IST.png}\hspace{0.30cm}%
+  \includegraphics[height=1.653cm]{figures/logos/THU.png}%
+}
+
+\begin{document}
+
+\begin{frame}[plain,label=p1]
+  \titlepage
+\end{frame}
+
+\input{slides/sections/p2_p5_comments_nominal_workflow.tex}
+\input{slides/sections/p10_p11_ml_recipes.tex}
+\input{slides/sections/p12_p15_representative_fits.tex}
+\input{slides/sections/p16_p17_summary_thanks.tex}
+
+\appendix
+\input{slides/sections/backup_psi2s_closure.tex}
+
+% A draft part may be injected by fastcompile_frame.sh for review without
+% becoming part of the accepted main deck.
+\ifdefined\previewpart
+  \input{\previewpart}
+\fi
+
+\end{document}

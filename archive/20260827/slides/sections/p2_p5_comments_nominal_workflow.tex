@@ -1,0 +1,183 @@
+\begin{frame}[label=p2]{Three comments addressed}
+  \vspace{2pt}
+  \begin{center}
+    \renewcommand{\arraystretch}{1.25}
+    \begin{tabular}{p{0.34\textwidth}p{0.58\textwidth}}
+      \toprule
+      Comment & Current status \\
+      \midrule
+      {\raggedright Add PbPb23 to the $\psi(2S)$ validation\par}
+        & {\raggedright Two-year fit, sPlot and combined closure completed; the validation remains statistics-limited\par} \\
+      {\raggedright Constrain the Gaussian widths with MC\par}
+        & {\raggedright Year-specific reweighted-MC shapes define the current nominal DATA fit; fit boundaries remain diagnostics\par} \\
+      {\raggedright Compare PbPb23 and PbPb24 signal MC\par}
+        & {\raggedright Pre-ML, unit-normalized year comparisons completed for both X and $\psi(2S)$\par} \\
+      \bottomrule
+    \end{tabular}
+  \end{center}
+
+  \vspace{0.45em}
+  \begin{itemize}
+    \setlength{\itemsep}{0.2em}
+    \item ppRef vs PbPb MC comparisons are part of the nominal reweighting workflow.
+    \item The two channels show different PbPb23--PbPb24 MC agreement.
+  \end{itemize}
+\end{frame}
+
+\begin{frame}[label=p3]{PbPb23 added to the $\psi(2S)$ validation}
+  \begin{columns}[T,onlytextwidth]
+    \begin{column}{0.49\textwidth}
+      \centering
+      PbPb23 DATA\par
+      \includegraphics[height=0.39\textheight,width=0.86\linewidth,keepaspectratio]{../Analysis_CODES/fitER/results/pbpb_psi2s_simultaneous_year_fit/Psi2S_pb23_v1_fid1_6v1_rwr6range4v1_xgb_v1/mc_shape_nominal_v1_fit_only_sqrtq0/psi2seff30/pb23_data_fit.pdf}
+    \end{column}
+    \begin{column}{0.49\textwidth}
+      \centering
+      PbPb24 DATA\par
+      \includegraphics[height=0.39\textheight,width=0.86\linewidth,keepaspectratio]{../Analysis_CODES/fitER/results/pbpb_psi2s_simultaneous_year_fit/Psi2S_pb23_v1_fid1_6v1_rwr6range4v1_xgb_v1/mc_shape_nominal_v1_fit_only_sqrtq0/psi2seff30/pb24_data_fit.pdf}
+    \end{column}
+  \end{columns}
+
+  \vspace{-0.45em}
+  \begin{center}
+    \small
+    \renewcommand{\arraystretch}{1.10}
+    \begin{tabular}{lrrr}
+      \toprule
+       & PbPb23 & PbPb24 & combined \\
+      \midrule
+      fitted signal yield & $86.32$ & $102.69$ & $189.01$ \\
+      signed $N_{\mathrm{eff}}$ & $27.759$ & $26.970$ & $54.176$ \\
+      \bottomrule
+    \end{tabular}
+  \end{center}
+
+  \small
+  $N_{\mathrm{eff}}=(\sum_i w_i)^2/\sum_i w_i^2$ for the signed signal sWeights.
+  The 30\% point maximizes the combined $N_{\mathrm{eff}}$ in the closure scan.\\[0.15em]
+  Adding 2023 approximately doubles the combined effective sample size.
+\end{frame}
+
+\newcommand{\PsiClosureMainFrame}[3]{%
+\begin{frame}[label=#1]{$\psi(2S)$ validation: \texttt{\detokenize{#2}}}
+  \begin{columns}[T,onlytextwidth]
+    \begin{column}{0.49\textwidth}
+      \centering
+      5 bins\par
+      \includegraphics[height=0.65\textheight,width=0.98\linewidth,keepaspectratio]{../Analysis_CODES/plotER/Validation/results/pbpb23_pbpb24_psi2s_combined_closure/psi2s_pb23_pb24_before_after_expanded22_v1/combined_5bin/#2.pdf}
+    \end{column}
+    \begin{column}{0.49\textwidth}
+      \centering
+      10 bins\par
+      \includegraphics[height=0.65\textheight,width=0.98\linewidth,keepaspectratio]{../Analysis_CODES/plotER/Validation/results/pbpb23_pbpb24_psi2s_combined_closure/psi2s_pb23_pb24_before_after_expanded22_v1/combined_10bin/#2.pdf}
+    \end{column}
+  \end{columns}
+  \vspace{-0.35em}
+  \small #3
+\end{frame}}
+
+\PsiClosureMainFrame{p4}{Btktkpt}{Reweighted-MC distance (L1/CDF): 5 bins $0.106/0.053$; 10 bins $0.238/0.140$.}
+\PsiClosureMainFrame{p5}{Bchi2Prob}{Reweighted-MC distance (L1/CDF): 5 bins $0.127/0.107$; 10 bins $0.213/0.177$.}
+\PsiClosureMainFrame{p6}{Btrk1dR}{Reweighted-MC distance (L1/CDF): 5 bins $0.004/0.004$; 10 bins $0.040/0.035$.}
+
+\begin{frame}[label=p7]{X baseline: reweighting and ML recipe}
+  \small
+  \begin{columns}[T,onlytextwidth]
+    \begin{column}{0.49\textwidth}
+      \centering
+      Reweighting\par
+      \vspace{0.25em}
+      \raggedright
+      Variables:
+      \begin{itemize}
+        \setlength{\itemsep}{0.05em}
+        \item \texttt{Bcos\_dtheta}, \texttt{Btktkpt}, \texttt{Bchi2Prob}
+        \item \texttt{Btrk1Pt}, \texttt{Btrk2Pt}, \texttt{Btrk1dR}
+      \end{itemize}
+      Selection:
+      \begin{itemize}
+        \setlength{\itemsep}{0.05em}
+        \item $10<\texttt{Bpt}<50$, $|\texttt{By}|<1.6$, $\texttt{BQvalue}<0.15$
+        \item $0.9<\texttt{Btrk1Pt},\texttt{Btrk2Pt}\leq4.5$
+        \item $2\leq\texttt{Btktkpt}\leq8$, $0\leq\texttt{Bchi2Prob}\leq1$
+        \item $0\leq\texttt{Btrk1dR}\leq0.45$, $0\leq\texttt{Btrk2dR}\leq0.40$
+        \item $-1\leq\texttt{Bcos\_dtheta}\leq1$
+      \end{itemize}
+    \end{column}
+    \begin{column}{0.49\textwidth}
+      \centering
+      ML\par
+      \vspace{0.25em}
+      \raggedright
+      Variables:
+      \begin{itemize}
+        \setlength{\itemsep}{0.05em}
+        \item \texttt{Btrk1dR}, \texttt{Btktkpt}, \texttt{Btrk1Pt}
+        \item \texttt{Bchi2Prob}, \texttt{Bcos\_dtheta}, \texttt{Btrk2Pt}
+      \end{itemize}
+      Selection:
+      \begin{itemize}
+        \setlength{\itemsep}{0.05em}
+        \item $10<\texttt{Bpt}<50$, $|\texttt{By}|<1.6$, $\texttt{BQvalue}<0.15$
+        \item $0.9<\texttt{Btrk1Pt},\texttt{Btrk2Pt}\leq4.5$
+        \item $2\leq\texttt{Btktkpt}\leq8$, $0\leq\texttt{Bchi2Prob}\leq1$
+        \item $0\leq\texttt{Btrk1dR}\leq0.45$, $0\leq\texttt{Btrk2dR}<0.25$
+        \item $-1\leq\texttt{Bcos\_dtheta}\leq1$
+        \item DATA background: $3.82<\texttt{Bmass}<3.85$ or $3.89<\texttt{Bmass}<3.92$ GeV
+      \end{itemize}
+    \end{column}
+  \end{columns}
+\end{frame}
+
+\begin{frame}[label=p8]{MC-constrained signal shape in the X baseline fit}
+  \begin{columns}[T,onlytextwidth]
+    \begin{column}{0.49\textwidth}
+      \centering
+      PbPb24 signal MC\par
+      \includegraphics[height=0.53\textheight,width=0.94\linewidth,keepaspectratio]{../Analysis_CODES/fitER/results/pbpb_x_simultaneous_year_fit/X_pb23_v3_fid3_6v5_rwr6range5v1_xgb_v1/mc_shape_nominal_v2_fit_only_sqrtq0/xeff25/pb24_mc_template_fit.pdf}
+    \end{column}
+    \begin{column}{0.49\textwidth}
+      \centering
+      PbPb24 DATA\par
+      \includegraphics[height=0.53\textheight,width=0.94\linewidth,keepaspectratio]{../Analysis_CODES/fitER/results/pbpb_x_simultaneous_year_fit/X_pb23_v3_fid3_6v5_rwr6range5v1_xgb_v1/mc_shape_nominal_v2_fit_only_sqrtq0/xeff25/pb24_data_fit.pdf}
+    \end{column}
+  \end{columns}
+
+  \vspace{-0.25em}
+  \begin{itemize}
+    \small
+    \setlength{\itemsep}{0.12em}
+    \item Fit each year's reweighted signal MC with a common-mean double Gaussian.
+    \item Simultaneous DATA fit: shared mean; year-specific yield, background and width scale.
+    \item X baseline: MC widths and Gaussian fraction fixed; width scale in $[0.90,1.50]$.
+  \end{itemize}
+\end{frame}
+
+\begin{frame}[label=p9]{PbPb23 vs PbPb24 signal MC before ML}
+  \begin{columns}[T,onlytextwidth]
+    \begin{column}{0.49\textwidth}
+      \centering
+      X: largest observed distance\par
+      \includegraphics[height=0.44\textheight,width=0.95\linewidth,keepaspectratio]{../Analysis_CODES/plotER/Validation/results/pbpb23_pbpb24_x_mc_year_comparison/x_pb23_pb24_baseline_v1/fiducial_only/Bchi2Prob.pdf}
+    \end{column}
+    \begin{column}{0.49\textwidth}
+      \centering
+      $\psi(2S)$: largest observed distance\par
+      \includegraphics[height=0.44\textheight,width=0.95\linewidth,keepaspectratio]{../Analysis_CODES/plotER/Validation/results/pbpb23_pbpb24_psi2s_mc_year_comparison/psi2s_pb23_pb24_v1/fiducial_only/Bpt.pdf}
+    \end{column}
+  \end{columns}
+
+  \vspace{-0.15em}
+  \begin{center}
+    \small
+    \renewcommand{\arraystretch}{1.12}
+    \begin{tabular}{lrrl}
+      \toprule
+      Channel & entries 2023 / 2024 & mean / max distance & largest variable \\
+      \midrule
+      X & 56811 / 22257 & 0.0098 / 0.0346 & \texttt{Bchi2Prob} \\
+      $\psi(2S)$ & 15717 / 7826 & 0.0389 / 0.0926 & \texttt{Bpt} \\
+      \bottomrule
+    \end{tabular}
+  \end{center}
+\end{frame}

@@ -1,0 +1,106 @@
+\begin{frame}[label=p12]{Baseline simultaneous fit at $x_{\mathrm{eff}}=25\%$}
+  \begin{columns}[T,onlytextwidth]
+    \begin{column}{0.49\textwidth}
+      \centering
+      \includegraphics[height=0.49\textheight,width=0.98\linewidth,keepaspectratio]{../Analysis_CODES/fitER/results/pbpb_x_simultaneous_year_fit/X_pb23_v3_fid3_6v5_rwr6range5v1_xgb_v1/mc_shape_nominal_v2_fit_only_sqrtq0/xeff25/pb23_data_fit.pdf}
+      \par PbPb 2023 DATA
+    \end{column}
+    \begin{column}{0.49\textwidth}
+      \centering
+      \includegraphics[height=0.49\textheight,width=0.98\linewidth,keepaspectratio]{../Analysis_CODES/fitER/results/pbpb_x_simultaneous_year_fit/X_pb23_v3_fid3_6v5_rwr6range5v1_xgb_v1/mc_shape_nominal_v2_fit_only_sqrtq0/xeff25/pb24_data_fit.pdf}
+      \par PbPb 2024 DATA
+    \end{column}
+  \end{columns}
+
+  \vspace{0.35em}
+  \begin{itemize}
+    \setlength{\itemsep}{0.10em}
+    \item Baseline: $\sqrt{q_0}=3.446$; fitted yields $24.9\pm19.1$ and $54.6\pm18.1$.
+    \item Both width scales reach 1.50.
+  \end{itemize}
+\end{frame}
+
+\begin{frame}[label=p13]{Largest scanned proxy: baseline $+$ \texttt{Bmu1y} $+$ \texttt{Bmu1pt}}
+  \begin{columns}[T,onlytextwidth]
+    \begin{column}{0.49\textwidth}
+      \centering
+      \includegraphics[height=0.49\textheight,width=0.98\linewidth,keepaspectratio]{../Analysis_CODES/fitER/results/pbpb_x_simultaneous_year_fit/X_pb23_v3_fid3_8v5_rwr6range5v1_xgb_v1/mc_shape_nominal_v2_fit_only_sqrtq0/xeff20/pb23_data_fit.pdf}
+      \par PbPb 2023 DATA
+    \end{column}
+    \begin{column}{0.49\textwidth}
+      \centering
+      \includegraphics[height=0.49\textheight,width=0.98\linewidth,keepaspectratio]{../Analysis_CODES/fitER/results/pbpb_x_simultaneous_year_fit/X_pb23_v3_fid3_8v5_rwr6range5v1_xgb_v1/mc_shape_nominal_v2_fit_only_sqrtq0/xeff20/pb24_data_fit.pdf}
+      \par PbPb 2024 DATA
+    \end{column}
+  \end{columns}
+
+  \vspace{0.35em}
+  \begin{itemize}
+    \setlength{\itemsep}{0.10em}
+    \item At $x_{\mathrm{eff}}=20\%$: $\sqrt{q_0}=4.723$; the largest value in the seven-point recipe scans.
+    \item Shared mean and both width scales reach boundaries.
+  \end{itemize}
+\end{frame}
+
+\begin{frame}[label=p14]{Baseline $+$ four muon variables at $x_{\mathrm{eff}}=25\%$}
+  \begin{columns}[T,onlytextwidth]
+    \begin{column}{0.49\textwidth}
+      \centering
+      \includegraphics[height=0.49\textheight,width=0.98\linewidth,keepaspectratio]{../Analysis_CODES/fitER/results/pbpb_x_simultaneous_year_fit/X_pb23_v3_fid3_10v1_rwr6range5v1_xgb_v1/mc_shape_nominal_v2_fit_only_sqrtq0/xeff25/pb23_data_fit.pdf}
+      \par PbPb 2023 DATA
+    \end{column}
+    \begin{column}{0.49\textwidth}
+      \centering
+      \includegraphics[height=0.49\textheight,width=0.98\linewidth,keepaspectratio]{../Analysis_CODES/fitER/results/pbpb_x_simultaneous_year_fit/X_pb23_v3_fid3_10v1_rwr6range5v1_xgb_v1/mc_shape_nominal_v2_fit_only_sqrtq0/xeff25/pb24_data_fit.pdf}
+      \par PbPb 2024 DATA
+    \end{column}
+  \end{columns}
+
+  \vspace{0.35em}
+  \begin{itemize}
+    \setlength{\itemsep}{0.10em}
+    \item Added variables: \texttt{Bmu1y}, \texttt{Bmu2y}, \texttt{Bmu1pt}, \texttt{Bmu2pt}; $\sqrt{q_0}=4.616$.
+    \item Shared mean and both width scales reach boundaries.
+  \end{itemize}
+\end{frame}
+
+\begin{frame}[label=p15]{Direct merged fit as a stability estimate}
+  \small
+  \begin{columns}[T,onlytextwidth]
+    \begin{column}{0.46\textwidth}
+      \centering
+      \includegraphics[height=0.37\textheight,width=0.98\linewidth,keepaspectratio]{../Analysis_CODES/fitER/results/pbpb_x_two_year_fit_strategy_comparison/X_pb23_v3_fid3_10v1_rwr6range5v1_xgb_v1/best_data_entry_normalized_v1/merged_data_entry_normalized/data_fit.pdf}
+      \par Merged DATA fit\\
+      four-muon-variable recipe, $x_{\mathrm{eff}}=25\%$
+    \end{column}
+    \begin{column}{0.52\textwidth}
+      \begin{itemize}
+        \setlength{\itemsep}{0.18em}
+        \item Normalize each year's weighted MC to its selected DATA entries:
+          \[
+            w'_y=\mathrm{Reweight}\times
+            \frac{N_y^{\mathrm{DATA}}}{\sum_i w_{y,i}}.
+          \]
+        \item Merge 2023 and 2024 MC and DATA; fit one signal yield, shape and background.
+        \item The $N_{23}^{\mathrm{DATA}}:N_{24}^{\mathrm{DATA}}$ mixture is descriptive, not a physical signal-yield ratio.
+      \end{itemize}
+    \end{column}
+  \end{columns}
+
+  \vspace{0.35em}
+  \begin{center}
+    \renewcommand{\arraystretch}{1.12}
+    \setlength{\tabcolsep}{5pt}
+    \begin{tabular}{lcccc}
+      \toprule
+      Recipe and point & simultaneous & merged & 2023 only & 2024 only \\
+      \midrule
+      $+\,$\texttt{Bmu1y}, \texttt{Bmu1pt}; 20\% & 4.723 & 4.505 & 0.799 & 4.172 \\
+      Baseline $+$ four muon variables; 25\% & 4.616 & 4.531 & 2.633 & 3.792 \\
+      \bottomrule
+    \end{tabular}
+  \end{center}
+
+  \vspace{0.15em}
+  Merged $\sqrt{q_0}$ is a same-point stability estimate, not a replacement for the nominal simultaneous fit.
+\end{frame}

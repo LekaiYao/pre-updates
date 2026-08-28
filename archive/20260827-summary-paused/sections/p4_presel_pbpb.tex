@@ -1,0 +1,53 @@
+\begin{frame}[label=p4]{Muon \& track pre-selection: PbPb}
+  \centering
+  \begin{tikzpicture}[
+    box/.style={anchor=north west,dashed,thick,rounded corners=1pt,
+      inner sep=6pt,align=left,font=\footnotesize},
+    mu/.style={box,draw=selPurple,text width=5.95cm},
+    trk/.style={box,draw=selGreen,text width=5.95cm},
+    cand/.style={box,draw=black,text width=6.90cm},
+    dimu/.style={box,draw=selPurple,text width=5.00cm}
+  ]
+    \node[mu] (mu) at (0,0) {%
+      {\color{selPurple}\bfseries Muons}\par\smallskip
+      $\square$ Hybrid-soft muons\par
+      \hspace{1em}$\bullet$ \texttt{isGlobalMuon} and \texttt{isTrackerMuon}\par
+      \hspace{1em}$\bullet$ $D_{xy}<0.3$ cm; $D_z<20$ cm\par
+      \hspace{1em}$\bullet$ \texttt{nPixWMea}$>0$; \texttt{nTrkWMea}$>5$\par\smallskip
+      $\square$ Acceptance region\par
+      \begin{tabular}{@{}ll@{}}
+        $p_{\mathrm{T}}^\mu>3.5\,\mathrm{GeV}/c$ & $|\eta^\mu|<1.2$ \\
+        $p_{\mathrm{T}}^\mu>5.47-1.89|\eta^\mu|$ & $1.2\leq|\eta^\mu|<2.1$ \\
+        $p_{\mathrm{T}}^\mu>1.5\,\mathrm{GeV}/c$ & $2.1\leq|\eta^\mu|<2.4$
+      \end{tabular}
+    };
+
+    \node[trk] (trk) at (6.75,0) {%
+      {\color{selGreen}\bfseries Tracks}\par\smallskip
+      $\square$ Quality\par
+      \hspace{1em}$\bullet$ $\sigma_{p_{\mathrm{T}}}/p_{\mathrm{T}}<0.1$\par
+      \hspace{1em}$\bullet$ Pixel + strip hits $>10$\par
+      \hspace{1em}$\bullet$ Normalized track $\chi^2<0.18$\par\smallskip
+      $\square$ Acceptance\par
+      \hspace{1em}$\bullet$ $p_{\mathrm{T}}>0.9\,\mathrm{GeV}/c$\par
+      \hspace{1em}$\bullet$ $|\eta|<2.4$
+    };
+
+    \node[cand] (cand) at (0,-4.25) {%
+      {\bfseries Candidate}\par\smallskip
+      \begin{tabular}{@{}ll@{}}
+        $\square$ Vertex prob. $>0.5\%$ & $\square$ $|y|<2.4$ \\
+        $\square$ $7.5<p_{\mathrm{T}}<50\,\mathrm{GeV}/c$ & $\square$ \texttt{BQvalue}$<0.15$ \\
+        $\square$ \texttt{Btrk1dR}$<0.6$ & $\square$ $\Delta m<0.15\,\mathrm{GeV}/c^2$
+      \end{tabular}\par
+      \hspace{1em}$\Delta m=m-m_{J/\psi}-m_{\pi\pi}$
+    };
+
+    \node[dimu] (dimu) at (7.75,-4.25) {%
+      {\color{selPurple}\bfseries Di-muon system}\par\smallskip
+      $\square$ Opposite muon charges\par
+      $\square$ Vertex probability $>1\%$\par
+      $\square$ $|m_{\mu\mu}-m_{J/\psi}^{\mathrm{PDG}}|<0.15\,\mathrm{GeV}/c^2$
+    };
+  \end{tikzpicture}
+\end{frame}

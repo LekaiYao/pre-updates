@@ -1,0 +1,182 @@
+\begin{frame}[label=p5]{Why reweight the signal simulation?}
+  \begin{columns}[T,onlytextwidth]
+    \begin{column}{0.46\textwidth}
+      \centering
+      \begin{tikzpicture}[
+        x=0.78cm,y=0.78cm,
+        axis/.style={-{Stealth},thick},
+        data/.style={positive,very thick},
+        mc/.style={negative,very thick,dashed}
+      ]
+        \draw[axis] (0,0) -- (5.4,0) node[right] {\small input $x$};
+        \draw[axis] (0,0) -- (0,4.0) node[above] {\small density};
+        \draw[data] plot[smooth] coordinates
+          {(0.2,0.2) (0.9,0.8) (1.6,2.3) (2.3,3.3)
+           (3.0,2.4) (3.8,1.0) (5.0,0.2)};
+        \draw[mc] plot[smooth] coordinates
+          {(0.2,0.1) (0.9,0.3) (1.6,1.0) (2.3,2.0)
+           (3.0,3.3) (3.8,2.5) (5.0,0.4)};
+        \node[data,anchor=west] at (0.20,3.70) {\footnotesize signal-like DATA};
+        \node[mc,anchor=west] at (3.75,3.45) {\footnotesize signal MC};
+      \end{tikzpicture}
+    \end{column}
+
+    \begin{column}{0.50\textwidth}
+      \small
+      \begin{enumerate}
+        \setlength{\itemsep}{0.65em}
+        \item XGBoost learns the reconstructed signal distribution in MC.
+        \item A DATA--MC mismatch changes the learned decision boundary.
+        \item The selected signal efficiency then depends on the mismodelled variables.
+        \item The selected mass spectrum and downstream fit inherit this dependence.
+      \end{enumerate}
+    \end{column}
+  \end{columns}
+
+  \vfill
+  \centering
+  A stronger classifier does not by itself remove signal-domain mismodelling.
+\end{frame}
+
+\begin{frame}[label=p6]{Reweighting as a multidimensional density-ratio correction}
+  \small
+  \begin{columns}[T,onlytextwidth]
+    \begin{column}{0.48\textwidth}
+      \[
+        w(\mathbf{x}) \simeq
+        \frac{p_{\mathrm{DATA\ signal}}(\mathbf{x})}
+             {p_{\mathrm{MC\ signal}}(\mathbf{x})}
+      \]
+      \[
+        p_{\mathrm{MC}}^{\mathrm{weighted}}(\mathbf{x})
+        \approx p_{\mathrm{DATA\ signal}}(\mathbf{x}) .
+      \]
+    \end{column}
+
+    \begin{column}{0.48\textwidth}
+      \begin{itemize}
+        \setlength{\itemsep}{0.45em}
+        \item $\mathbf{x}$ contains correlated reconstruction-level variables.
+        \item One continuous weight is assigned to each simulated candidate.
+        \item Event reconstruction and measured DATA are unchanged.
+        \item No additional simulated candidates are created.
+      \end{itemize}
+    \end{column}
+  \end{columns}
+
+  \vspace{0.7em}
+  \centering
+  \begin{tabular}{ccc}
+    Original signal MC & $\xrightarrow{\quad w(\mathbf{x})\quad}$ & Weighted signal MC \\
+    training population & & DATA-like training population
+  \end{tabular}
+
+  \vfill
+  \footnotesize
+  BDT reweighting follows the multidimensional approach of A. Rogozhnikov,
+  arXiv:1608.05806.
+\end{frame}
+
+\begin{frame}[label=p7]{The DATA target must represent the signal component}
+  \small
+  \begin{columns}[T,onlytextwidth]
+    \begin{column}{0.56\textwidth}
+      \centering
+      \begin{tikzpicture}[
+        node distance=0.42cm,
+        flowstep/.style={draw=positive,rounded corners,text width=5.8cm,
+          minimum height=0.58cm,align=center,font=\small},
+        arr/.style={-{Stealth},thick,positive}
+      ]
+        \node[flowstep] (cand) {ppRef DATA candidates};
+        \node[flowstep,below=of cand] (fit) {Mass fit: signal + combinatorial background};
+        \node[flowstep,below=of fit] (splot) {sPlot statistical separation};
+        \node[flowstep,below=of splot] (tree) {Candidate-level signed \texttt{signal\_sWeight}};
+        \node[flowstep,below=of tree] (target) {sWeighted DATA signal target};
+        \draw[arr] (cand)--(fit);
+        \draw[arr] (fit)--(splot);
+        \draw[arr] (splot)--(tree);
+        \draw[arr] (tree)--(target);
+      \end{tikzpicture}
+    \end{column}
+
+    \begin{column}{0.40\textwidth}
+      \begin{itemize}
+        \setlength{\itemsep}{0.55em}
+        \item Negative sWeights are retained.
+        \item The target is not an event-by-event truth label.
+        \item Fit quality and signed effective statistics must be checked.
+        \item The correction is defined only inside the common target support.
+      \end{itemize}
+    \end{column}
+  \end{columns}
+
+  \vfill
+  \centering
+  Inclusive sideband or candidate DATA cannot be used as the signal target.
+\end{frame}
+
+\begin{frame}[label=p8]{Why the working strategy uses a direct X target}
+  \small
+  \begin{columns}[T,onlytextwidth]
+    \begin{column}{0.47\textwidth}
+      \centering
+      $\psi(2S)$-derived transfer
+      \raggedright
+      \begin{itemize}
+        \setlength{\itemsep}{0.55em}
+        \item Target: ppRef $\psi(2S)$ signed-sWeighted DATA.
+        \item Test: learn a correction in shared variables and apply it to X MC.
+        \item Boundary: limited X point-closure improvement; robust all-variable closure was not established.
+      \end{itemize}
+    \end{column}
+
+    \begin{column}{0.47\textwidth}
+      \centering
+      Direct-X target
+      \raggedright
+      \begin{itemize}
+        \setlength{\itemsep}{0.55em}
+        \item Target: ppRef X signed-sPlot signal.
+        \item Test: learn the correction directly for X MC and transfer it inside common ppRef/PbPb support.
+        \item Boundary: selected variables and weight tails are better controlled; independent track-$dR$ closure remains unresolved.
+      \end{itemize}
+    \end{column}
+  \end{columns}
+
+  \vspace{0.6em}
+  \centering
+  Working route: accepted ppRef X signal target + controlled common phase space.
+
+  \vfill
+  This choice defines a practical workflow; it does not by itself validate ppRef-to-PbPb transfer.
+\end{frame}
+
+\begin{frame}[label=p9]{Validation gates before downstream use}
+  \small
+  \renewcommand{\arraystretch}{1.20}
+  \begin{tabular}{p{2.75cm}p{9.55cm}}
+    \toprule
+    Gate & Question answered \\
+    \midrule
+    Signal target
+      & Is the mass fit usable, and are the signed sWeight sum and effective statistics controlled? \\
+    Weight stability
+      & Are the maximum weight, weighted-MC $N_{\mathrm{eff}}$ and fold-to-fold behaviour acceptable? \\
+    Point closure
+      & Do per-variable signed empirical-CDF distances improve, including variables not used by the reweighter? \\
+    Domain support
+      & Are ppRef and PbPb MC compared in the same phase space in which the correction is applied? \\
+    Downstream chain
+      & Are weighted/unweighted ML, mass-fit stability and matched-model signal recovery checked separately? \\
+    \bottomrule
+  \end{tabular}
+
+  \vspace{0.7em}
+  \begin{itemize}
+    \setlength{\itemsep}{0.35em}
+    \item Passing a domain-classifier or aggregate closure metric is not sufficient on its own.
+    \item Matched-model injection checks workflow sensitivity, not DATA--MC transfer validity.
+  \end{itemize}
+
+\end{frame}

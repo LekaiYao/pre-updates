@@ -16,7 +16,7 @@ def tex_body(line: str) -> str:
 
 
 requested = [Path(arg) for arg in sys.argv[1:]]
-targets = requested or sorted((ROOT / "slides").glob("*.tex"))
+targets = requested or sorted((ROOT / "slides").rglob("*.tex"))
 violations: list[str] = []
 
 for target in targets:

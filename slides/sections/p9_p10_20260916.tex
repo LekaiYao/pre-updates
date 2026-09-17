@@ -1,0 +1,37 @@
+\begin{frame}[label=p9_20260916]{ML recipe comparison: summary}
+  \begin{center}\small
+  \renewcommand{\arraystretch}{1.15}
+  \begin{tabular}{@{}cL{5.3cm}ccL{2.3cm}@{}}
+    \toprule
+    Config. & Main change & $\epsilon_X$ & $N_X$ & Significance\\
+    \midrule
+    1 & Nine-input starting point & 25\% & $47.7\pm21.4$ & 2.262\\
+    2 & \var{Btrk1dR}: input $\to$ selection; wider sidebands & 40\% & $21.9\pm17.9$ & 1.192\\
+    3 & Two muon $\phi$ inputs $\to$ \var{Bujeta}, \var{Btktketa} & 25\% & $55.4\pm21.0$ & 2.656\\
+    4 & \var{Bpt}$>15$ GeV & 40\% & $43.0\pm14.1$ & 3.309\\
+    5 & Wider \var{Btrk2dR} selection and sidebands & 50\% & $78.9\pm21.8$ & 3.873\\
+    \bottomrule
+  \end{tabular}
+  \end{center}
+  {\small\textbf{Tested alternatives with worse results:}}\par
+  \begin{itemize}\small
+    \item The configuration used in the previous analysis.
+    \item Using both \var{Btrk1dR} and \var{Btrk2dR} as training inputs.
+    \item Other previously useful variables: \var{Btktkpt}, \var{Balpha},
+          \var{Bcos_dtheta}, \var{Bchi2Prob}.
+  \end{itemize}
+\end{frame}
+
+\begin{frame}[label=p10_20260916]{\strut}
+  \centering\vfill
+  \makebox[\textwidth][c]{%
+    \begin{beamercolorbox}[wd=0.68\textwidth,sep=1.2em,center,rounded=true,shadow=true]{block body}
+      {\LARGE\bfseries Thanks for listening!}\par
+      \vspace{1.0em}
+      {\large Reporter: Lekai Yao}\par
+      \vspace{0.45em}
+      {\large 2026.9.16}
+    \end{beamercolorbox}%
+  }
+  \vfill
+\end{frame}

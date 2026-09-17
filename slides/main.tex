@@ -3,12 +3,12 @@
 \usetheme{Madrid}
 \usecolortheme{default}
 \setbeamertemplate{navigation symbols}{}
-\setbeamertemplate{footline}[frame number]
+\setbeamertemplate{footline}{\hfill\usebeamercolor[fg]{structure}\small\insertframenumber/10\hspace{0.4cm}\vspace{0.15cm}}
 
-\usepackage{booktabs}
+\usepackage{booktabs,array}
 \usepackage{graphicx}
 \usepackage{tikz}
-\usetikzlibrary{arrows.meta,positioning}
+\usetikzlibrary{arrows.meta,positioning,calc}
 \input{beamer_setup.tex}
 
 % Optional fast part build; each p{n}-prefixed part overwrites
@@ -35,36 +35,32 @@
 \newcommand{\HL}[1]{\textcolor{emphasis}{#1}}
 \newcommand{\muted}[1]{\textcolor{neutral}{#1}}
 
-\title[X(3872) Analysis Update]{X(3872) Analysis Update}
-\author{%
-  Henrique Legoinha, \underline{Lekai Yao}, Nuno Leonardo, Zhen Hu\\[0.45em]
-  2026.8.27%
-}
-\institute{}
-\date{%
-  \includegraphics[height=1.653cm]{figures/logos/CERN.png}\hspace{0.30cm}%
-  \includegraphics[height=1.653cm]{figures/logos/CMS.png}\hspace{0.30cm}%
-  \includegraphics[height=1.653cm]{figures/logos/LIP.png}\hspace{0.30cm}%
-  \includegraphics[height=1.653cm]{figures/logos/IST.png}\hspace{0.30cm}%
-  \includegraphics[height=1.653cm]{figures/logos/THU.png}%
-}
+\newcommand{\var}[1]{\texttt{\detokenize{#1}}}
+\newcommand{\talkfig}[2][0.70\textheight]{\includegraphics[width=\linewidth,height=#1,keepaspectratio]{\csname source#2\endcsname}\par}
+\newcommand{\draftline}{\par\vspace{0.35em}{\centering\small\color{neutral}\textit{DRAFT -- needs physics approval}\par}}
+\newcommand{\notelead}[1]{\par{\color{positive}\bfseries #1}\par\vspace{0.25em}}
+\newcommand{\caution}[1]{\par{\small\color{neutral}#1\par}}
+\newcommand{\takeaway}[1]{\par\vspace{0.4em}{\small\color{positive}#1\par}}
+\tikzset{box/.style={draw=positive,rounded corners=3pt,fill=positive!7,align=center,font=\small,inner sep=6pt},arr/.style={-{Stealth},thick,positive}}
+\newcolumntype{L}[1]{>{\raggedright\arraybackslash}p{#1}}
+\setlength{\tabcolsep}{5pt}
+\renewcommand{\arraystretch}{1.18}
+\input{slides/title_metadata_20260916.tex}
+\pdfstringdefDisableCommands{\def\translate#1{#1}}
 
 \begin{document}
 
-\begin{frame}[plain,label=p1]
-  \titlepage
-\end{frame}
+% P1--P13 approved by the user on 20260916; P11--P13 are backup.
+\input{slides/sections/p1_p3_20260916.tex}
+\input{slides/sections/p4_p8_20260916.tex}
+\input{slides/sections/p9_p10_20260916.tex}
 
-\input{slides/sections/p2_p5_comments_nominal_workflow.tex}
-\input{slides/sections/p10_p11_ml_recipes.tex}
-\input{slides/sections/p12_p15_representative_fits.tex}
-\input{slides/sections/p16_p17_summary_thanks.tex}
-
+% Approved backup; retain the main-talk denominator of 10.
 \appendix
-\input{slides/sections/backup_psi2s_closure.tex}
+\setbeamertemplate{footline}{\hfill\usebeamercolor[fg]{structure}\small Backup\quad\insertframenumber\hspace{0.4cm}\vspace{0.15cm}}
+\input{slides/sections/p11_p13_20260916.tex}
 
-% A draft part may be injected by fastcompile_frame.sh for review without
-% becoming part of the accepted main deck.
+% Optional preview injection; not part of the accepted main deck.
 \ifdefined\previewpart
   \input{\previewpart}
 \fi

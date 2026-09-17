@@ -1,0 +1,50 @@
+\begin{frame}[plain,label=p1_20260916]
+  \titlepage
+\end{frame}
+
+% 20260916 user-directed recap. rw means reweighting, not MC generation weights.
+% Historical context: docs/slides_terminology.md and the archived workflow.
+% Current inputs: accepted H045/H046 intake; no new validation claim.
+\begin{frame}[label=p2_20260916]{Recap: from reweighting to direct ML selection}
+  \begin{center}
+  \begin{tikzpicture}
+    \node[anchor=west,text=positive,font=\bfseries] at (-6.1,1.5) {Previous workflow};
+    \node[align=center,text width=5.1cm] (old) at (-3.5,0.45)
+      {Poor agreement:\\MC vs sWeighted data\\(sPlot signal)};
+    \node[box,text width=4.5cm,font=\normalsize,minimum height=1.05cm] (rw) at (3.5,0.45)
+      {Reweighting (rw) workflow};
+    \draw[arr] (old.east)--(rw.west);
+    \draw[neutral!35] (-6.0,-0.45)--(6.0,-0.45);
+    \node[anchor=west,text=positive,font=\bfseries] at (-6.1,-1.05) {Current workflow: 2023 PbPb};
+    \node[align=center,text width=5.1cm] (now) at (-3.5,-2.1)
+      {New NtupleMaker\\+ official MC};
+    \node[box,text width=4.5cm,font=\normalsize,minimum height=1.05cm] (ml) at (3.5,-2.1)
+      {Direct ML selection $\rightarrow$ fit};
+    \draw[arr] (now.east)--(ml.west);
+  \end{tikzpicture}
+  \end{center}
+\end{frame}
+
+% Five configurations: accepted H045 nodes.csv; names allowed by user.
+\begin{frame}[label=p3_20260916]{Five ML configurations: inputs and selections}
+  \relax
+  {\small
+  \textbf{Common inputs:} \var{Bmu1pt}, \var{Bmu1eta}, \var{Bmu2pt}, \var{Bmu2eta}, \var{Btrk2Pt}, \var{BtrkPtimb}.\par\vspace{0.3em}
+  \textbf{Common selection:} \var{Bpt}$<50$ GeV, $|\var{By}|<1.6$, \var{BQvalue}$<0.15$ GeV.
+  }
+  \begin{center}\small
+  \setlength{\tabcolsep}{3pt}\renewcommand{\arraystretch}{1.00}
+  \begin{tabular}{@{}L{1.10cm}L{3.50cm}L{1.30cm}L{1.75cm}L{1.75cm}L{2.25cm}@{}}
+    \toprule
+    Config. & Additional inputs & \var{Bpt} (GeV) & \var{Btrk1dR} & \var{Btrk2dR} & Sidebands (GeV)\\
+    \midrule
+    1 & \var{Bmu1phi}, \var{Bmu2phi}, \var{Btrk1dR} & $>10$ & No cut & $(0,0.25)$ & (3.82,3.85); (3.89,3.92)\\
+    2 & \var{Bmu1phi}, \var{Bmu2phi} & $>10$ & $(0,0.25)$ & $(0,0.25)$ & (3.75,3.85); (3.90,4.00)\\
+    3 & \var{Btrk1dR}, \var{Bujeta}, \var{Btktketa} & $>10$ & No cut & $(0,0.25)$ & (3.82,3.85); (3.89,3.92)\\
+    4 & Same as 3 & $>15$ & No cut & $(0,0.25)$ & (3.82,3.85); (3.89,3.92)\\
+    5 & Same as 3 & $>15$ & No cut & $(0,0.35)$ & (3.80,3.85); (3.89,3.94)\\
+    \bottomrule
+  \end{tabular}
+  \end{center}
+  \caution{Sidebands define the training background; intervals have strict bounds.}
+\end{frame}

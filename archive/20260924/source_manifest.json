@@ -1,0 +1,103 @@
+{
+  "汇报日期": "20260924",
+  "归档日期": "2026-09-30",
+  "页数": 17,
+  "正式PDF_SHA256": "4aaa6852f8374d39f93c7817643da380e4bb596bd8ebe85a65c9ddbd221e9139",
+  "归档前PDF_SHA256": "8a37f00a9f05cc8b6fa1fef31aa7fa48a16e96127a73826fec6e971083fed0d5",
+  "全部页面渲染一致": true,
+  "源码及依赖数": 22,
+  "文件": [
+    {
+      "路径": "figures/20260924/auc.pdf",
+      "SHA256": "26bc79a610098d3ad3544d006f85488e59e3bcdd0e6114544fbea752086eeed6"
+    },
+    {
+      "路径": "figures/20260924/backup_5v10_conditional_fit.pdf",
+      "SHA256": "70ca1b7a6576001a4d199b2a3e0b1711095ec3c6d2c5a1bc90a1b5e77855e35d"
+    },
+    {
+      "路径": "figures/20260924/backup_5v10_punzi_score.pdf",
+      "SHA256": "91c9393bf7d2636f82f9ff15fa138a56fb329ae5e559f3b36892a57fb0c77ce0"
+    },
+    {
+      "路径": "figures/20260924/backup_5v9_conditional_fit.pdf",
+      "SHA256": "3cffb71741c4057f3834c8fd1e4ebf95c5cb887641741e536976f90c36f8b993"
+    },
+    {
+      "路径": "figures/20260924/backup_5v9_punzi_score.pdf",
+      "SHA256": "b74f326d8cabc0ea6b3f8f174a23c57ec39d8677d8c769208159d15d65c30202"
+    },
+    {
+      "路径": "figures/20260924/backup_6v1_conditional_fit.pdf",
+      "SHA256": "39c4fad981d484e4846f41fc070ab66752436979b7c8d68fa414d3df0ccf9357"
+    },
+    {
+      "路径": "figures/20260924/backup_6v1_punzi_score.pdf",
+      "SHA256": "3ce23590013b75635ec0e4ce8bd59de24a8fd60e2814fd792020d3e204febb65"
+    },
+    {
+      "路径": "figures/20260924/main_9v_conditional_fit.pdf",
+      "SHA256": "c0e0d38ba3c2e14d6aa6869046e56cb86669cbaa7110c82ce939077561e5a62d"
+    },
+    {
+      "路径": "figures/20260924/main_9v_punzi_score.pdf",
+      "SHA256": "e4debe7a1abb4fb50f67b892548b09143838b49a5c315bd138651130540c6a18"
+    },
+    {
+      "路径": "figures/logos/CERN.png",
+      "SHA256": "5711a2bda5806242b2a9b01c38567d028c75a037b3f0b067da5ae18540643b58"
+    },
+    {
+      "路径": "figures/logos/CMS.png",
+      "SHA256": "ccaa17b3c52120f99179589c6d0ce2cf6299ba5563e9d8c694275ff2dc02d4b5"
+    },
+    {
+      "路径": "figures/logos/IST.png",
+      "SHA256": "155d383c5a96f476ddc24298b0dfab5289f19d3fd424a51ecc266ca2510752ba"
+    },
+    {
+      "路径": "figures/logos/LIP.png",
+      "SHA256": "1094dd389eec7852178dd54744eb5d0c753bb29f7bf2321cf6c8f6d8142d9055"
+    },
+    {
+      "路径": "figures/logos/MIT.png",
+      "SHA256": "46ffb57e7407657cba57bc65e1471cd2262777c30932db6521e2ae3d32c3ddfe"
+    },
+    {
+      "路径": "figures/logos/THU.png",
+      "SHA256": "bc263c964ae95340c43bb572ba8ac71951a258463e17b4498266916ea0e37d99"
+    },
+    {
+      "路径": "latexmkrc",
+      "SHA256": "4be6211219c5630b64bbfb46140b49a06637333d4a81aeb5b80351dfd351d5e6"
+    },
+    {
+      "路径": "slides/main.tex",
+      "SHA256": "656c4dc7077130449b6b54ba9bcebfa8adca849d0c914d30996867ddb4ec2edc"
+    },
+    {
+      "路径": "slides/project_setup.tex",
+      "SHA256": "59f1c69f1d543273ddb1f2416082b4828733d4ffa18072becefbfba8c5cd47f5"
+    },
+    {
+      "路径": "slides/sections/p1_main_260924.tex",
+      "SHA256": "c084f035e07a78fbc0444dc6f3acf1d9d0836e06393ddd1a2f939a4669dc7d73"
+    },
+    {
+      "路径": "slides/sections/p9_backup_260924.tex",
+      "SHA256": "25d08bb3a9b84bfcefb8b6aa56ad92221ed8d531c4d735249d14401f4501e65c"
+    },
+    {
+      "路径": "slides/title_metadata_20260924.tex",
+      "SHA256": "35fdfc6a84ff9b1f3c4c9841b899bfa5dab9559f5fc00e722efa315aae368b99"
+    },
+    {
+      "路径": "utils/beamer_setup.tex",
+      "SHA256": "fde385bb412f1d599373c9c8225b501bc528474d3943fd5b64d69cc258d97328"
+    }
+  ],
+  "tmp备份文件数": 42,
+  "tmp备份路径": "docs/archive/20260924_tmp/tmp_20260924.tar.gz",
+  "tmp已清空": true,
+  "检查": "快检、全部TeX内部编号、完整构建通过；无告警；三份PDF逐字节一致"
+}

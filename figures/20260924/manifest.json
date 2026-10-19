@@ -1,0 +1,54 @@
+[
+  {
+    "文件": "figures/20260924/auc.pdf",
+    "SHA256": "26bc79a610098d3ad3544d006f85488e59e3bcdd0e6114544fbea752086eeed6"
+  },
+  {
+    "文件": "figures/20260924/backup_5v10_conditional_fit.pdf",
+    "SHA256": "70ca1b7a6576001a4d199b2a3e0b1711095ec3c6d2c5a1bc90a1b5e77855e35d"
+  },
+  {
+    "文件": "figures/20260924/backup_5v10_data_fit.pdf",
+    "SHA256": "a272dc6b4ea636ce79769827c055f65d602e7723f908974ca15960b2767628b0"
+  },
+  {
+    "文件": "figures/20260924/backup_5v10_punzi_score.pdf",
+    "SHA256": "91c9393bf7d2636f82f9ff15fa138a56fb329ae5e559f3b36892a57fb0c77ce0"
+  },
+  {
+    "文件": "figures/20260924/backup_5v9_conditional_fit.pdf",
+    "SHA256": "3cffb71741c4057f3834c8fd1e4ebf95c5cb887641741e536976f90c36f8b993"
+  },
+  {
+    "文件": "figures/20260924/backup_5v9_data_fit.pdf",
+    "SHA256": "3019cb136f8c6fdaa67a912849d5e67efb6c4826a01572610af91a4dca367f9f"
+  },
+  {
+    "文件": "figures/20260924/backup_5v9_punzi_score.pdf",
+    "SHA256": "b74f326d8cabc0ea6b3f8f174a23c57ec39d8677d8c769208159d15d65c30202"
+  },
+  {
+    "文件": "figures/20260924/backup_6v1_conditional_fit.pdf",
+    "SHA256": "39c4fad981d484e4846f41fc070ab66752436979b7c8d68fa414d3df0ccf9357"
+  },
+  {
+    "文件": "figures/20260924/backup_6v1_data_fit.pdf",
+    "SHA256": "4270ad3ae4a763470deb8d8dd304e52ae049ff74160c4fae9fba0a57c389d3a2"
+  },
+  {
+    "文件": "figures/20260924/backup_6v1_punzi_score.pdf",
+    "SHA256": "3ce23590013b75635ec0e4ce8bd59de24a8fd60e2814fd792020d3e204febb65"
+  },
+  {
+    "文件": "figures/20260924/main_9v_conditional_fit.pdf",
+    "SHA256": "c0e0d38ba3c2e14d6aa6869046e56cb86669cbaa7110c82ce939077561e5a62d"
+  },
+  {
+    "文件": "figures/20260924/main_9v_data_fit.pdf",
+    "SHA256": "085d3ffd93669e638bd8ad95b3919c10a834b7d67a52722810fe005a7e844d13"
+  },
+  {
+    "文件": "figures/20260924/main_9v_punzi_score.pdf",
+    "SHA256": "e4debe7a1abb4fb50f67b892548b09143838b49a5c315bd138651130540c6a18"
+  }
+]

@@ -1,0 +1,211 @@
+{
+  "状态": "PASS",
+  "说明": "用户指定新点，图与参数同步；十张图原样沿用",
+  "配置": [
+    {
+      "yield": 47.707552379322316,
+      "yield_error": 21.441594757780358,
+      "mean": 3.876689999998192,
+      "mean_error": 0.00751335834761746,
+      "scale": 1.4999726749799687,
+      "significance": 2.2622896239414825,
+      "method": "profile",
+      "mean_boundary": true,
+      "scale_boundary": true,
+      "配置": 1,
+      "tag": "X_pb23_v7_fid5_9v4_rw0_xgb_v1",
+      "xeff": 25,
+      "threshold": 0.9527912735939026,
+      "阈值文件哈希核验": "PASS",
+      "fit_result_json": {
+        "path": "/eos/home-l/leyao/pbpb_work/X_analysis/Analysis_CODES/fitER/results/ml_fits/X_pb23_v7_fid5_9v4_rw0_xgb_v1/pb23_scan/9v4/xeff25/fit_result.json",
+        "sha256": "ae318d0d7d4e017bd06b3da353e3c6ad403548cd6b02d87737b9ebaab1c17d1e"
+      },
+      "选点依据": "用户指定展示点；有conditional则使用conditional图与参数",
+      "cut_scan": {
+        "source": "/eos/home-l/leyao/pbpb_work/X_analysis/XGBoost/output/selected/X_pb23_v7_fid5_9v4_rw0_xgb_v1/cut_scan/DATA_pb23_fid5_eff025.pdf",
+        "copy": "tmp/20260916_current/assets/config1_cut_scan.pdf",
+        "sha256": "c5a885e3e3b71fb61714db911400b9553fbebca062d189f0bf9b43856c79e554",
+        "原图未处理": true,
+        "正式副本": "figures/20260916/config1_cut_scan.pdf"
+      },
+      "fit": {
+        "source": "/eos/home-l/leyao/pbpb_work/X_analysis/Analysis_CODES/fitER/results/ml_fits/X_pb23_v7_fid5_9v4_rw0_xgb_v1/pb23_scan/9v4/xeff25/data_fit.pdf",
+        "copy": "tmp/20260916_current/assets/config1_fit.pdf",
+        "sha256": "5b0f056cde66a3024445190f347bb5bec03cdbeee7d5b63412033d70d0e30a0a",
+        "原图未处理": true,
+        "正式副本": "figures/20260916/config1_fit.pdf"
+      }
+    },
+    {
+      "yield": 21.94496954417509,
+      "yield_error": 17.924448479413467,
+      "mean": 3.8766899830037675,
+      "mean_error": 0.006896923587770942,
+      "scale": 1.4999999963580077,
+      "significance": 1.192296251358503,
+      "method": "profile",
+      "mean_boundary": true,
+      "scale_boundary": true,
+      "配置": 2,
+      "tag": "X_pb23_v12_fid8_8v7_rw0_xgb_v1",
+      "xeff": 40,
+      "threshold": 0.8685545921325684,
+      "阈值文件哈希核验": "PASS",
+      "fit_result_json": {
+        "path": "/eos/home-l/leyao/pbpb_work/X_analysis/Analysis_CODES/fitER/results/ml_fits/X_pb23_v12_fid8_8v7_rw0_xgb_v1/pb23_scan/8v7/xeff40/fit_result.json",
+        "sha256": "abeebacee70528a4f0f233a4aa671174649aff87614da2a161b0e7f808eb97ee"
+      },
+      "选点依据": "用户指定展示点；有conditional则使用conditional图与参数",
+      "cut_scan": {
+        "source": "/eos/home-l/leyao/pbpb_work/X_analysis/XGBoost/output/selected/X_pb23_v12_fid8_8v7_rw0_xgb_v1/cut_scan/DATA_pb23_fid8_eff040.pdf",
+        "copy": "tmp/20260916_current/assets/config2_cut_scan.pdf",
+        "sha256": "7d0a5cba4bf5fbf71590a664eebcab2edf24517664a289cc0129ae2fe904ae65",
+        "原图未处理": true,
+        "正式副本": "figures/20260916/config2_cut_scan.pdf"
+      },
+      "fit": {
+        "source": "/eos/home-l/leyao/pbpb_work/X_analysis/Analysis_CODES/fitER/results/ml_fits/X_pb23_v12_fid8_8v7_rw0_xgb_v1/pb23_scan/8v7/xeff40/data_fit.pdf",
+        "copy": "tmp/20260916_current/assets/config2_fit.pdf",
+        "sha256": "95f01f7aae11b558ce140e9ba0afd6fa7d866eaed865a98746f527f85344d399",
+        "原图未处理": true,
+        "正式副本": "figures/20260916/config2_fit.pdf"
+      }
+    },
+    {
+      "yield": 55.42333794721013,
+      "yield_error": 21.039682021943403,
+      "mean": 3.8776740781448207,
+      "mean_error": 0.0028166286055830714,
+      "scale": 1.4949815048594381,
+      "significance": 2.6558839257001927,
+      "method": "profile",
+      "mean_boundary": false,
+      "scale_boundary": false,
+      "配置": 3,
+      "tag": "X_pb23_v7_fid5_9v9_rw0_xgb_v1",
+      "xeff": 25,
+      "threshold": 0.9526699781417847,
+      "阈值文件哈希核验": "PASS",
+      "fit_result_json": {
+        "path": "/eos/home-l/leyao/pbpb_work/X_analysis/Analysis_CODES/fitER/results/ml_fits/X_pb23_v7_fid5_9v9_rw0_xgb_v1/pb23_scan/9v9/xeff25/fit_result.json",
+        "sha256": "c70dc8311d5e3dfc4a33bd33a37eaa58865235d94979534210f91f05150f20a2"
+      },
+      "选点依据": "用户指定展示点；有conditional则使用conditional图与参数",
+      "cut_scan": {
+        "source": "/eos/home-l/leyao/pbpb_work/X_analysis/XGBoost/output/selected/X_pb23_v7_fid5_9v9_rw0_xgb_v1/cut_scan/DATA_pb23_fid5_eff025.pdf",
+        "copy": "tmp/20260916_current/assets/config3_cut_scan.pdf",
+        "sha256": "aa9d21cf1da8609169fc73fa14c700f0d75767305421f8d5622f5e9133a38b0f",
+        "原图未处理": true,
+        "正式副本": "figures/20260916/config3_cut_scan.pdf"
+      },
+      "fit": {
+        "source": "/eos/home-l/leyao/pbpb_work/X_analysis/Analysis_CODES/fitER/results/ml_fits/X_pb23_v7_fid5_9v9_rw0_xgb_v1/pb23_scan/9v9/xeff25/data_fit.pdf",
+        "copy": "tmp/20260916_current/assets/config3_fit.pdf",
+        "sha256": "f3e0e3f9b6aac9c4adf24f6a1f6de099a56861fc429b2837169c0ac78fedeb17",
+        "原图未处理": true,
+        "正式副本": "figures/20260916/config3_fit.pdf"
+      }
+    },
+    {
+      "yield": 42.97612982466798,
+      "yield_error": 14.113562028851016,
+      "mean": 3.8795443922994037,
+      "mean_error": null,
+      "scale": 1.0,
+      "significance": 3.3094532675888924,
+      "method": "conditional",
+      "psi_yield": 85.41233579202236,
+      "psi_mean": 3.6852449883563354,
+      "fixed_parameters": {
+        "a0": -0.36270283057521485,
+        "a1": 0.02149221967788484,
+        "psi_fraction": 0.794824439424362,
+        "psi_mean": 3.6852449883563354,
+        "psi_scale": 1.0,
+        "psi_sigma1": 0.003356373332542129,
+        "psi_sigma2": 0.006201474845015995,
+        "psi_yield": 85.41233579202236,
+        "x_fraction": 0.3563879456860468,
+        "x_mean": 3.8795443922994037,
+        "x_scale": 1.0,
+        "x_sigma1": 0.00862969709710741,
+        "x_sigma2": 0.004283105125668563
+      },
+      "配置": 4,
+      "tag": "X_pb23_v19_fid13_9v9_rw0_xgb_v1",
+      "xeff": 40,
+      "threshold": 0.8450451493263245,
+      "阈值文件哈希核验": "PASS",
+      "fit_result_json": {
+        "path": "/eos/home-l/leyao/pbpb_work/X_analysis/Analysis_CODES/fitER/results/ml_fits/X_pb23_v19_fid13_9v9_rw0_xgb_v1/two_peak_mc_width/xeff40/conditional/fit_result.json",
+        "sha256": "e2262459afafb55b421f25aad1913205979124b11d839b3aec22dcf183d55be2"
+      },
+      "选点依据": "用户指定展示点；有conditional则使用conditional图与参数",
+      "cut_scan": {
+        "source": "/eos/home-l/leyao/pbpb_work/X_analysis/XGBoost/output/selected/X_pb23_v19_fid13_9v9_rw0_xgb_v1/cut_scan/DATA_pb23_fid13_eff040.pdf",
+        "copy": "tmp/20260916_current/assets/config4_cut_scan.pdf",
+        "sha256": "83955ead8cfd505adb1ffb83899621c6667cc81be0117b1746cc04afe6a6d4bd",
+        "原图未处理": true,
+        "正式副本": "figures/20260916/config4_cut_scan.pdf"
+      },
+      "fit": {
+        "source": "/eos/home-l/leyao/pbpb_work/X_analysis/Analysis_CODES/fitER/results/ml_fits/X_pb23_v19_fid13_9v9_rw0_xgb_v1/two_peak_mc_width/xeff40/conditional/data_fit.pdf",
+        "copy": "tmp/20260916_current/assets/config4_fit.pdf",
+        "sha256": "3f4aac9c2e577157e243e0264dcb4ec6528038ccd3e508fd5cb7543525a360fd",
+        "原图未处理": true,
+        "正式副本": "figures/20260916/config4_fit.pdf"
+      }
+    },
+    {
+      "yield": 78.87686907342692,
+      "yield_error": 21.760000296208254,
+      "mean": 3.877506748361155,
+      "mean_error": null,
+      "scale": 1.0,
+      "significance": 3.8734681982229215,
+      "method": "conditional",
+      "psi_yield": 102.06860353372608,
+      "psi_mean": 3.6857286341058613,
+      "fixed_parameters": {
+        "a0": 0.08217480806426078,
+        "a1": -0.06024514002874539,
+        "psi_fraction": 0.8434801169249548,
+        "psi_mean": 3.6857286341058613,
+        "psi_scale": 1.0,
+        "psi_sigma1": 0.0033617662313554413,
+        "psi_sigma2": 0.006544998894468577,
+        "psi_yield": 102.06860353372608,
+        "x_fraction": 0.25625835195197966,
+        "x_mean": 3.877506748361155,
+        "x_scale": 1.0,
+        "x_sigma1": 0.008598249201511686,
+        "x_sigma2": 0.004502492780104148
+      },
+      "配置": 5,
+      "tag": "X_pb23_v27_fid18_9v9_rw0_xgb_v1",
+      "xeff": 50,
+      "threshold": 0.7827247381210327,
+      "阈值文件哈希核验": "PASS",
+      "fit_result_json": {
+        "path": "/eos/home-l/leyao/pbpb_work/X_analysis/Analysis_CODES/fitER/results/ml_fits/X_pb23_v27_fid18_9v9_rw0_xgb_v1/checks/two_peak_mc_width/xeff50/conditional/fit_result.json",
+        "sha256": "68d2f3d390f0322f287128cc4f5af7a13e5a28dd2d7e4790719aad660c758c6a"
+      },
+      "选点依据": "用户指定展示点；有conditional则使用conditional图与参数",
+      "cut_scan": {
+        "source": "/eos/home-l/leyao/pbpb_work/X_analysis/XGBoost/output/selected/X_pb23_v27_fid18_9v9_rw0_xgb_v1/cut_scan/DATA_pb23_fid18_eff050.pdf",
+        "copy": "tmp/20260916_current/assets/config5_cut_scan.pdf",
+        "sha256": "6700c9da6b7ee4f4a320ac25d30cf460afb39e8dc51865194af4b330bf7c4539",
+        "原图未处理": true,
+        "正式副本": "figures/20260916/config5_cut_scan.pdf"
+      },
+      "fit": {
+        "source": "/eos/home-l/leyao/pbpb_work/X_analysis/Analysis_CODES/fitER/results/ml_fits/X_pb23_v27_fid18_9v9_rw0_xgb_v1/checks/two_peak_mc_width/xeff50/conditional/data_fit.pdf",
+        "copy": "tmp/20260916_current/assets/config5_fit.pdf",
+        "sha256": "66ac1e99418e73fa8189b2a3987a822a41604478039fa2738018ccdc6c350b7f",
+        "原图未处理": true,
+        "正式副本": "figures/20260916/config5_fit.pdf"
+      }
+    }
+  ]
+}

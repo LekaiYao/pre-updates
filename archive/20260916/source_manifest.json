@@ -1,0 +1,173 @@
+{
+  "归档日期": "20260916",
+  "补全日期": "2026-09-20",
+  "来源提交": "a337fc9ae697b2f1a0f492b9b89f030d55d2e378",
+  "正式PDF_SHA256": "934bfc2777900d91baa633119e5ee38929e2a27e69a98a6c7a3be524c6bfcc77",
+  "文件": [
+    {
+      "路径": "slides/main.tex",
+      "SHA256": "b9ae657d7aae2756bf4f0906e6005108d78efe08e61d78f350843b90e4be9dc1",
+      "字节数": 2845
+    },
+    {
+      "路径": "slides/project_setup.tex",
+      "SHA256": "59f1c69f1d543273ddb1f2416082b4828733d4ffa18072becefbfba8c5cd47f5",
+      "字节数": 233
+    },
+    {
+      "路径": "slides/title_metadata_20260916.tex",
+      "SHA256": "bb0c097bb169e3ec9f0d393ded42c5dfc26efe52d29539e5a021bf79cae9078f",
+      "字节数": 950
+    },
+    {
+      "路径": "slides/sections/p1_p3_20260916.tex",
+      "SHA256": "a1f6a0e95b4644e668430a02c580725e740f9591377cc666fd63f825e359c43e",
+      "字节数": 2575
+    },
+    {
+      "路径": "slides/sections/p4_p8_20260916.tex",
+      "SHA256": "768d3b2def5dd61bdf5100c25c9397538df381a750ee4cca8af6b8b0780d70eb",
+      "字节数": 4180
+    },
+    {
+      "路径": "slides/sections/p9_p10_20260916.tex",
+      "SHA256": "b9af9e45db8d3636b01abe3a807da60c4ba71720b4c048578f4690809d851899",
+      "字节数": 1479
+    },
+    {
+      "路径": "slides/sections/p11_p13_20260916.tex",
+      "SHA256": "52f928b63b408bdcca5fe21d4d36e77baa225300927dd0005d9209a6d7a9611e",
+      "字节数": 4308
+    },
+    {
+      "路径": "utils/beamer_setup.tex",
+      "SHA256": "fde385bb412f1d599373c9c8225b501bc528474d3943fd5b64d69cc258d97328",
+      "字节数": 3530
+    },
+    {
+      "路径": "latexmkrc",
+      "SHA256": "4be6211219c5630b64bbfb46140b49a06637333d4a81aeb5b80351dfd351d5e6",
+      "字节数": 361
+    },
+    {
+      "路径": "figures/20260916/assets_manifest.json",
+      "SHA256": "dbf07a027f38beb7d0dbfcc3496fbf84869df351ec3b18614d31f846139fcda2",
+      "字节数": 9887
+    },
+    {
+      "路径": "figures/20260916/config1_cut_scan.pdf",
+      "SHA256": "c5a885e3e3b71fb61714db911400b9553fbebca062d189f0bf9b43856c79e554",
+      "字节数": 16723
+    },
+    {
+      "路径": "figures/20260916/config1_fit.pdf",
+      "SHA256": "5b0f056cde66a3024445190f347bb5bec03cdbeee7d5b63412033d70d0e30a0a",
+      "字节数": 20212
+    },
+    {
+      "路径": "figures/20260916/config2_cut_scan.pdf",
+      "SHA256": "7d0a5cba4bf5fbf71590a664eebcab2edf24517664a289cc0129ae2fe904ae65",
+      "字节数": 16586
+    },
+    {
+      "路径": "figures/20260916/config2_fit.pdf",
+      "SHA256": "95f01f7aae11b558ce140e9ba0afd6fa7d866eaed865a98746f527f85344d399",
+      "字节数": 20097
+    },
+    {
+      "路径": "figures/20260916/config3_cut_scan.pdf",
+      "SHA256": "aa9d21cf1da8609169fc73fa14c700f0d75767305421f8d5622f5e9133a38b0f",
+      "字节数": 16724
+    },
+    {
+      "路径": "figures/20260916/config3_fit.pdf",
+      "SHA256": "f3e0e3f9b6aac9c4adf24f6a1f6de099a56861fc429b2837169c0ac78fedeb17",
+      "字节数": 20382
+    },
+    {
+      "路径": "figures/20260916/config4_cut_scan.pdf",
+      "SHA256": "83955ead8cfd505adb1ffb83899621c6667cc81be0117b1746cc04afe6a6d4bd",
+      "字节数": 16676
+    },
+    {
+      "路径": "figures/20260916/config4_fit.pdf",
+      "SHA256": "3f4aac9c2e577157e243e0264dcb4ec6528038ccd3e508fd5cb7543525a360fd",
+      "字节数": 30467
+    },
+    {
+      "路径": "figures/20260916/config5_cut_scan.pdf",
+      "SHA256": "6700c9da6b7ee4f4a320ac25d30cf460afb39e8dc51865194af4b330bf7c4539",
+      "字节数": 16619
+    },
+    {
+      "路径": "figures/20260916/config5_fit.pdf",
+      "SHA256": "66ac1e99418e73fa8189b2a3987a822a41604478039fa2738018ccdc6c350b7f",
+      "字节数": 30824
+    },
+    {
+      "路径": "figures/20260916/fom/fom_score.pdf",
+      "SHA256": "f84b214fda95de9bf34ababc137f4ffa11fc504049adca0e8843389da263be46",
+      "字节数": 27829
+    },
+    {
+      "路径": "figures/20260916/fom/fom_xeff.pdf",
+      "SHA256": "e4affed66dd21c1bfa7f49e2e5057e2c4acee21d928fcb27cda09ff7f5764bc6",
+      "字节数": 27303
+    },
+    {
+      "路径": "figures/20260916/fom/manifest.json",
+      "SHA256": "2afa5a9ca4d559d51269ae57f4cddce4506785418c5d6d14ce5a144d12b988ff",
+      "字节数": 5897
+    },
+    {
+      "路径": "figures/20260916/fom/xeff36_conditional_fit.pdf",
+      "SHA256": "bd5fb7f125df7ccae7225736c446a9593c7b57b0a2bbb8d66f092f73b3d7c26a",
+      "字节数": 30341
+    },
+    {
+      "路径": "figures/logos/CERN.png",
+      "SHA256": "5711a2bda5806242b2a9b01c38567d028c75a037b3f0b067da5ae18540643b58",
+      "字节数": 509089
+    },
+    {
+      "路径": "figures/logos/CMS.png",
+      "SHA256": "ccaa17b3c52120f99179589c6d0ce2cf6299ba5563e9d8c694275ff2dc02d4b5",
+      "字节数": 155146
+    },
+    {
+      "路径": "figures/logos/IHEP.png",
+      "SHA256": "f9ef1553d1e8828b549876989cc324c77858551610aeff41c9c285672fb52d57",
+      "字节数": 125475
+    },
+    {
+      "路径": "figures/logos/IST.png",
+      "SHA256": "155d383c5a96f476ddc24298b0dfab5289f19d3fd424a51ecc266ca2510752ba",
+      "字节数": 17227
+    },
+    {
+      "路径": "figures/logos/LIP.png",
+      "SHA256": "1094dd389eec7852178dd54744eb5d0c753bb29f7bf2321cf6c8f6d8142d9055",
+      "字节数": 47861
+    },
+    {
+      "路径": "figures/logos/MIT.png",
+      "SHA256": "46ffb57e7407657cba57bc65e1471cd2262777c30932db6521e2ae3d32c3ddfe",
+      "字节数": 353849
+    },
+    {
+      "路径": "figures/logos/NNU.png",
+      "SHA256": "2119ede2954d7e5faa57f06a1090c114443684f44a234dfc5c9cbd02f0ee056a",
+      "字节数": 131597
+    },
+    {
+      "路径": "figures/logos/THU.png",
+      "SHA256": "bc263c964ae95340c43bb572ba8ac71951a258463e17b4498266916ea0e37d99",
+      "字节数": 685950
+    },
+    {
+      "路径": "figures/logos/TexasAM.png",
+      "SHA256": "49e5703bb6e689f79c1b3b2c416058d70064ca657099fbbd3dabd673ee144a5a",
+      "字节数": 140757
+    }
+  ]
+}

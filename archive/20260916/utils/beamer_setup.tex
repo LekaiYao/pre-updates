@@ -1,0 +1,82 @@
+% ============================================================
+% beamer_setup.tex — CMS particle macros for beamer slides
+%
+% Self-contained: does NOT depend on cms-tdr.cls or heppennames2.
+% Naming follows CMS convention (same as AN/custom-definitions.tex)
+% for consistency across the three-project workflow.
+% ============================================================
+
+% ---- required packages ----
+\usepackage{xspace}
+\usepackage{amsmath}
+\usepackage{booktabs}
+\usepackage{graphicx}
+
+% ---- CMS-style particle macros (standalone, no cms-tdr needed) ----
+\newcommand{\PJGy}{\ensuremath{\mathrm{J}\hspace{-.08em}/\hspace{-.14em}\psi}\xspace}
+\newcommand{\PGm}{\ensuremath{\mu}\xspace}
+\newcommand{\PGmm}{\ensuremath{\mu^{-}}\xspace}
+\newcommand{\PGmp}{\ensuremath{\mu^{+}}\xspace}
+\newcommand{\PGp}{\ensuremath{\pi}\xspace}
+\newcommand{\PK}{\ensuremath{\mathrm{K}}\xspace}
+\newcommand{\PKp}{\ensuremath{\mathrm{K}^{+}}\xspace}
+\newcommand{\PKm}{\ensuremath{\mathrm{K}^{-}}\xspace}
+\newcommand{\Pp}{\ensuremath{\mathrm{p}}\xspace}
+\newcommand{\PBzs}{\ensuremath{\mathrm{B}_{s}^{0}}\xspace}
+\newcommand{\PBp}{\ensuremath{\mathrm{B}^{+}}\xspace}
+\newcommand{\PBz}{\ensuremath{\mathrm{B}^{0}}\xspace}
+\newcommand{\PBs}{\ensuremath{\mathrm{B}_{s}^{0}}\xspace}
+\newcommand{\PDst}{\ensuremath{\mathrm{D}^{*+}}\xspace}
+\newcommand{\Pphi}{\ensuremath{\phi(1020)}\xspace}
+
+% ---- analysis-specific macros (from AN/custom-definitions.tex) ----
+\newcommand{\sqrts}{\ensuremath{\sqrt{s}}\xspace}
+\newcommand{\sqrtsnn}{\ensuremath{\sqrt{s_{_{\text{NN}}}}}\xspace}
+\newcommand{\RAA}{\ensuremath{R_{\mathrm{AA}}}\xspace}
+\newcommand{\TAA}{\ensuremath{T_{\mathrm{AA}}}\xspace}
+\newcommand{\PbPb}{\ensuremath{\mathrm{PbPb}}\xspace}
+\newcommand{\pp}{\ensuremath{\mathrm{p}\mathrm{p}}\xspace}
+\newcommand{\pPb}{\ensuremath{\mathrm{p}\mathrm{Pb}}\xspace}
+
+\newcommand{\Jpsi}{\ensuremath{\mathrm{J}\hspace{-.08em}/\hspace{-.14em}\psi}\xspace}
+\newcommand{\psiP}{\ensuremath{\psi\text{(2S)}}\xspace}
+\newcommand{\B}{\ensuremath{\mathrm{B}}\xspace}
+\newcommand{\Bp}{\ensuremath{\mathrm{B}^{+}}\xspace}
+\newcommand{\Bu}{\ensuremath{\mathrm{B}^{+}}\xspace}
+\newcommand{\Bd}{\ensuremath{\mathrm{B}^{0}}\xspace}
+\newcommand{\Bs}{\ensuremath{\mathrm{B}_{s}^{0}}\xspace}
+
+\newcommand{\mumu}{\ensuremath{\mu^{+}\mu^{-}}\xspace}
+\newcommand{\Jpsidecay}{\ensuremath{\PJGy\to\PGmp\PGmm}\xspace}
+\newcommand{\phidecay}{\ensuremath{\Pphi\to \PKp \PKm}\xspace}
+
+\newcommand{\npart}{\ensuremath{\langle N_{\text{part}}\rangle}\xspace}
+\newcommand{\ncoll}{\ensuremath{N_{\text{coll}}}\xspace}
+\newcommand{\NMB}{\ensuremath{N_{\text{MB}}}\xspace}
+
+% ---- formatting helpers ----
+\newcommand{\pt}{\ensuremath{p_{\mathrm{T}}}\xspace}
+\newcommand{\GeVc}{\ensuremath{\mathrm{GeV}/c}\xspace}
+\newcommand{\GeVcsq}{\ensuremath{\mathrm{GeV}/c^{2}}\xspace}
+\newcommand{\acceff}{\ensuremath{\alpha\,\epsilon}\xspace}
+
+% ---- reference shortcuts ----
+\newcommand{\fig}[1]{Fig.~\ref{#1}\xspace}
+\newcommand{\tab}[1]{Tab.~\ref{#1}\xspace}
+
+% ---- CMS slide footer customisation ----
+\newcommand{\cmsSlideFooter}{%
+  \setbeamertemplate{footline}[text line]{%
+    \parbox{\linewidth}{%
+      \vspace*{-8pt}%
+      \hspace*{1em}\insertshortauthor \hfill \insertshorttitle \hfill \insertframenumber/\inserttotalframenumber\hspace*{1em}%
+    }%
+  }%
+}
+
+% ---- draft/todo marker ----
+\newcommand{\todo}[1]{\textcolor{red}{[#1]}}
+
+% ============================================================
+% End of beamer_setup.tex
+% ============================================================

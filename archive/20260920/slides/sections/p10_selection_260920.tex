@@ -1,0 +1,21 @@
+\begin{frame}[label=p10_20260920]{Allowed inputs and the common selection}
+
+\begin{center}\small
+\begin{tabular}{@{}lL{10.0cm}@{}}\toprule
+Group & Allowed inputs\\\midrule
+Muon & \var{Bmu1pt}, \var{Bmu2pt}, \var{Bmu1eta}, \var{Bmu2eta}\\
+Track & \var{Btrk1Pt}, \var{Btrk2Pt}, \var{Btrk1Eta}, \var{Btrk2Eta}\\
+Track geometry & \var{Btrk1dR}, \var{Btrk2dR}, \var{BtrkPtimb}\\
+Composite kinematics & \var{Bujeta}, \var{Btktkpt}, \var{Btktketa}\\
+Vertex / pointing & \var{Bchi2Prob}, \var{BujvProb}, \var{BtktkvProb}, \var{Balpha}, \var{Bcos_dtheta}\\
+\bottomrule\end{tabular}\end{center}
+{\small\textbf{Cut before ML:} $15<\var{Bpt}<50$ GeV, $|\var{By}|<1.6$, $\var{BQvalue}<0.15$ GeV; no track $\Delta R$ cut.\par\textbf{Background:} $3.80<m<3.85$ or $3.89<m<3.94$ GeV.\par\textbf{Cut after ML:} additionally $0<\var{Btrk1dR},\var{Btrk2dR}<0.35$.}\par
+
+\end{frame}
+
+\begin{frame}[label=p11_20260920]{AUC ranks candidates; mass-spectrum inspection selects the recipe}
+\begin{enumerate}\item Start with \var{Btrk1dR} and \var{Btrk2Pt}; keep common samples, split and hyperparameters fixed.\item Add each allowed variable and rank by \textbf{test AUC} and \textbf{AUC}.\item Inspect DATA mass spectra at the same weighted MC efficiency: background mass dependence and changes under tighter cuts.\item Select the next recipe using both inputs; do not automatically take the largest AUC.\end{enumerate}{\small\textbf{AUC:} combine train and test candidates, scan the score threshold to build the weighted ROC curve, and integrate its area. Signal MC uses \var{pThatreweight}; background has unit weight. \textbf{test AUC:} the same calculation using test candidates only.}\par\vspace{0.2em}
+{\small\textbf{Recipe labels:} $NvK$ denotes $N$ inputs and a recipe variant $K$.}\par\begin{center}\textbf{2v1 $\rightarrow$ 3v5 $\rightarrow$ 4v35 $\rightarrow$ 6v13 $\rightarrow$ 7v17}\end{center}\caution{Mass-shape and efficiency concerns below are recorded human judgments, not completed bias or systematic studies.}\par\vspace{0.2em}
+
+\end{frame}
+

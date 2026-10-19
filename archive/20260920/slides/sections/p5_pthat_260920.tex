@@ -1,0 +1,53 @@
+\begin{frame}[label=p5_20260920]{The $\hat p_T=5$ component dominates weight, not statistics}
+
+\begin{center}\small
+\begin{tabular}{@{}rrrrrrr@{}}\toprule
+$\hat p_T$ & Weight & $N_{\rm train}/N_{\rm test}$ & $\sum w$ (all) & Weight share [\%] & Train AUC & Test AUC\\\midrule
+5 & 1.84751 & 611/216 & 1527.895 & 46.00/48.08 & 0.95415 & 0.83900\\
+10 & 0.134021 & 6900/2232 & 1223.884 & 37.68/36.04 & 0.88141 & 0.86390\\
+15 & 0.0192029 & 19536/6424 & 498.507 & 15.29/14.86 & 0.91778 & 0.91163\\
+30 & 0.000633152 & 37384/12545 & 31.613 & 0.96/0.96 & 0.97930 & 0.97659\\
+50 & 5.9176e-05 & 28881/9508 & 2.272 & 0.07/0.07 & 0.98593 & 0.98281\\
+\bottomrule\end{tabular}\end{center}
+\caution{Weight share shown as train/test; $\sum w=(N_{\rm train}+N_{\rm test})w$. AUC uses 1000 trees.}\par\vspace{0.2em}
+\caution{The five component labels follow the supplied $\hat p_T$ mapping; weights descend from 5 to 50.}\par\vspace{0.2em}
+\takeaway{Only 611 train + 216 test candidates in $\hat p_T=5$, yet about 46--48\% of MC weight.}
+\caution{A weighted sum is not a count of independent simulated events.}\par\vspace{0.2em}
+
+\end{frame}
+
+\begin{frame}[label=p6_20260920]{AUC by MC component and number of trees}
+\relax
+\begin{center}
+\textbf{Each cell: AUC(train) / AUC(test)}\par\vspace{0.800em}
+{\small
+\begin{tabular}{@{}rcccc@{}}\toprule
+$\hat p_T$ & 300 trees & 500 trees & 750 trees & 1000 trees\\\midrule
+5 & 0.891 / 0.830 & 0.917 / 0.834 & 0.939 / 0.837 & 0.954 / 0.839\\
+10 & 0.863 / 0.858 & 0.869 / 0.861 & 0.876 / 0.863 & 0.881 / 0.864\\
+15 & 0.910 / 0.907 & 0.913 / 0.909 & 0.916 / 0.911 & 0.918 / 0.912\\
+30 & 0.978 / 0.977 & 0.979 / 0.977 & 0.979 / 0.977 & 0.979 / 0.977\\
+50 & 0.985 / 0.983 & 0.986 / 0.983 & 0.986 / 0.983 & 0.986 / 0.983\\
+\bottomrule\end{tabular}}
+\end{center}
+\vspace{0.500em}
+Same trained model, truncated at each tree count; no retraining.
+\takeaway{The growing train/test gap is concentrated in the $\hat p_T=5$ component.}
+\end{frame}
+
+\begin{frame}[label=p8_20260920]{Removing $\hat p_T=5$: AUC comparison and conclusions}
+\begin{itemize}
+  \setlength{\itemsep}{0.8em}
+  \item \textbf{Original configuration:} AUC(train/test) = \textbf{0.921 / 0.860}.\\
+        Train and test both include all five MC components.
+  \item \textbf{Retrained without $\hat p_T=5$:} AUC(train/test) = \textbf{0.904 / 0.859}.\\
+        Train: actual training sample, excluding $\hat p_T=5$;\\
+        test: unchanged original sample, including $\hat p_T=5$.
+  \item \textbf{Overtraining:} low raw statistics and high weights in $\hat p_T=5$\\
+        drive the train/test AUC gap.
+  \item \textbf{Variable-selection sample:} for $\var{Bpt}>15$ GeV, treat the\\
+        $\hat p_T=5$ contribution as approximately negligible; omit it from\\
+        training, testing and the MC efficiency reference.
+\end{itemize}
+\end{frame}
+

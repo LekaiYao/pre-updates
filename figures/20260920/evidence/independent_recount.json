@@ -1,0 +1,11 @@
+{
+  "status": "PASS",
+  "rows": 104,
+  "checks": [
+    "strict threshold background counts",
+    "signal weighted efficiency",
+    "background denominator",
+    "target not exceeded"
+  ],
+  "max_signal_efficiency_shortfall_percentage_points": 0.2182857262956528
+}

@@ -1,0 +1,40 @@
+\begin{frame}[plain,label=p1_20260920]{}
+\titlepage
+\end{frame}
+
+\begin{frame}[label=p3_20260920]{Fewer trees reduce the AUC gap, at a performance cost}
+
+\begin{center}\small
+\begin{tabular}{@{}lrrrrrr@{}}\toprule
+Trees & Train AUC & Test AUC & $\Delta$AUC & $\epsilon_B^{\rm train}$ & $\epsilon_B^{\rm test}$ & $\epsilon_B^{\rm test}$\\\midrule
+300 & 0.88451 & 0.85320 & 0.03131 & 2.890 & 4.082 & 7.055\\
+500 & 0.89887 & 0.85645 & 0.04242 & 2.523 & 3.915 & 6.584\\
+750 & 0.91212 & 0.85842 & 0.05370 & 2.114 & 3.809 & 6.872\\
+1000 & 0.92145 & 0.86018 & 0.06126 & 1.803 & 3.558 & 6.690\\
+\bottomrule\end{tabular}\end{center}
+\caution{Background efficiencies in percent: the first two columns use $\epsilon_X=40\%$; the last uses $50\%$.}\par\vspace{0.2em}
+\begin{itemize}\item 300 to 1000 trees: both train and test AUC increase.\item At 40\% signal efficiency, later trees still reduce the test background.\item At 50\%, the test background is not monotonic: 500 trees outperform 1000 here.\end{itemize}
+\takeaway{Reducing the gap alone does not identify the best ML configuration.}
+\caution{Same candidate split and seed; no retraining or independent split validation.}\par\vspace{0.2em}
+
+\end{frame}
+
+\begin{frame}[label=p4_20260920]{Hyperparameter variations do not resolve the AUC discrepancy}
+\framesubtitle{v1: best ML configuration in the 260916 update; hyperparameter tests to address overtraining.}
+
+\begin{center}\small\renewcommand{\arraystretch}{1.0}
+\begin{tabular}{@{}llrrr@{}}\toprule
+Model & Change from v1 & Train AUC & Test AUC & $\Delta$AUC\\\midrule
+v1 & Baseline & 0.92145 & 0.86018 & 0.06126\\
+v2 & $\lambda=12$ & 0.92054 & 0.85907 & 0.06148\\
+v3 & $\alpha=2$ & 0.92061 & 0.85916 & 0.06145\\
+v4 & min\_child\_weight $=16$ & 0.91997 & 0.85878 & 0.06119\\
+v5 & $\gamma=2$ & 0.92171 & 0.86024 & 0.06147\\
+v6 & max\_depth $=3$ & 0.89721 & 0.85482 & 0.04239\\
+\bottomrule\end{tabular}\end{center}
+\caution{All six models: 1000 trees, identical samples and split. v1 depth $=4$.}\par\vspace{0.2em}
+\begin{itemize}\item Stronger regularization (v2--v5): little change in the gap.\item Shallower trees (v6): smaller gap, but lower test AUC.\end{itemize}
+\takeaway{Interim conclusion: hyperparameters are not the main explanation; inspect the MC weight components.}
+
+\end{frame}
+

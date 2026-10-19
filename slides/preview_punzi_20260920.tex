@@ -1,0 +1,57 @@
+\documentclass[11pt,aspectratio=169]{beamer}
+
+\usetheme{Madrid}
+\usecolortheme{default}
+\setbeamertemplate{navigation symbols}{}
+\setbeamertemplate{footline}{\hfill\usebeamercolor[fg]{structure}\small\insertframenumber/25\hspace{0.4cm}\vspace{0.15cm}}
+
+\usepackage{booktabs,array}
+\usepackage{graphicx}
+\usepackage{tikz}
+\usetikzlibrary{arrows.meta,positioning,calc}
+\input{beamer_setup.tex}
+
+% Optional fast part build; each p{n}-prefixed part overwrites
+% tmp/<part-name>/preview.*.
+\ifdefined\onlyframes
+  \expandafter\includeonlyframes\expandafter{\onlyframes}
+\fi
+
+\definecolor{positive}{HTML}{0173B2}
+\definecolor{negative}{HTML}{DE8F05}
+\definecolor{emphasis}{HTML}{027A5A}
+\definecolor{neutral}{HTML}{666666}
+\definecolor{selPurple}{HTML}{7030A0}
+\definecolor{selGreen}{HTML}{00A651}
+\setbeamercolor{structure}{fg=positive}
+\setbeamercolor{block title}{fg=white,bg=positive}
+\setbeamercolor{block body}{fg=black,bg=positive!8}
+\setbeamercolor{block title alerted}{fg=white,bg=negative}
+\setbeamercolor{block body alerted}{fg=black,bg=negative!10}
+\setbeamercolor{block title example}{fg=white,bg=emphasis}
+\setbeamercolor{block body example}{fg=black,bg=emphasis!8}
+\newcommand{\pos}[1]{\textcolor{positive}{#1}}
+\newcommand{\con}[1]{\textcolor{negative}{#1}}
+\newcommand{\HL}[1]{\textcolor{emphasis}{#1}}
+\newcommand{\muted}[1]{\textcolor{neutral}{#1}}
+
+\newcommand{\var}[1]{\texttt{\detokenize{#1}}}
+\newcommand{\talkfig}[2][0.70\textheight]{\includegraphics[width=\linewidth,height=#1,keepaspectratio]{\csname source#2\endcsname}\par}
+\newcommand{\draftline}{\par\vspace{0.35em}{\centering\small\color{neutral}\textit{DRAFT -- needs physics approval}\par}}
+\newcommand{\notelead}[1]{\par{\color{positive}\bfseries #1}\par\vspace{0.25em}}
+\newcommand{\caution}[1]{\par{\small\color{neutral}#1\par}}
+\newcommand{\takeaway}[1]{\par\vspace{0.4em}{\small\color{positive}#1\par}}
+\tikzset{box/.style={draw=positive,rounded corners=3pt,fill=positive!7,align=center,font=\small,inner sep=6pt},arr/.style={-{Stealth},thick,positive}}
+\newcolumntype{L}[1]{>{\raggedright\arraybackslash}p{#1}}
+\setlength{\tabcolsep}{5pt}
+\renewcommand{\arraystretch}{1.18}
+\input{slides/title_metadata_20260920.tex}
+\pdfstringdefDisableCommands{\def\translate#1{#1}}
+
+
+\begin{document}
+\setcounter{framenumber}{19}
+\input{slides/sections/p23_punzi_old_260920.tex}
+\input{slides/sections/p26_punzi_new_260920.tex}
+\input{slides/sections/p28_thanks_backup_260920.tex}
+\end{document}

@@ -1,0 +1,7 @@
+tag,change,train_auc,test_auc,metadata
+X_pb23_v27_fid18_9v9_rw0_xgb_v1,基线,0.9214453444351903,0.8601808116803092,/eos/home-l/leyao/pbpb_work/X_analysis/XGBoost/output/models/X_pb23_v27_fid18_9v9_rw0_xgb_v1/run_metadata.json
+X_pb23_v27_fid18_9v9_rw0_xgb_v2,reg_lambda=12.0,0.9205430829296305,0.8590652849688699,/eos/home-l/leyao/pbpb_work/X_analysis/XGBoost/output/backup_outdate/X_except_six_20260918T061114Z/models/X_pb23_v27_fid18_9v9_rw0_xgb_v2/run_metadata.json
+X_pb23_v27_fid18_9v9_rw0_xgb_v3,reg_alpha=2.0,0.9206073892031671,0.8591592170303776,/eos/home-l/leyao/pbpb_work/X_analysis/XGBoost/output/backup_outdate/X_except_six_20260918T061114Z/models/X_pb23_v27_fid18_9v9_rw0_xgb_v3/run_metadata.json
+X_pb23_v27_fid18_9v9_rw0_xgb_v4,min_child_weight=16,0.9199709601691799,0.8587822747090503,/eos/home-l/leyao/pbpb_work/X_analysis/XGBoost/output/backup_outdate/X_except_six_20260918T061114Z/models/X_pb23_v27_fid18_9v9_rw0_xgb_v4/run_metadata.json
+X_pb23_v27_fid18_9v9_rw0_xgb_v5,gamma=2.0,0.9217105613474048,0.8602415164267512,/eos/home-l/leyao/pbpb_work/X_analysis/XGBoost/output/backup_outdate/X_except_six_20260918T061114Z/models/X_pb23_v27_fid18_9v9_rw0_xgb_v5/run_metadata.json
+X_pb23_v27_fid18_9v9_rw0_xgb_v6,max_depth=3,0.8972120159185786,0.8548245254620286,/eos/home-l/leyao/pbpb_work/X_analysis/XGBoost/output/models/X_pb23_v27_fid18_9v9_rw0_xgb_v6/run_metadata.json

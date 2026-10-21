@@ -44,6 +44,41 @@ latexmk -pdf -outdir=build slides/main.tex
 
 构建后使用官方 `pdf` skill 对 `build/main.pdf` 做逐页视觉检查。
 
+## 内部协作编号检查
+
+首次 checkout 后启用版本化提交检查：
+
+```bash
+git config core.hooksPath .githooks
+```
+
+各分析在 `.tex-internal-ids.json` 配置自己的编号前缀，例如：
+
+```json
+{"prefixes": ["REQ", "TASK"]}
+```
+
+这会检查独立的 `REQ12`、`TASK3` 等字面编号；前缀区分大小写，只允许英文字母，
+后接数字。main 的默认列表为空，检查会明确报告尚未启用；通用模板不预设分析的
+denylist。配置文件应纳入版本管理。
+
+`pre-commit` 只检查 Git 暂存区中 `slides/**/*.tex` 新增的行，并使用暂存区的配置。
+未暂存的源码或配置修改不会替代待提交内容。配置缺失或格式错误会阻止提交；首次启用
+或修改前缀后，还应手动做一次全量检查：
+
+```bash
+python3 scripts/check_tex_internal_ids.py --all
+python3 -B -m unittest discover -s tests -v
+```
+
+检查覆盖完整文档正文和没有 document 环境的 TeX 片段，保留准确行号。
+它跳过注释、常用图片/输入/引用命令的路径或标识参数、frame 的选项；
+标题、图注和超链接的可见文字仍会检查。命中后须重写对应语句，不能只删掉编号而丢失上下文。
+
+这是字面源码检查，不执行 TeX 宏展开、不解析自定义命令或条件分支，也不读取图片/PDF
+中的文字；完整文档的导言区不扫描。它可能对未使用的片段或宏定义报出结果，不能代替
+最终 PDF 的人工检查。迁移到已有分析分支时，应保留该分支的编号前缀和局部规则。
+
 ## 单页排版迭代
 
 为目标 frame 设置稳定的 `label` 后运行：

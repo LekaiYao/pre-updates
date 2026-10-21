@@ -55,6 +55,10 @@
   放在 backup，并解释其物理或技术含义。
 - 交付前检查内部编号、request/task ID、原始路径和未解释的配置标签。具体
   denylist 由每个分析项目维护，不写死在通用模板中。
+- 可通过 `.tex-internal-ids.json` 配置编号前缀，并启用 `.githooks/pre-commit`；
+  检查暂存新增的 TeX 正文，命中时须将句子重写为面向听众的表述。
+  此检查对扫描到的 backup 文字同样生效；需保留的复现编号放在注释或 provenance 中。
+  新启用或变更前缀后运行 `--all` 检查既有内容，使用方法和局限见 README。
 
 ## 4. Update 计划与内容复用
 

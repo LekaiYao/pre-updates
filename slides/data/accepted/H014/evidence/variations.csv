@@ -1,0 +1,16 @@
+group,variation,f_dps,signed_shift,note
+baseline,nominal,0.170423232645,0,calibrated_global_allpairs_singleCR_12cell_mergeddy
+single_j_category,pt15,0.17120162424,0.000778391595,two_categories_split_at_pt15
+single_j_category,absy1p2,0.164176471713,-0.006246760932,two_categories_split_at_abs_y_1p2
+cr_definition_and_purity,nominal_purity,0.166173698866,-0.004249533779,purity
+cr_definition_and_purity,cr_phi70_zero,0.178254078452,0.007830845807,zero_sps_leakage
+cr_definition_and_purity,cr_phi70_purity,0.17526159011,0.004838357465,mc_sps_leakage
+cr_definition_and_purity,cr_phi110_zero,0.171777926966,0.001354694321,zero_sps_leakage
+cr_definition_and_purity,cr_phi110_purity,0.163928580208,-0.006494652437,mc_sps_leakage
+cr_definition_and_purity,cr_dy2p4_zero,0.170417031446,-6.20119899999e-06,zero_sps_leakage
+cr_definition_and_purity,cr_dy2p4_purity,0.170417031446,-6.20119899999e-06,mc_sps_leakage
+dps_mc_full_workflow_closure,pure_dps_pseudodata,0.176876852708,0.00645362006318,symmetric_abs_uncertainty;closure_f_dps=1.03786819416;relative_bias=0.03786819416
+projection_crosscheck,delta_y,0.171938907014,0.001515674369,formal_crosscheck_not_in_systematic
+projection_crosscheck,delta_phi,0.171264157937,0.000840925292,formal_crosscheck_not_in_systematic
+projection_crosscheck,evt_mass,0.163516517955,-0.00690671469,formal_crosscheck_not_in_systematic
+projection_crosscheck,evt_y,0.170609440418,0.000186207773,formal_crosscheck_not_in_systematic

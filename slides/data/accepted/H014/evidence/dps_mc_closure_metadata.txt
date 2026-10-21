@@ -1,0 +1,14 @@
+artifact=pure_dps_mc_full_nominal_workflow_closure
+status=complete
+pseudo_data=pure_dps_mc_same_event_pairs
+single_jpsi_extraction=global_calibrated_two_stage_splot
+mixing=nominal_deterministic_all_cross_event_Jpsi1_x_Jpsi2
+pp_extraction=nominal_12_cell_4D_fit
+control_region=abs_delta_y_ge_1p8_and_abs_delta_phi_le_pi_over_2
+expected_f_dps=1
+observed_f_dps=1.03786819416
+absolute_closure_shift=0.03786819416
+nominal_data_f_dps=0.170423232645
+absolute_f_dps_systematic=0.00645362006318
+root_version=6.14/09
+git_commit=24823a5d476c18aee1f3134e86da645063965ef1

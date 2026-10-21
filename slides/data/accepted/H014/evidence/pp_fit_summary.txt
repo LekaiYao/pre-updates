@@ -1,0 +1,12 @@
+input=tests/atlas_data_driven_sps/results/unified_input/WeightData_mJJ7p5.root
+model=Data/ULntuple16/CMSSW_10_6_20/src/NtupleAnalyzer/Model_4D_tot.root
+data_tree_entries=2492
+cells=12
+accepted_fits=12
+failed_fits=0
+single_control_cell=1
+merge_high_dphi_rows=0
+merge_high_dy_columns=1
+acceptance_criterion=status==0 && covQual>=2 && edm<0.01
+sumw2_error=false
+likelihood_offset=true

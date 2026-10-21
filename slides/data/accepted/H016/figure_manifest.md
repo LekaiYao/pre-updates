@@ -1,0 +1,48 @@
+# H016 figure manifest
+
+Package status: `ready` for consumer review.
+
+## H016-F01 - Current data-driven f_DPS result
+
+- Status: `ready`
+- PDF: `figures/fdps_current_result.pdf` (`691ea23a1c86e3307f44a04c12e34f9053e111c8f3673f3f5b3ad92c422ad8df`)
+- PNG: `figures/fdps_current_result.png` (`b2e661be2f0e027a5417d10486f72cf3d9f5ed0ab8ce37d7689baceb39d4ddef`)
+- Machine sources: `inputs.json;results.json;uncertainty_source_map.csv`
+- Definition: accepted f_DPS central/stat/method systematic and three included method groups
+- Caveat: f_DPS is accepted; group details follow H014 accepted inputs
+
+## H016-F02 - Data-driven sigma_DPS result and uncertainty breakdown
+
+- Status: `ready`
+- PDF: `figures/sigma_dps_preliminary_breakdown.pdf` (`b4e343c9d78db504a0338bd8f46a16cb466d37b86085a5f5d4f7622456ef0285`)
+- PNG: `figures/sigma_dps_preliminary_breakdown.png` (`db45025a0c6605eea5501a2451a1b2e4a13ef72c4aebe39baefcdcf9e1060cc9`)
+- Machine sources: `inputs.json;results.json;uncertainty_source_map.csv`
+- Definition: sigma_DPS(mJJ>7.5)=f_DPS*sigma_pair and source-level propagated components
+- Caveat: preliminary rho=0 statistical reference; five AN percentages used directly; unknown shared-systematic correlations use conditional independence
+
+## H016-F03 - Data-driven sigma_eff result and uncertainty breakdown
+
+- Status: `ready`
+- PDF: `figures/sigma_eff_preliminary_breakdown.pdf` (`a1138899b0de2eb12541dabb8ff658fd6eb6359dae13ec46f5e3b20f687f48c3`)
+- PNG: `figures/sigma_eff_preliminary_breakdown.png` (`99bea79bbda80c4b17f10dc617b5b580ad9d03702b5c61f7d2421ab7875b59a7`)
+- Machine sources: `inputs.json;results.json;uncertainty_source_map.csv`
+- Definition: mass-extrapolated DPS denominator, BR cancellation, and exact source-by-source endpoint propagation
+- Caveat: preliminary rho=0 statistical reference; epsilon_m uncertainty not included
+
+## H016-F04 - Current data-driven result summary
+
+- Status: `ready`
+- PDF: `figures/data_driven_result_summary.pdf` (`387bd28320b9488d18bec6ba62eb02e37189ae6ada23631cc957ed21aa62297d`)
+- PNG: `figures/data_driven_result_summary.png` (`8286466427273ae37dae36909273190394bfb1064efc8c18a8b77d1216548711`)
+- Machine sources: `inputs.json;results.json;uncertainty_source_map.csv`
+- Definition: slide-ready f_DPS, sigma_DPS, and sigma_eff summary
+- Caveat: cross-section results are preliminary; rho=0 statistical reference approved for this update
+
+## H016-F05 - CR boundary and zero/MC SPS-leakage variants
+
+- Status: `reused_accepted_H015_F07`
+- PDF: `docs/answers/H015_preupdates_data_driven_slide_figures/figures/control_region_variations.pdf` (`d270ac5a18f9ede328839f8ca5b291847d0c2dcc9fdb7c34a5bb7a6a95da4938`)
+- PNG: `docs/answers/H015_preupdates_data_driven_slide_figures/figures/control_region_variations.png` (`7ace94f8d336ce649337c00c12ea5db21aca9e98747bee3548960ddc42cd1f50`)
+- Machine sources: `docs/answers/H015_preupdates_data_driven_slide_figures/data/control_region_variations.csv`
+- Definition: accepted CR-boundary and zero/MC-leakage variants with one group envelope
+- Caveat: reused without copying; MC-leakage variants are members of the CR envelope, not an extra systematic

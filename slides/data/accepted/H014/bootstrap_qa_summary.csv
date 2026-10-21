@@ -1,0 +1,8 @@
+stage,passed,total,failed,detail
+jobs,100,100,0,complete and unique job IDs
+replicas,500,500,0,fixed attempts; no replacement
+single_j_calibration,1000,1000,0,max EDM 0.000910132980514
+single_j_yield_splot,1000,1000,0,max EDM 0.0000372449043367
+pp_cells,6000,6000,0,minimum 35 fit entries
+projection_component_fits,78,78,0,formal cross-check only
+projection_template_fits,4,4,0,formal cross-check only

@@ -1,0 +1,48 @@
+{
+  "analysis_rerun": false,
+  "analysis_runtime": "CMSSW_10_6_20 / ROOT 6.14/09 / cmssw-el7",
+  "compatibility_validation": {
+    "aclic_output_location": "/tmp/leyao/h016_aclic",
+    "compile_status": 1,
+    "compiled_source": "tests/atlas_data_driven_sps/fit_pp_2d_adaptive.cpp",
+    "environment": "CMSSW_10_6_20 / ROOT 6.14/09 / cmssw-el7",
+    "fit_run": false,
+    "mass_extrapolation_reproduction": true,
+    "record": "validation.txt"
+  },
+  "cr_sps_leakage": {
+    "double_counted_as_separate_source": false,
+    "future_improvement_recorded": true,
+    "group": "CR definition/purity envelope",
+    "included_in_current_method_systematic": true
+  },
+  "files_not_to_overwrite": [
+    "tests/atlas_data_driven_sps/results/fdps_systematics_global_nominal_v1/",
+    "tests/atlas_data_driven_sps/results/route9p3_global_calibrated_allpairs/bootstrap_fixed500_global_nominal_v1/",
+    "docs/answers/H015_preupdates_data_driven_slide_figures/"
+  ],
+  "fit_bootstrap_systematic_rerun": false,
+  "generated_at": "2026-08-29T15:20:36+02:00",
+  "new_operations": [
+    "deterministic source-level cross-section propagation",
+    "F02-F04 presentation redraw",
+    "mass-extrapolation provenance freeze",
+    "manifest and checksum generation"
+  ],
+  "physics_status": {
+    "f_DPS": "accepted",
+    "mass_extrapolation_uncertainty": "fixed for this preliminary round by explicit 2026-08-29 user instruction; not asserted zero",
+    "pair_systematics": "five AN percentages used directly without normalization to rounded 2.5 pb",
+    "sigma_DPS": "preliminary conditional propagation",
+    "sigma_eff": "preliminary conditional propagation",
+    "sigma_eff_systematics": "exact endpoint propagation for every independent source",
+    "statistical_covariance": "unresolved; rho=0 preliminary use approved by user"
+  },
+  "producer_branch": "sync/chensh-20260730",
+  "producer_head": "b89508566a2096bf40e3a99addac7d09fd901e2b",
+  "request_copies_byte_identical": true,
+  "request_id": "H016",
+  "request_sha256": "e894b4aa92e137d184469c40896c8a98cefaf1dde1d298650aeb6adb9c07c5ee",
+  "status": "ready",
+  "tracked_dirty_files_at_intake": []
+}

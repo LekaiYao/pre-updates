@@ -1,0 +1,17 @@
+status=complete
+nominal_f_dps=0.170423232645
+replicas=500
+attempts=500
+failures=0
+replacement_seeds=false
+mean=0.170392853017
+sample_sd=0.0593312996229
+median=0.166563601064
+q16=0.109759223901
+q84=0.232621415348
+minimum=0.0317212086715
+maximum=0.381175859734
+mean_shift_from_nominal=-0.0000303796275744
+sd_monte_carlo_precision_approx=0.00187809947293
+statistical_uncertainty=0.0593312996229
+statistical_uncertainty_status=frozen_for_global_nominal

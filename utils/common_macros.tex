@@ -5,6 +5,30 @@
 \newcommand{\muted}[1]{\textcolor{neutral}{#1}}
 \newcommand{\demolabel}{\textcolor{negative}{\textbf{DEMO / MOCK}}}
 
+% Human-approved closing geometry. Reporter and date come from project_setup.tex.
+\newcommand{\analysisclosing}[1]{%
+  \begin{frame}[label=#1]{\strut}
+    \centering
+    \vfill
+    \makebox[\textwidth][c]{%
+      \begin{beamercolorbox}[
+        wd=0.68\textwidth,
+        sep=1.2em,
+        center,
+        rounded=true,
+        shadow=true
+      ]{block body}
+        {\LARGE\bfseries Thanks for listening!}\par
+        \vspace{1.0em}
+        {\large Reporter: \analysisreporter}\par
+        \vspace{0.45em}
+        {\large \analysisdate}
+      \end{beamercolorbox}%
+    }
+    \vfill
+  \end{frame}%
+}
+
 % Draft checkpoint. Remove the draft label only after explicit physics approval.
 \newcommand{\analysischeckpoint}[4]{%
   \begin{frame}{#1}
